@@ -11,7 +11,6 @@ Usage:
 def csv_to_json(csv_file):
     reader = csv.DictReader(csv_file)
     entries = list(reader)
-    print entries[1]
     pretty_json = json.dumps(entries, sort_keys=True, indent=4)
     return pretty_json
 
