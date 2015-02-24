@@ -1,7 +1,8 @@
 5 constilations (key groups):
-- fao (need to restrict to 2014?? -> get date range from leigh)
+- fao
 	- /FAO/FAO--M&E Data/
 		- dataset:loa_tracker_marueen.16thDec14_prep_o
+		- use >= May 2013 for cutoff
 	- /FAO/FAO Beneficiary Data/
 		- dataset:AG003-Beneficiary.selection.form.xml
 		- dataset:fisheries.fisherman.registration.xml
@@ -12,7 +13,7 @@
 			- 4 categories (livelihood, shelter, wash, x) then 25 subcategories
 	- dataset:beneficiary_baseline (nicetohave)
 		- coping_strategy_index, food_consumption_score (num days in a week that family members have eaten particular food group, has thresholds(buckets))
-		- could mean the lat/lon then to get average cluster geopoint
+		- could mean the lat/lon then to get average cluster geopoint (to approximate 'village')
 - sns (/SNS Consortium mFW Forms & Data/
 	- for viz: feeding centers (called 'otp') (~26) 
 	- mash together 
