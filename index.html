@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-table/v0.2.0/dist/ember-table.css">
     <style>
         body { padding: 0; margin: 0; }
-        #map { height: 50%; margin: 0; box-sizing: border-box; }
+        div.column { width: 50%; float: left; box-sizing: border-box; margin: 0; }
+        #map { height: 100%; }
     </style>
     <script type='text/x-handlebars'>
         <div class='table-container'>
@@ -18,8 +19,8 @@
     </script>
 </head>
 <body>
-    <div id='ember-app'></div>
-    <div id='map'></div>
+    <div id='map' class='column'></div>
+    <div id='ember-app' class='column'></div>
 
     <script src='http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js'></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
@@ -54,7 +55,8 @@
                             headerCellName: entry,
                             getCellContent: function(row) {
                                 return row[entry];
-                            }
+                            },
+                            isSortable: 'yes'
                         });
                         return columnDefinition;
                     });
