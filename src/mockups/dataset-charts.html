@@ -11,13 +11,12 @@
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/2.1.0/normalize.css">
         <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-table/v0.2.0/dist/ember-table.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-charts/v0.3.0/dist/ember-charts.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <script type='text/x-handlebars'>
-            <div class='table-container'>
-            {{table-component
-                hasFooter=false
-                columnsBinding='tableColumns'
-                contentBinding='tableContents'}}
+            <div class='chart-container col-lg-6'>
+            {{horizontal-bar-chart
+                data=content}}
             </div>
         </script>
     </head>
@@ -58,6 +57,8 @@
         <script src="http://rawgit.com/Addepar/ember-table/v0.2.0/dependencies/ember-addepar-mixins/resize_handler.js"></script>
         <script src="http://rawgit.com/Addepar/ember-table/v0.2.0/dependencies/ember-addepar-mixins/style_bindings.js"></script>
         <script src="http://rawgit.com/Addepar/ember-table/v0.2.0/dist/ember-table.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js"></script>
+        <script src="http://rawgit.com/Addepar/ember-charts/v0.3.0/dist/ember-charts.js"></script>
         <script>
             function renderTable(rawData) {
                 var App = Ember.Application.create({
@@ -70,23 +71,13 @@
                 });
 
                 App.ApplicationController = Ember.Controller.extend({
-                    tableColumns: Ember.computed('App.rawData', function() {
-                        if(!App.rawData[0]) { return []; };
-                        var keys = Object.keys(App.rawData[0])
-                        var columns = keys.map(function(entry) { 
-                            var columnDefinition = Ember.Table.ColumnDefinition.create({
-                                headerCellName: entry,
-                                getCellContent: function(row) {
-                                    return row[entry];
-                                },
-                                isSortable: 'yes'
-                            });
-                            return columnDefinition;
-                        });
-                        return columns;
-                    }),
-                    tableContents: Ember.computed('App.rawData', function() {
-                        return App.rawData;
+                    content: Ember.computed('App.rawData', function() {
+                        return [
+                            { label: "MUDUG", value: 2200 },
+                            { label: "BENADIR", value: 8800 },
+                            { label: "GEDO", value: 6754 },
+                            { label: "HIRAN", value: 20000 },
+                        ];
                     })
                 });
             }
