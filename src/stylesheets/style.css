@@ -34,7 +34,6 @@ a.dataset-section-link:hover, a.dataset-section-link.active {
 }
 
 #viewport {
-    width: 1020px;
     height: 100%;
     margin-left: 64px;
 }
