@@ -35,5 +35,5 @@ a.dataset-section-link:hover, a.dataset-section-link.active {
 
 #viewport {
     height: 100%;
-    margin-left: 64px;
+    box-sizing: border-box;
 }
