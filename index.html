@@ -13,9 +13,9 @@
                             <h2>Organizations</h2>
                             <p>Choose an organization</p>
                             <ul>
-                                {{#each organization in model itemController='organizations'}}
+                                {{#each organization in DFIDDashboard.organizations}}
                                     <li>
-                                        {{#link-to 'organization' organization }}
+                                        {{#link-to 'organization' organization.slug }}
                                             {{ organization.name }}
                                         {{/link-to}}
                                     </li>
