@@ -10,15 +10,19 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="../stylesheets/style.css">
         <script type='text/x-handlebars' data-template-name='organizations'>
-            <h2>Organizations</h2>
-            <p>Choose an organization</p>
-            <ul>
-                {{#each organization in model itemController='organizations'}}
-                    <li><a href='/src/mockups/dataset-list.html'>{{ organization.name }}</a></li>
-                {{/each}}
-            </ul>
-            <ul>
-            </ul>
+            <div>
+                <h2>Organizations</h2>
+                <p>Choose an organization</p>
+                <ul>
+                    {{#each organization in model itemController='organizations'}}
+                        <li>
+                            {{#link-to 'organization' organization }}
+                                {{ organization.name }}
+                            {{/link-to}}
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
         </script>
     </head>
     <body>
