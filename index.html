@@ -24,6 +24,19 @@
                 </ul>
             </div>
         </script>
+        <script type='text/x-handlebars' data-template-name='organization'>
+            <div>
+                <h2>{{ organization.name }}</h2>
+                <p>Choose a dataset to visualize</p>
+                <ul>
+                    {{#each dataset in organization.datasets}}
+                        <li>
+                            {{ dataset.name }}
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </script>
     </head>
     <body>
         <div class='container'>
@@ -39,6 +52,7 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/jquery-ui.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <script src="/src/javascript/application.js"></script>
+        <script src="/src/javascript/models/dataset.js"></script>
         <script src="/src/javascript/models/organization.js"></script>
         <script src="/src/javascript/controllers/organizations.js"></script>
         <script src="/src/javascript/controllers/organization.js"></script>
