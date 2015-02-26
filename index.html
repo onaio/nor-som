@@ -37,7 +37,9 @@
                             <ul>
                                 {{#each dataset in organization.datasets}}
                                     <li>
-                                        {{ dataset.name }}
+                                        {{#link-to 'table' dataset.slug}}
+                                            {{ dataset.name }}
+                                        {{/link-to}}
                                     </li>
                                 {{/each}}
                             </ul>
