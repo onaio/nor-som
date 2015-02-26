@@ -1,46 +1,58 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.11/themes/css/cartodb.css" />
-        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-        <link rel="stylesheet" href="http://rawgit.com/LearnBoost/antiscroll/master/antiscroll.css">
-        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/2.1.0/normalize.css">
-        <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-table/v0.2.0/dist/ember-table.css">
-        <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../stylesheets/style.css">
+        <link rel='stylesheet' href='/src/stylesheets/raleway.css'>
+        <link rel="stylesheet" href="/src/stylesheets/bootstrap.min.css">
+        <link rel="stylesheet" href="/src/stylesheets/style.css">
+
         <script type='text/x-handlebars' data-template-name='organizations'>
-            <div>
-                <h2>Organizations</h2>
-                <p>Choose an organization</p>
-                <ul>
-                    {{#each organization in model itemController='organizations'}}
-                        <li>
-                            {{#link-to 'organization' organization }}
-                                {{ organization.name }}
-                            {{/link-to}}
-                        </li>
-                    {{/each}}
-                </ul>
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-lg-6 col-lg-offset-3'>
+                        <div>
+                            <h2>Organizations</h2>
+                            <p>Choose an organization</p>
+                            <ul>
+                                {{#each organization in DFIDDashboard.organizations}}
+                                    <li>
+                                        {{#link-to 'organization' organization.slug }}
+                                            {{ organization.name }}
+                                        {{/link-to}}
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script type='text/x-handlebars' data-template-name='organization'>
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-lg-6 col-lg-offset-3'>
+                        <div>
+                            <h2>{{ organization.name }}</h2>
+                            <p>Choose a dataset to visualize</p>
+                            <ul>
+                                {{#each dataset in organization.datasets}}
+                                    <li>
+                                        {{ dataset.name }}
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </script>
     </head>
     <body>
-        <div class='container'>
-            <div class='row'>
-                <div class='col-lg-12' id='ember-app-container'>
-                </div>
-            </div>
-        </div>
         <script src="/src/javascript/libs/jquery-1.11.2.min.js"></script>
         <script src="/src/javascript/libs/handlebars-v1.3.0.js"></script>
         <script src="/src/javascript/libs/ember.js"></script>
         <script src="/src/javascript/libs/ember-data.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/jquery-ui.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <script src="/src/javascript/application.js"></script>
-        <script src="/src/javascript/models/organization.js"></script>
-        <script src="/src/javascript/controllers/organizations.js"></script>
         <script src="/src/javascript/controllers/organization.js"></script>
         <script src="/src/javascript/router.js"></script>
     </body>
