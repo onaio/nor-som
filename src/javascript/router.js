@@ -1,6 +1,7 @@
 DFIDDashboard.Router.map(function() {
     this.resource('organizations', { path: '/' })
     this.resource('organization', { path: '/:slug'})
+    this.resource('table', { path: '/dataset/:slug/table'})
 })
 
 DFIDDashboard.OrganizationsRoute = Ember.Route.extend({
@@ -16,3 +17,11 @@ DFIDDashboard.OrganizationRoute = Ember.Route.extend({
                 console.log(organization);
                 return organization; }
 })
+
+DFIDDashboard.TableRoute = Ember.Route.extend({
+    model: function(params) {
+        return DFIDDashboard.datasets.filter(function(item) {
+            return item.slug == params.slug
+        })
+    }
+});
