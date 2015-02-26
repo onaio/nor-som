@@ -1,5 +1,3 @@
-window.DFIDDashboard = Ember.Application.create({
-    rootElement: '#ember-app-container'
-});
+window.DFIDDashboard = Ember.Application.create();
 
 DFIDDashboard.ApplicationAdapter = DS.FixtureAdapter.extend();
