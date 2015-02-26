@@ -1,10 +1,14 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.11/themes/css/cartodb.css" />
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
         <link rel="stylesheet" href="http://rawgit.com/LearnBoost/antiscroll/master/antiscroll.css">
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/2.1.0/normalize.css">
         <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-table/v0.2.0/dist/ember-table.css">
+        <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../stylesheets/style.css">
         <script type='text/x-handlebars' data-template-name='organizations'>
             <h2>Organizations</h2>
             <p>Choose an organization</p>
@@ -18,8 +22,10 @@
         </script>
     </head>
     <body>
-        <div class='container-fluid'>
-            <div class='col-lg-10 col-lg-offset-1' id='ember-app-container'>
+        <div class='container'>
+            <div class='row'>
+                <div class='col-lg-12' id='ember-app-container'>
+                </div>
             </div>
         </div>
         <script src="/src/javascript/libs/jquery-1.11.2.min.js"></script>
@@ -27,6 +33,7 @@
         <script src="/src/javascript/libs/ember.js"></script>
         <script src="/src/javascript/libs/ember-data.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/jquery-ui.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <script src="/src/javascript/application.js"></script>
         <script src="/src/javascript/models/organization.js"></script>
         <script src="/src/javascript/controllers/organization.js"></script>
