@@ -1,0 +1,20 @@
+--------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\Nijo\Desktop\stata12\Stata12\assetbin.log
+  log type:  text
+ opened on:  26 Feb 2015, 16:25:27
+
+. encode totalasset, generate (totalasset2)
+
+. histogram totalasset2
+(bin=29, start=1, width=3.4137931)
+
+. graph save Graph "C:\Users\Nijo\Desktop\ONA\assethistogram.gph"
+(file C:\Users\Nijo\Desktop\ONA\assethistogram.gph saved)
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\Nijo\Desktop\stata12\Stata12\assetbin.log
+  log type:  text
+ closed on:  26 Feb 2015, 16:25:59
+--------------------------------------------------------------------------------------------------
