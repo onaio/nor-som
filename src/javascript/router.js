@@ -3,7 +3,7 @@ DFIDDashboard.Router.map(function() {
     this.resource('organization', { path: '/:slug'});
     this.resource('table', { path: '/dataset/:slug/table'});
     this.resource('map', { path: '/dataset/:slug/map'});
-})
+});
 
 DFIDDashboard.OrganizationsRoute = Ember.Route.extend({
     model: function() { return DFIDDashboard.organizations; }
@@ -22,7 +22,7 @@ DFIDDashboard.TableRoute = Ember.Route.extend({
     model: function(params) {
         var dataset = DFIDDashboard.Dataset.create(
             DFIDDashboard.datasets.filter(function(item) {
-                return item.slug == params.slug
+                return item.slug == params.slug;
             })[0]);
         var sql = new cartodb.SQL({user: 'okal'});
         sql.execute('SELECT * FROM ' + dataset.cartoTableName)
@@ -31,7 +31,7 @@ DFIDDashboard.TableRoute = Ember.Route.extend({
             })
             .error(function(errors) {
                 console.error(errors);
-            })
+            });
 
         return dataset;
     }

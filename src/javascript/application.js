@@ -17,7 +17,7 @@ DFIDDashboard.datasets = [
         cartoTableName: 'brics_reg_data',
         rawData: []
     }
-]
+];
 
 DFIDDashboard.organizations = [
     {
@@ -36,6 +36,6 @@ DFIDDashboard.organizations = [
         slug: 'fao',
         datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'fao'; })
     }
-]
+];
 
 DFIDDashboard.Dataset = Ember.Object.extend();

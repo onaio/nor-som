@@ -13,18 +13,18 @@ DFIDDashboard.TableController = Ember.Controller.extend({
         return columns;
     }),
     rows: Ember.computed('columns', function() {
-        var controller = this
-        var keys = controller.get('columns')
+        var controller = this;
+        var keys = controller.get('columns');
         var rows = this.content.rawData.map(function(row) {
             var values = [];
-            for(index in keys) {
+            for(var index in keys) {
                 var key = keys[index];
                 if(row.hasOwnProperty(key)) {
                     values.push(row[key]);
                 }
             }
             return values;
-        })
+        });
         return rows;
     }),
     name: Ember.computed('content.rawData', function() {
