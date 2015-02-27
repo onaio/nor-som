@@ -69,5 +69,3 @@ DFIDDashboard.organizations = [
         datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'fao'; })
     }
 ];
-
-DFIDDashboard.Dataset = Ember.Object.extend();
