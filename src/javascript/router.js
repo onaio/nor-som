@@ -52,4 +52,4 @@ DFIDDashboard.ChartsRoute = Ember.Route.extend({
             return item.slug == params.slug;
         });
     }
-})
+});
