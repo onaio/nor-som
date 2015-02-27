@@ -48,7 +48,7 @@ DFIDDashboard.MapRoute = Ember.Route.extend({
 
 DFIDDashboard.ChartsRoute = Ember.Route.extend({
     model: function(params) {
-        return DFIDDashboard.visualizations.filter(function(item) {
+        return DFIDDashboard.dataset.filter(function(item) {
             return item.slug == params.slug;
         });
     }
