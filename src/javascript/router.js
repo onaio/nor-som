@@ -3,6 +3,7 @@ DFIDDashboard.Router.map(function() {
     this.resource('organization', { path: '/:slug'});
     this.resource('table', { path: '/dataset/:slug/table'});
     this.resource('map', { path: '/dataset/:slug/map'});
+    this.resource('charts', { path: '/dataset/:slug/charts'});
 });
 
 DFIDDashboard.OrganizationsRoute = Ember.Route.extend({
