@@ -55,4 +55,24 @@
 -- Comments varchar(50));
 
 
+alter table fao_fisheries_reg add column district_id int;
+
+update fao_fisheries_reg set district = upper(district);
+
+update fao_fisheries_reg
+set district_id = dl.district_id
+from district_lookup dl
+where fao_fisheries_reg.district = dl.district_name;
+
+update fao_fisheries_reg
+set district_id = dl.district_id
+from district_lookup dl
+where fao_fisheries_reg.district = dl.district_alt and 
+        fao_fisheries_reg.district_id is null;
+
+select distinct district from fao_fisheries_reg where district_id is null;
+
+select * from district_lookup where district_name like 'BAN%';
+
+insert into district_lookup values('BANDARBEYLA','BANDARBAYLA',1602,'BARI',16);
 
