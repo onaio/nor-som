@@ -18,7 +18,7 @@
                             <h2>Organizations</h2>
                             <p>Choose an organization</p>
                             <ul>
-                                {{#each organization in DFIDDashboard.organizations}}
+                                {{#each organization in content}}
                                     <li>
                                         {{#link-to 'organization' organization.slug }}
                                             {{ organization.name }}
