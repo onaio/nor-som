@@ -103,26 +103,11 @@
                 <div class='row'>
                     <div id='content' class='col-lg-12'>
                         <div class='table-container'>
-                            <table class='table'>
-                                <thead>
-                                    <tr>
-                                        {{#each column in columns}}
-                                            <th>
-                                                 {{column}}
-                                            </th>
-                                        {{/each}}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{#each row in rows}}
-                                        <tr>
-                                            {{#each item in row}}
-                                                <td>{{item}}</td>
-                                            {{/each}}
-                                        </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>
+                            {{table-component
+                                numFixedColumns=0
+                                hasFooter=false
+                                columnsBinding='columns'
+                                contentBinding='model.rawData'}}
                         </div>
                     </div>
                 </div>
@@ -138,9 +123,9 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.6/jquery.mousewheel.js"></script>
         <script src="http://rawgit.com/LearnBoost/antiscroll/master/antiscroll.js"></script>
         <script src="http://builds.emberjs.com/tags/v1.4.0/ember.js"></script>
-        <script src="http://rawgit.com/Addepar/ember-table/v0.2.0/dependencies/ember-addepar-mixins/resize_handler.js"></script>
-        <script src="http://rawgit.com/Addepar/ember-table/v0.2.0/dependencies/ember-addepar-mixins/style_bindings.js"></script>
-        <script src="http://rawgit.com/Addepar/ember-table/v0.2.0/dist/ember-table.js"></script>
+        <script src="http://rawgit.com/Addepar/ember-table/v0.4.0/dependencies/ember-addepar-mixins/resize_handler.js"></script>
+        <script src="http://rawgit.com/Addepar/ember-table/v0.4.0/dependencies/ember-addepar-mixins/style_bindings.js"></script>
+        <script src="http://rawgit.com/Addepar/ember-table/v0.4.0/dist/ember-table.js"></script>
         <script src="/src/javascript/application.js"></script>
         <script src="/src/javascript/controllers/organization.js"></script>
         <script src="/src/javascript/controllers/table.js"></script>
