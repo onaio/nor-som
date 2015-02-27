@@ -14,14 +14,24 @@ DFIDDashboard.OrganizationRoute = Ember.Route.extend({
                 var organization =  DFIDDashboard.organizations.filter(function(item) {
                     return (item.slug == params.slug);
                 })[0];
-                console.log(organization);
                 return organization; }
 })
 
 DFIDDashboard.TableRoute = Ember.Route.extend({
     model: function(params) {
-        return DFIDDashboard.datasets.filter(function(item) {
-            return item.slug == params.slug
-        })
+        var dataset = DFIDDashboard.Dataset.create(
+            DFIDDashboard.datasets.filter(function(item) {
+                return item.slug == params.slug
+            })[0]);
+        var sql = new cartodb.SQL({user: 'okal'});
+        sql.execute('SELECT * FROM ' + dataset.cartoTableName)
+            .done(function(data) {
+                dataset.set('rawData', data.rows);
+            })
+            .error(function(errors) {
+                console.error(errors);
+            })
+
+        return dataset;
     }
 });
