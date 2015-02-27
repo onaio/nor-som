@@ -1,9 +1,14 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.11/themes/css/cartodb.css" />
         <link rel='stylesheet' href='/src/stylesheets/raleway.css'>
         <link rel="stylesheet" href="/src/stylesheets/bootstrap.min.css">
         <link rel="stylesheet" href="/src/stylesheets/style.css">
+        <link rel="stylesheet" href="http://rawgit.com/LearnBoost/antiscroll/master/antiscroll.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/2.1.0/normalize.css">
+        <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-table/v0.2.0/dist/ember-table.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
         <script type='text/x-handlebars' data-template-name='organizations'>
             <div class='container'>
@@ -80,12 +85,19 @@
         </script>
     </head>
     <body>
+        <script src='http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js'></script>
         <script src="/src/javascript/libs/jquery-1.11.2.min.js"></script>
         <script src="/src/javascript/libs/handlebars-v1.3.0.js"></script>
-        <script src="/src/javascript/libs/ember.js"></script>
-        <script src="/src/javascript/libs/ember-data.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/jquery-ui.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.6/jquery.mousewheel.js"></script>
+        <script src="http://rawgit.com/LearnBoost/antiscroll/master/antiscroll.js"></script>
+        <script src="http://builds.emberjs.com/tags/v1.4.0/ember.js"></script>
+        <script src="http://rawgit.com/Addepar/ember-table/v0.2.0/dependencies/ember-addepar-mixins/resize_handler.js"></script>
+        <script src="http://rawgit.com/Addepar/ember-table/v0.2.0/dependencies/ember-addepar-mixins/style_bindings.js"></script>
+        <script src="http://rawgit.com/Addepar/ember-table/v0.2.0/dist/ember-table.js"></script>
         <script src="/src/javascript/application.js"></script>
         <script src="/src/javascript/controllers/organization.js"></script>
+        <script src="/src/javascript/controllers/table.js"></script>
         <script src="/src/javascript/router.js"></script>
     </body>
 </html>
