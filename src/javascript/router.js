@@ -25,8 +25,7 @@ DFIDDashboard.TableRoute = Ember.Route.extend({
             DFIDDashboard.datasets.filter(function(item) {
                 return item.slug == params.slug;
             })[0]);
-        var sql = new cartodb.SQL({user: 'okal'});
-        sql.execute('SELECT * FROM ' + dataset.cartoTableName)
+        DFIDDashboard.sql.execute('SELECT * FROM ' + dataset.cartoTableName)
             .done(function(data) {
                 dataset.set('rawData', data.rows);
             })
@@ -48,8 +47,25 @@ DFIDDashboard.MapRoute = Ember.Route.extend({
 
 DFIDDashboard.ChartsRoute = Ember.Route.extend({
     model: function(params) {
-        return DFIDDashboard.dataset.filter(function(item) {
+        var dataset = DFIDDashboard.datasets.filter(function(item) {
             return item.slug == params.slug;
+        })[0];
+        var visualizations = dataset.visualizations;
+        visualizations.map(function(visualization) {
+            var query = visualization.query;
+            DFIDDashboard.sql.execute(query)
+                .done(function(data) {
+                    var items = data.rows;
+                    var chartDefinitions = items.map(function(item) {
+                        var labelKey = Object.keys(item).filter(function(item) { return item !== 'count'; })[0];
+                        var label = item[labelKey];
+                        var count = item['count'];
+                        return { label: label, value: count };
+                    });
+                    visualization.set('chartDefinitions', chartDefinitions);
+                })
+                .error(function(error) { console.error(error); })
         });
+        return dataset;
     }
 });

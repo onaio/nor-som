@@ -134,15 +134,14 @@
             {{partial "side-navigation"}}
             <div class='container'>
                 <div class='row'>
-                    <div class='col-lg-6 col-lg-offset-3'>
-                        <div>
-                            <h2>{{ organization.name }}</h2>
-                            <p>Choose a dataset to visualize</p>
-                            <ul>
-                                {{#each visualizationDefinition in visualizationDefinitions}}
-                                {{/each}}
-                            </ul>
-                        </div>
+                    <div class='col-lg-12'>
+                            {{#each visualization in content.visualizations}}
+                                <h3>{{visualization.title}}</h3>
+                                <div class='chart-container'>
+                                    {{horizontal-bar-chart
+                                        data=visualization.chartDefinitions}}
+                                </div>
+                            {{/each}}
                     </div>
                 </div>
             </div>
@@ -160,7 +159,10 @@
         <script src="http://rawgit.com/Addepar/ember-table/v0.4.0/dependencies/ember-addepar-mixins/resize_handler.js"></script>
         <script src="http://rawgit.com/Addepar/ember-table/v0.4.0/dependencies/ember-addepar-mixins/style_bindings.js"></script>
         <script src="http://rawgit.com/Addepar/ember-table/v0.4.0/dist/ember-table.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js"></script>
+        <script src="http://rawgit.com/Addepar/ember-charts/v0.3.0/dist/ember-charts.js"></script>
         <script src="/src/javascript/application.js"></script>
+        <script src="/src/javascript/controllers/charts.js"></script>
         <script src="/src/javascript/controllers/organization.js"></script>
         <script src="/src/javascript/controllers/table.js"></script>
         <script src="/src/javascript/router.js"></script>
