@@ -26,7 +26,7 @@ DFIDDashboard.datasets = [
         cartoVisualizationID: 'c15061cc-bb3c-11e4-a7da-0e9d821ea90d',
         cartoTableName: 'brics_community_plans_final',
         rawData: [],
-        visualizations: []
+        visualizations: DFIDDashboard.visualizations.filter(function(item) { return item.datasetSlug == 'brics-community-plans'; });
     },
     {
         organizationSlug: 'brics',
@@ -35,7 +35,7 @@ DFIDDashboard.datasets = [
         cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
         cartoTableName: 'brics_reg_data',
         rawData: [],
-        visualizations: []
+        visualizations: DFIDDashboard.visualizations.filter(function(item) { return item.datasetSlug == 'brics-registration-data'; });
     }
 ];
 
