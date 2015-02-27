@@ -45,3 +45,11 @@ DFIDDashboard.MapRoute = Ember.Route.extend({
         })[0];
     }
 });
+
+DFIDDashboard.ChartsRoute = Ember.Route.extend({
+    model: function(params) {
+        return DFIDDashboard.visualizations.filter(function(item) {
+            return item.slug == params.slug;
+        });
+    }
+})
