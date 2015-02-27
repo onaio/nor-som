@@ -1,34 +1,41 @@
 window.DFIDDashboard = Ember.Application.create();
 
+DFIDDashboard.datasets = [
+    {
+        organizationSlug: 'brics',
+        name: 'BRiCS Community Plans',
+        slug: 'brics-community-plans',
+        cartoVisualizationID: 'c15061cc-bb3c-11e4-a7da-0e9d821ea90d',
+        cartoTableName: 'brics_community_plans_final',
+        rawData: []
+    },
+    {
+        organizationSlug: 'brics',
+        name: 'BRiCS Registration Data',
+        slug: 'brics-registration-data',
+        cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
+        cartoTableName: 'brics_reg_data',
+        rawData: []
+    }
+];
+
 DFIDDashboard.organizations = [
     {
-        id: 1,
         name: 'BRiCS',
         slug: 'brics',
-        datasets: [
-            {
-                name: 'BRiCS Community Plans',
-                cartoVisualizationID: 'c15061cc-bb3c-11e4-a7da-0e9d821ea90d',
-                cartoTableName: 'Brics_community_plans_final',
-            }
-        ]
+        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'brics'; })
 
     },
     {
-        id: 2,
         name: 'SNS',
-        slug: 'sns'
+        slug: 'sns',
+        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'sns'; })
     },
     {
-        id: 3,
         name: 'FAO',
-        slug: 'fao'
+        slug: 'fao',
+        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'fao'; })
     }
-]
+];
 
-DFIDDashboard.ApplicationAdapter = DS.FixtureAdapter.extend({
-    queryFixtures: function(fixtures, query, type) {
-        var key = Ember.keys(query)[0];
-        return fixtures.filterBy(key, query[key]);
-    }
-});
+DFIDDashboard.Dataset = Ember.Object.extend();
