@@ -59,12 +59,12 @@ DFIDDashboard.ChartsRoute = Ember.Route.extend({
                     var chartDefinitions = items.map(function(item) {
                         var labelKey = Object.keys(item).filter(function(item) { return item !== 'count'; })[0];
                         var label = item[labelKey];
-                        var count = item['count'];
+                        var count = item.count;
                         return { label: label, value: count };
                     });
                     visualization.set('chartDefinitions', chartDefinitions);
                 })
-                .error(function(error) { console.error(error); })
+                .error(function(error) { console.error(error); });
         });
         return dataset;
     }
