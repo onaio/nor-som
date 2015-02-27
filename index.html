@@ -32,6 +32,39 @@
             </div>
         </script>
 
+        <script type='text/x-handlebars' data-template-name='map'>
+            <div class='side-navigation'>
+                <ul>
+                    <li><a href='/src/mockups/organization-list.html' class='dataset-section-link' title='Home'><i class="fa fa-home fa-lg"></i></a></li>
+                    <li><a href='/src/mockups/dataset-list.html' class='dataset-section-link' title='Organization'><i class="fa fa-list fa-lg"></i></a></li>
+                    <li><a href='/src/mockups/dataset-map.html' class='active dataset-section-link' title='Map'><i class="fa fa-map-marker fa-lg"></i></a></li>
+                    <li><a href='/src/mockups/dataset-charts.html' class='dataset-section-link' title='Charts'><i class="fa fa-bar-chart fa-lg"></i></a></li>
+                    <li><a href='/src/mockups/dataset-charts.html' class='dataset-section-link' title='Table'><i class="fa fa-table fa-lg"></i></a></li>
+                </ul>
+            </div>
+            <div class='container' id='viewport'>
+
+                <div id='description' class='row'>
+                    <div class='col-lg-12'>
+                        <h3>FAO Beneficiary Registration</h3>
+                        <p>This data represents beneficiaries registered by FAO.</p>
+                        <span>
+                        {{model.cartoVisualizationID}}
+                        </span>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div id='content' class='col-lg-12' {{bind-attr data-viz-id=model.cartoVisualizationID}}>
+                    </div>
+                </div>
+                <script>
+                    var cartoVisualizationID = $('#content').attr('data-viz-id');
+                    var cartoURL = 'http://okal.cartodb.com/api/v2/viz/' + cartoVisualizationID + '/viz.json'
+                    cartodb.createVis('content', cartoURL);
+                </script>
+            </div>
+        </script>
+
         <script type='text/x-handlebars' data-template-name='organization'>
             <div class='container'>
                 <div class='row'>
@@ -40,7 +73,7 @@
                             <h2>{{ organization.name }}</h2>
                             <p>Choose a dataset to visualize</p>
                             <ul>
-                                {{#each dataset in organization.datasets}}
+                                {{#each dataset in content.datasets}}
                                     <li>
                                         {{#link-to 'table' dataset.slug}}
                                             {{ dataset.name }}
@@ -85,6 +118,7 @@
     </head>
     <body>
         <script src='http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js'></script>
+        <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
         <script src="/src/javascript/libs/jquery-1.11.2.min.js"></script>
         <script src="/src/javascript/libs/handlebars-v1.3.0.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/jquery-ui.js"></script>
@@ -98,5 +132,8 @@
         <script src="/src/javascript/controllers/organization.js"></script>
         <script src="/src/javascript/controllers/table.js"></script>
         <script src="/src/javascript/router.js"></script>
+        <script>
+            cartodb.createVis('content', 'http://okal.cartodb.com/api/v2/viz/c15061cc-bb3c-11e4-a7da-0e9d821ea90d/viz.json');
+        </script>
     </body>
 </html>
