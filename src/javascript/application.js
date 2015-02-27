@@ -23,18 +23,18 @@ DFIDDashboard.organizations = [
     {
         name: 'BRiCS',
         slug: 'brics',
-        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'brics' })
+        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'brics'; })
 
     },
     {
         name: 'SNS',
         slug: 'sns',
-        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'sns' })
+        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'sns'; })
     },
     {
         name: 'FAO',
         slug: 'fao',
-        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'fao' })
+        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'fao'; })
     }
 ]
 
