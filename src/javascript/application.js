@@ -38,5 +38,4 @@ DFIDDashboard.organizations = [
     }
 ]
 
-
-DFIDDashboard.Dataset = Ember.Object.extend({})
+DFIDDashboard.Dataset = Ember.Object.extend();
