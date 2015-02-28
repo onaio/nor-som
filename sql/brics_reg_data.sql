@@ -139,3 +139,74 @@ update brics_reg_data set WATER_ACCESS_AND_QUALITY_IMPROVEMENT = true from brics
 
 
 
+alter table brics_reg_data add column CATEGORY_RESILIENCE BOOLEAN;
+alter table brics_reg_data add column CATEGORY_WASH BOOLEAN;
+alter table brics_reg_data add column CATEGORY_SHELTER BOOLEAN;
+alter table brics_reg_data add column CATEGORY_FOOD_SECURITY_AND_LIVELIHOOD BOOLEAN;
+
+UPDATE brics_reg_data SET CATEGORY_RESILIENCE = FALSE;
+UPDATE brics_reg_data SET CATEGORY_WASH = FALSE;
+UPDATE brics_reg_data SET CATEGORY_SHELTER = FALSE;
+UPDATE brics_reg_data SET CATEGORY_FOOD_SECURITY_AND_LIVELIHOOD = FALSE;
+
+UPDATE brics_reg_data set CATEGORY_RESILIENCE = true from refined_ags_output_lookup olook join brics_ags_lookup blook on blook.refined_ags = olook.refined_ags where blook.session_id = brics_reg_data.session_id and olook.output_id = 1;
+UPDATE brics_reg_data set CATEGORY_WASH = true from refined_ags_output_lookup olook join brics_ags_lookup blook on blook.refined_ags = olook.refined_ags where blook.session_id = brics_reg_data.session_id and olook.output_id = 2;
+UPDATE brics_reg_data set CATEGORY_SHELTER = true from refined_ags_output_lookup olook join brics_ags_lookup blook on blook.refined_ags = olook.refined_ags where blook.session_id = brics_reg_data.session_id and olook.output_id = 3;
+UPDATE brics_reg_data set CATEGORY_FOOD_SECURITY_AND_LIVELIHOOD = true from refined_ags_output_lookup olook join brics_ags_lookup blook on blook.refined_ags = olook.refined_ags where blook.session_id = brics_reg_data.session_id and olook.output_id = 4;
+
+
+##CHECKING the category update query results match the activity columns
+-- SELECT * FROM brics_reg_data where
+-- CAMPAIGN_ANIMAL_TREATMENT IS FALSE AND
+-- CAMPAIGN_IYCF_AWARENESS_TRAINING IS FALSE AND
+-- CAMPAIGN_SANITATION_AND_WASH_AWARENESS IS FALSE AND
+-- CASH_FOR_WORK IS FALSE AND
+-- CASH_GRANTS IS FALSE AND
+-- CASH_TRANSFERS_UNCONDITIONAL IS FALSE AND
+-- CHWS_AND_HYGIENE_PROMOTERS_RECRUIT_AND_TRAIN IS FALSE AND
+-- COMMUNITY_DISASTER_MANAGEMENT_COMMITTEES_CDMC_ESTABLISH_AND_TRAIN IS FALSE AND
+-- COMMUNITY_PRODUCTIVE_ASSETS_BUILDING IS FALSE AND
+-- COMMUNITY_WASH_GROUPS_ESTABLISH_AND_TRAIN_AND_EQUIP IS FALSE AND
+-- CONSTRUCTION_AND_REHABILITATION_OF_PUBLIC_FACILITIES IS FALSE AND
+-- CONSTRUCTION_AND_REHABILITATION_OF_SHELTERS IS FALSE AND
+-- CONSTRUCTION_AND_REHABILITATION_WATER_SOURCES_AND_RESERVOIRS IS FALSE AND
+-- COUNSELLING_ON_GBV_AND_LINK_TO_SERVICE_PROVIDERS_FOR_VICTIMS IS FALSE AND
+-- DEVELOP_COMMUNITY_WATER_MANAGEMENT_PLANS IS FALSE AND
+-- DEVELOP_SOLID_WASTE_MANAGEMENT_SYSTEM IS FALSE AND
+-- DISTRIBUTION_OF_LIVELIHOOD_INPUTS IS FALSE AND
+-- DISTRIBUTION_OF_NFIs IS FALSE AND
+-- EARLY_WARNING_AND_EARLY_ACTION_SYSTEM IS FALSE AND
+-- LIVELIHOOD_TRAINING IS FALSE AND
+-- LOBBYING_AND_ADVOCACY IS FALSE AND
+-- MARKET_ANALYSIS IS FALSE AND
+-- NRM_TRAINING_AND_IMPLEMENTATION IS FALSE AND
+-- PEACE_BUILDING_TRAINING_AND_COMMITTEES IS FALSE AND
+-- SELF_HELP_GROUPS_ESTABLISH_AND_TRAIN_AND_EQUIP IS FALSE AND
+-- WATER_ACCESS_AND_QUALITY_IMPROVEMENT IS FALSE;
+
+## ^ vs this
+-- select * from brics_reg_data 
+-- where 
+-- CATEGORY_RESILIENCE IS FALSE AND
+-- CATEGORY_WASH IS FALSE AND
+-- CATEGORY_SHELTER IS FALSE AND
+-- CATEGORY_FOOD_SECURITY_AND_LIVELIHOOD IS FALSE
+
+
+
+alter table brics_reg_data add column the_geom varchar(13000);
+alter table brics_reg_data add column area float;
+
+update brics_reg_data set the_geom = dg.the_geom
+from district_geo dg
+where dg.district_id = brics_reg_data.district_id;
+
+update brics_reg_data set area = dg.area
+from district_geo dg
+where dg.district_id = brics_reg_data.district_id;
+
+
+
+
+
+

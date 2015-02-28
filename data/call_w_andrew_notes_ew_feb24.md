@@ -10,7 +10,8 @@
 - brics
 	- dataset:brics_registration_data (get from leigh)
 		- registration (georef'd, HH data), codes next to that household for interventions 1307 
-			- 4 categories (livelihood, shelter, wash, x) then 25 subcategories
+			- 4 categories (livelihood, shelter, wash, x) then 25 subcategories 
+			- <(1) Resilience 2) WASH 3) Shelter 4) Food Security and Livelihood)>
 	- dataset:beneficiary_baseline (nicetohave)
 		- coping_strategy_index, food_consumption_score (num days in a week that family members have eaten particular food group, has thresholds(buckets))
 		- could mean the lat/lon then to get average cluster geopoint (to approximate 'village')

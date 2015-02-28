@@ -169,6 +169,30 @@ select distinct refined_ags from ags_code_refined_ags_lookup order by 1
 --update brics_reg_data set WATER_ACCESS_AND_QUALITY_IMPROVEMENT = true from brics_ags_lookup look where look.session_id = brics_reg_data.session_id and look.refined_ags = 'WATER ACCESS AND QUALITY IMPROVEMENT';
 
 
-select * from brics_reg_data; 
+
+alter table brics_ags_lookup add column CATEGORY_RESILIENCE BOOLEAN;
+alter table brics_ags_lookup add column CATEGORY_WASH BOOLEAN;
+alter table brics_ags_lookup add column CATEGORY_SHELTER BOOLEAN;
+alter table brics_ags_lookup add column CATEGORY_FOOD_SECURITY_AND_LIVELIHOOD BOOLEAN;
+
+UPDATE brics_ags_lookup SET CATEGORY_RESILIENCE = FALSE;
+UPDATE brics_ags_lookup SET CATEGORY_WASH = FALSE;
+UPDATE brics_ags_lookup SET CATEGORY_SHELTER = FALSE;
+UPDATE brics_ags_lookup SET CATEGORY_FOOD_SECURITY_AND_LIVELIHOOD = FALSE;
+
+
+
+
+UPDATE brics_reg_data set CATEGORY_RESILIENCE = true from refined_ags_output_lookup olook join brics_ags_lookup blook on blook.refined_ags = olook.refined_ags where blook.session_id = brics_reg_data.session_id and olook.output_id = 1
+UPDATE brics_reg_data set CATEGORY_WASH = true from refined_ags_output_lookup olook join brics_ags_lookup blook on blook.refined_ags = olook.refined_ags where blook.session_id = brics_reg_data.session_id and olook.output_id = 2
+UPDATE brics_reg_data set CATEGORY_SHELTER = true from refined_ags_output_lookup olook join brics_ags_lookup blook on blook.refined_ags = olook.refined_ags where blook.session_id = brics_reg_data.session_id and olook.output_id = 3
+UPDATE brics_reg_data set CATEGORY_FOOD_SECURITY_AND_LIVELIHOOD = true from refined_ags_output_lookup olook join brics_ags_lookup blook on blook.refined_ags = olook.refined_ags where blook.session_id = brics_reg_data.session_id and olook.output_id = 4
+
+
+
+
+
+
+
 
 
