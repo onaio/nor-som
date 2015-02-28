@@ -76,3 +76,17 @@ select * from district_lookup where district_name like 'BAN%';
 
 insert into district_lookup values('BANDARBEYLA','BANDARBAYLA',1602,'BARI',16);
 
+###add geometry columns
+
+alter table fao_fisheries_reg add column the_geom varchar(13000);
+alter table fao_fisheries_reg add column area float;
+
+update fao_fisheries_reg set the_geom = dg.the_geom
+from district_geo dg
+where dg.district_id = fao_fisheries_reg.district_id;
+
+update fao_fisheries_reg set area = dg.area
+from district_geo dg
+where dg.district_id = fao_fisheries_reg.district_id;
+
+select count(*) from fao_fisheries_reg where the_geom is null;
