@@ -27,3 +27,22 @@ where unicef_cash_transfers.district = dl.district_alt and
 
 select distinct district from unicef_cash_transfers where district_id is null;
 
+
+
+insert into district_lookup values('CABUDWAAQ','ABDUWAAQ',1902,'GALGADUUD',19);
+insert into district_lookup values('WANLA WEYN','WANLEWEYN',2307,'SHABELLE HOOSE',23);
+
+alter table unicef_cash_transfers add column the_geom varchar(13000);
+alter table unicef_cash_transfers add column area float;
+
+update unicef_cash_transfers set the_geom = dg.the_geom
+from district_geo dg
+where dg.district_id = unicef_cash_transfers.district_id;
+
+update unicef_cash_transfers set area = dg.area
+from district_geo dg
+where dg.district_id = unicef_cash_transfers.district_id;
+
+
+
+
