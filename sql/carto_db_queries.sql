@@ -47,3 +47,29 @@ count(case when SELF_HELP_GROUPS_ESTABLISH_AND_TRAIN_AND_EQUIP = true then sessi
 count(case when WATER_ACCESS_AND_QUALITY_IMPROVEMENT = true then session_id else null end) as WATER_ACCESS_AND_QUALITY_IMPROVEMENT
 from brics_reg_data_2015_01_16
 group by 1,2;
+
+
+
+
+
+
+
+select 
+district,array_agg(distinct ngo) as all_ngos,
+min(the_geom_webmercator) as the_geom_webmercator,
+min(cartodb_id) as cartodb_id,
+sum(case
+ when category_resilience is true then 1
+ when category_wash is true then 1
+ when category_shelter is true then 1
+ when category_food_security_and_livelihood is true then 1
+else 0 end)as total_activities
+from brics_reg_data_2015_01_16
+group by 1
+order by 1;
+
+
+
+
+
+
