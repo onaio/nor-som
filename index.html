@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-table/v0.2.0/dist/ember-table.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-charts/v0.3.0/dist/ember-charts.css">
+        <link rel="stylesheet" href="bower_components/c3/c3.css">
 
         <script type='text/x-handlebars' data-template-name='_side-navigation'>
             <div class='side-navigation'>
@@ -134,18 +135,34 @@
         <script type='text/x-handlebars' data-template-name='charts'>
             {{partial "side-navigation"}}
             <div class='container'>
-                <div class='row'>
-                    <div class='col-lg-12'>
-                            {{#each visualization in content.visualizations}}
-                                <h3>{{visualization.title}}</h3>
-                                <div class='chart-container'>
-                                    {{horizontal-bar-chart
-                                        data=visualization.chartDefinitions}}
-                                </div>
-                            {{/each}}
+                {{#each visualization in content.visualizations}}
+                    <div class='row'>
+                        <h3>{{visualization.title}}</h3>
+                        <div class='map-container col-lg-6' {{bind-attr data-viz-id=visualization.cartoVisualizationID id=visualization.mapContainerID}}>
+                        </div>
+                        <div id='chart-container' class='col-lg-6'>
+                            {{c3-chart
+                                data=visualization.chartData
+                                axis=visualization.chartAxis
+                                padding=visualization.chartPadding}}
+                        </div>
                     </div>
-                </div>
+                {{/each}}
             </div>
+            <scri{{!}}pt>
+                var cartoVisualizationID = $('#map-container').attr('data-viz-id');
+                var mapContainers = $('.map-container');
+                mapContainers.map(function(index) {
+                    var mapContainerElement = $(mapContainers[index]);
+                    var cartoVisualizationID = mapContainerElement.attr('data-viz-id');
+                    if(cartoVisualizationID) {
+                        var cartoURL = 'http://ona.cartodb.com/api/v2/viz/' + cartoVisualizationID + '/viz.json';
+                        console.log(cartoURL);
+                        cartodb.createVis('map-' + cartoVisualizationID, cartoURL);
+                    }
+                })
+                
+            </scr{{!}}ipt>
         </script>
     </head>
     <body>
@@ -162,6 +179,9 @@
         <script src="http://rawgit.com/Addepar/ember-table/v0.4.0/dist/ember-table.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js"></script>
         <script src="http://rawgit.com/Addepar/ember-charts/v0.3.0/dist/ember-charts.js"></script>
+        <script src="bower_components/d3/d3.min.js"></script>
+        <script src="bower_components/c3/c3.min.js"></script>
+        <script src="bower_components/ember-c3/build/lib.js"></script>
         <script src="/src/javascript/application.js"></script>
         <script src="/src/javascript/controllers/charts.js"></script>
         <script src="/src/javascript/controllers/organization.js"></script>

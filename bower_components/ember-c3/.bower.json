@@ -1,0 +1,33 @@
+{
+  "name": "ember-c3",
+  "version": "0.1.3",
+  "dependencies": {
+    "ember": "^1.4.0",
+    "handlebars": "^1.3.0",
+    "c3": ">=0.1.43-0 < 1.0.0-0"
+  },
+  "devDependencies": {
+    "ember-mocha-adapter": "0.1.2",
+    "ember-data": "^1.0.0-beta.5",
+    "bootstrap": "~3.1.1",
+    "jsoneditor": "~2.3.6",
+    "ember-jsoneditor": "~0.1.0"
+  },
+  "ignore": [
+    "app/",
+    "dist/",
+    "lib/"
+  ],
+  "main": "build/lib.js",
+  "homepage": "https://github.com/Glavin001/ember-c3",
+  "_release": "0.1.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.3",
+    "commit": "36b3a395c6493591c294532debbb251118ccdafb"
+  },
+  "_source": "git://github.com/Glavin001/ember-c3.git",
+  "_target": "~0.1.3",
+  "_originalSource": "ember-c3",
+  "_direct": true
+}

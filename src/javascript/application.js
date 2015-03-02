@@ -8,22 +8,41 @@ DFIDDashboard.sql = new cartodb.SQL({user: 'ona', api_key: '71318d1aefad674aeeed
 DFIDDashboard.visualizations = [
     {
         datasetSlug: 'brics-registration-data',
-        title: 'Residential Status Information',
-        query: "select hh_info_residential_status, count(hh_info_residential_status) from brics_reg_data_2015_01_16 group by 1 order by 2 desc;",
+        title: 'Activity Groups by District',
+        query: "select \
+                the_geom, \
+                min(district) as district,\
+                min(the_geom_webmercator) as the_geom_webmercator,\
+                min(cartodb_id) as cartodb_id,\
+                count (case when category_resilience = true then session_id else null end) as cat_res,\
+                count (case when category_wash = true then session_id else null end) as cat_wash,\
+                count (case when category_shelter = true then session_id else null end) as cat_hut,\
+                count (case when category_food_security_and_livelihood = true then session_id else null end) as cat_food\
+                from brics_reg_data_2015_01_16\
+                group by 1",
+        cartoVisualizationID: '2b5caab4-7af9-11e4-bfdf-0e853d047bba',
+        categorizedBy: 'district',
+        columnNames: ['cat_res', 'cat_wash', 'cat_hut', 'cat_food'],
+        mapContainerID: 'map-2b5caab4-7af9-11e4-bfdf-0e853d047bba',
         rawData: []
     },
     {
         datasetSlug: 'brics-registration-data',
-        title: 'Shelter Groups',
-        query: "select shelter_groups, count(shelter_groups)  from brics_reg_data_2015_01_16 where shelter_groups is not null group by 1 order by 2 desc;",
-        rawData: [],
+        title: 'Activity Groups by NGO',
+        query:  "select \
+                ngo,\
+                count (case when category_resilience = true then session_id else null end) as cat_res,\
+                count (case when category_wash = true then session_id else null end) as cat_wash,\
+                count (case when category_shelter = true then session_id else null end) as cat_hut,\
+                count (case when category_food_security_and_livelihood = true then session_id else null end) as cat_food\
+                from brics_reg_data_2015_01_16\
+                group by 1",
+        cartoVisualizationID: 'c9320b96-7caa-11e4-a351-0e853d047bba',
+        categorizedBy: 'ngo',
+        columnNames: ['cat_res', 'cat_wash', 'cat_hut', 'cat_food'],
+        mapContainerID: 'map-c9320b96-7caa-11e4-a351-0e853d047bba',
+        rawData: []
     },
-    {
-        datasetSlug: 'brics-registration-data',
-        title: 'Main Income Groups',
-        query: "select main_income_groups, count(main_income_groups) from brics_reg_data_2015_01_16  group by 1 order by 2 desc;",
-        rawData: [],
-    }
 ];
 
 DFIDDashboard.datasets = [
@@ -31,7 +50,6 @@ DFIDDashboard.datasets = [
         organizationSlug: 'brics',
         name: 'BRiCS Community Plans',
         slug: 'brics-community-plans',
-        cartoVisualizationID: 'c15061cc-bb3c-11e4-a7da-0e9d821ea90d',
         cartoTableName: 'brics_community_plans_final',
         rawData: [],
         visualizations: DFIDDashboard.visualizations
