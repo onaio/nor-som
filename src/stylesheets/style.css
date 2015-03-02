@@ -1,5 +1,6 @@
 body {
     font-family: Raleway;
+    padding-bottom: 20px;
 }
 
 ul {
@@ -37,4 +38,8 @@ ul {
 
 .map-container {
     height: 300px;
+}
+
+.btn, .dropdown-menu {
+    border-radius: 0;
 }
