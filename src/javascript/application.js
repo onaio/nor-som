@@ -11,7 +11,7 @@ DFIDDashboard.sql = new cartodb.SQL({user: 'ona', api_key: '71318d1aefad674aeeed
 
 DFIDDashboard.visualizations = [
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'brics-registration-data',
+        datasetSlug: 'brics',
         title: 'Activity Groups by District',
         id: 'activity-groups-by-district',
         query: "select " +
@@ -31,7 +31,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'brics-registration-data',
+        datasetSlug: 'brics',
         title: 'Activity Groups by NGO',
         id: 'activity-groups-by-ngo',
         query:  "select  " +
@@ -48,17 +48,18 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'unicef-pcas-active',
+        datasetSlug: 'unicef',
         title: 'Total PCAS by Programme',
         id: 'total-pcas-by-programme',
-        query: "select  " +
+        query:  "SELECT " +
                 "programme_section, " +
-                "sum(total_pca_value) total_pca, " +
-                "sum(unicef_cash + unicef_supply) as unicef_contribution, " +
-                "sum(partner_contribution) total_partner_contribution, " +
-                "count (1) as num_pcas " +
+                "SUM(unicef_contribution::numeric)::money as unicef_contribution, " +
+                "SUM(partner_contribution::numeric)::money as total_partner_contribution, " +
+                "SUM(total_pca_value::numeric)::money as total_pca_value, " +
+                "COUNT (*) AS num_pcas, " +
+                "(SUM(total_pca_value::numeric)/count(*))::numeric::money AS avg_per_pca " +
                 "FROM unicef_active_pcas " +
-                "group by 1",
+                "GROUP by 1",
         cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
         categorizedBy: 'programme_section',
         columnNames: ['unicef_contribution', 'total_partner_contribution'],
@@ -69,30 +70,21 @@ DFIDDashboard.visualizations = [
 DFIDDashboard.datasets = [
     {
         organizationSlug: 'brics',
-        name: 'BRiCS Community Plans',
-        slug: 'brics-community-plans',
-        rawData: [],
-        visualizations: DFIDDashboard.visualizations
-                        .filter(function(item) { return item.datasetSlug == 'brics-community-plans'; })
-                        .map(function(item) { return item; })
-    },
-    {
-        organizationSlug: 'brics',
-        name: 'BRiCS Registration Data',
-        slug: 'brics-registration-data',
+        name: 'BRiCS',
+        slug: 'brics',
         cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
         rawData: [],
         visualizations: DFIDDashboard.visualizations
-                        .filter(function(item) { return item.datasetSlug == 'brics-registration-data'; })
+                        .filter(function(item) { return item.datasetSlug == 'brics'; })
                         .map(function(item) { return item; })
     },
     {
         organizationSlug: 'unicef',
         name: 'UNICEF',
-        slug: 'unicef-pcas-active',
+        slug: 'unicef',
         rawData: [],
         visualizations: DFIDDashboard.visualizations
-                        .filter(function(item) { return item.datasetSlug == 'unicef-pcas-active'; })
+                        .filter(function(item) { return item.datasetSlug == 'unicef'; })
                         .map(function(item) { return item; })
     }
 ];
