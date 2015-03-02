@@ -1,7 +1,11 @@
 window.DFIDDashboard = Ember.Application.create();
 
 DFIDDashboard.Dataset = Ember.Object.extend();
-DFIDDashboard.Visualization = Ember.Object.extend();
+DFIDDashboard.Visualization = Ember.Object.extend({
+    mapContainerID: Ember.computed('cartoVisualizationID', function() {
+        return 'map-' + this.get('cartoVisualizationID');
+    }),
+});
 
 DFIDDashboard.sql = new cartodb.SQL({user: 'ona', api_key: '71318d1aefad674aeeeda099af88240beb003209'});
 
@@ -23,8 +27,7 @@ DFIDDashboard.visualizations = [
                 group by 1",
         cartoVisualizationID: '2b5caab4-7af9-11e4-bfdf-0e853d047bba',
         categorizedBy: 'district',
-        columnNames: ['resilience', 'wash', 'shelter', 'food'],
-        mapContainerID: 'map-2b5caab4-7af9-11e4-bfdf-0e853d047bba',
+        columnNames: ['shelter', 'wash', 'resilience', 'food'],
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
@@ -42,7 +45,6 @@ DFIDDashboard.visualizations = [
         cartoVisualizationID: 'c9320b96-7caa-11e4-a351-0e853d047bba',
         categorizedBy: 'ngo',
         columnNames: ['resilience', 'wash', 'shelter', 'food'],
-        mapContainerID: 'map-c9320b96-7caa-11e4-a351-0e853d047bba',
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
@@ -60,7 +62,6 @@ DFIDDashboard.visualizations = [
         cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
         categorizedBy: 'programme_section',
         columnNames: ['unicef_contribution', 'total_partner_contribution'],
-        mapContainerID: 'map-8adc94f2-be35-11e4-a9de-0e0c41326911',
         rawData: []
     }),
 ];
