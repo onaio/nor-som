@@ -20,35 +20,25 @@
         </script>
 
         <script type='text/x-handlebars' data-template-name='_side-navigation'>
-            <div class='side-navigation'>
-                <ul>
-                    <li>
-                        {{#link-to 'organizations'}}
-                            <i class="fa fa-home fa-lg"></i>
-                        {{/link-to}}
-                    </li>
-                    <li>
-                        {{#link-to 'organization' model.organizationSlug }}
-                            <i class="fa fa-list fa-lg"></i>
-                        {{/link-to}}
-                    </li>
-                    <li>
-                        {{#link-to 'map' model.slug}}
-                            <i class="fa fa-map-marker fa-lg"></i>
-                        {{/link-to}}
-                    </li>
-                    <li>
-                        {{#link-to 'charts' model.slug}}
-                            <i class="fa fa-bar-chart fa-lg"></i>
-                        {{/link-to}}
-                    </li>
-                    <li>
-                        {{#link-to 'table' model.slug}}
-                            <i class="fa fa-table fa-lg"></i>
-                        {{/link-to}}
-                    </li>
-                </ul>
-            </div>
+            <div class='container'>
+                <div class="dropdown pull-right">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                        <i class='fa fa-list'></i>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        {{#each organization in DFIDDashboard.organizations}}
+                            <li role="presentation" class='dropdown-header'>{{organization.name}}</li>
+                            {{#each dataset in organization.datasets}}
+                                <li role="presentation">
+                                    {{#link-to 'charts' dataset.slug}}
+                                        {{ dataset.name }}
+                                    {{/link-to}}
+                                </li>
+                            {{/each}}
+                        {{/each}}
+                    </ul>
+                </div> 
+            </div> 
         </script>
 
         <script type='text/x-handlebars' data-template-name='organizations'>
@@ -165,7 +155,11 @@
         <script type='text/x-handlebars' data-template-name='_brics-registration-data'>
             <div class='container'>
                 <div class='row'>
-                    <h3>Activity Groups by District</h3>
+                    <div class='col-lg-12'>
+                        <h3>Activity Groups by District</h3>
+                    </div>
+                </div>
+                <div class='row'>
                     <div class='col-lg-6'>
                         {{standalone-map visualizationID='activity-groups-by-district'}}
                     </div>
@@ -176,7 +170,11 @@
             </div>
             <div class='container'>
                 <div class='row'>
-                    <h3>Activity Groups by NGO</h3>
+                    <div class='col-lg-12'>
+                        <h3>Activity Groups by NGO</h3>
+                    </div>
+                </div>
+                <div class='row'>
                     <div class='col-lg-12'>
                         {{standalone-chart visualizationID='activity-groups-by-ngo'}}
                     </div>
@@ -187,7 +185,11 @@
         <script type='text/x-handlebars' data-template-name='_unicef-pcas-active'>
             <div class='container'>
                 <div class='row'>
-                    <h3>PCAS by Programme</h3>
+                    <div class='col-lg-6'>
+                        <h3>PCAS by Programme</h3>
+                    </div>
+                </div>
+                <div class='row'>
                     <div class='col-lg-6'>
                         {{standalone-map visualizationID='total-pcas-by-programme'}}
                     </div>
@@ -203,14 +205,15 @@
         <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
         <script src="/src/javascript/libs/jquery-1.11.2.min.js"></script>
         <script src="/src/javascript/libs/handlebars-v1.3.0.js"></script>
+        <script src="/src/javascript/libs/ember.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/jquery-ui.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.6/jquery.mousewheel.js"></script>
         <script src="http://rawgit.com/LearnBoost/antiscroll/master/antiscroll.js"></script>
-        <script src="http://builds.emberjs.com/tags/v1.4.0/ember.js"></script>
         <script src="http://rawgit.com/Addepar/ember-table/v0.4.0/dependencies/ember-addepar-mixins/resize_handler.js"></script>
         <script src="http://rawgit.com/Addepar/ember-table/v0.4.0/dependencies/ember-addepar-mixins/style_bindings.js"></script>
         <script src="http://rawgit.com/Addepar/ember-table/v0.4.0/dist/ember-table.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <script src="bower_components/d3/d3.min.js"></script>
         <script src="bower_components/c3/c3.min.js"></script>
         <script src="bower_components/ember-c3/build/lib.js"></script>
