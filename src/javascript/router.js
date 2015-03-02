@@ -55,14 +55,33 @@ DFIDDashboard.ChartsRoute = Ember.Route.extend({
             var query = visualization.query;
             DFIDDashboard.sql.execute(query)
                 .done(function(data) {
-                    var items = data.rows;
-                    var chartDefinitions = items.map(function(item) {
-                        var labelKey = Object.keys(item).filter(function(item) { return item !== 'count'; })[0];
-                        var label = item[labelKey];
-                        var count = item.count;
-                        return { label: label, value: count };
+                    var rows = data.rows;
+                    var columns = visualization.columnNames.map(function(columnName) {
+                        var column = [columnName];
+                        rows.map(function(row) {
+                            column.push(row[columnName]);
+                        });
+                        return column;
                     });
-                    visualization.set('chartDefinitions', chartDefinitions);
+                    console.log(columns);
+                    var chartData= {
+                        columns: columns,
+                        type: 'bar',
+                        groups: [
+                            visualization.columnNames
+                        ]
+                    };
+                    var chartAxis = {
+                        rotated: true,
+                        x: {
+                            type: 'category',
+                            categories: rows.map(function(row) { return row[visualization.categorizedBy]; })
+                        }
+                    };
+                    visualization.set('chartData', chartData);
+                    visualization.set('chartAxis', chartAxis);
+                    visualization.set('chartPadding', {left: 120});
+                    visualization.set('rawData', rows);
                 })
                 .error(function(error) { console.error(error); });
         });

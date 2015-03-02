@@ -12,12 +12,10 @@ ul {
     position: fixed;
     width: 48px;
     height: 100%;
-    box-sizing: border-box;
     border-right: 1px solid #eee;
 }
 
 .side-navigation a {
-    box-sizing: border-box;
     width: 48px;
     height: 48px;
     padding-top: 18px;
@@ -35,5 +33,8 @@ ul {
 
 #viewport {
     height: 100%;
-    box-sizing: border-box;
+}
+
+.map-container {
+    height: 300px;
 }
