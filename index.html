@@ -12,6 +12,12 @@
         <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-charts/v0.3.0/dist/ember-charts.css">
         <link rel="stylesheet" href="bower_components/c3/c3.css">
 
+        <script type='text/x-handlebars' id='components/standalone-chart'>
+            {{c3-chart
+                data=visualization.chartData
+                axis=visualization.chartAxis
+                padding=visualization.chartPadding}}
+        </script>
         <script type='text/x-handlebars' data-template-name='_side-navigation'>
             <div class='side-navigation'>
                 <ul>
@@ -132,19 +138,19 @@
             </div>
         </script>
 
+        <script type='text/x-handlebars' data-template-name='components/map'>
+            <div class='map-container col-lg-6' {{bind-attr data-viz-id=visualization.cartoVisualizationID id=visualization.mapContainerID}}>
+            </div>
+        </script>
+
         <script type='text/x-handlebars' data-template-name='charts'>
             {{partial "side-navigation"}}
+            {{standalone-chart visualizationID='activity-groups-by-district'}}
             <div class='container'>
                 {{#each visualization in content.visualizations}}
                     <div class='row'>
                         <h3>{{visualization.title}}</h3>
                         <div class='map-container col-lg-6' {{bind-attr data-viz-id=visualization.cartoVisualizationID id=visualization.mapContainerID}}>
-                        </div>
-                        <div id='chart-container' class='col-lg-6'>
-                            {{c3-chart
-                                data=visualization.chartData
-                                axis=visualization.chartAxis
-                                padding=visualization.chartPadding}}
                         </div>
                     </div>
                 {{/each}}
@@ -178,7 +184,6 @@
         <script src="http://rawgit.com/Addepar/ember-table/v0.4.0/dependencies/ember-addepar-mixins/style_bindings.js"></script>
         <script src="http://rawgit.com/Addepar/ember-table/v0.4.0/dist/ember-table.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js"></script>
-        <script src="http://rawgit.com/Addepar/ember-charts/v0.3.0/dist/ember-charts.js"></script>
         <script src="bower_components/d3/d3.min.js"></script>
         <script src="bower_components/c3/c3.min.js"></script>
         <script src="bower_components/ember-c3/build/lib.js"></script>
