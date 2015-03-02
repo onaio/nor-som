@@ -11,7 +11,7 @@ DFIDDashboard.sql = new cartodb.SQL({user: 'ona', api_key: '71318d1aefad674aeeed
 
 DFIDDashboard.visualizations = [
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'brics-registration-data',
+        datasetSlug: 'brics',
         title: 'Activity Groups by District',
         id: 'activity-groups-by-district',
         query: "select " +
@@ -31,7 +31,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'brics-registration-data',
+        datasetSlug: 'brics',
         title: 'Activity Groups by NGO',
         id: 'activity-groups-by-ngo',
         query:  "select  " +
@@ -48,7 +48,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'unicef-pcas-active',
+        datasetSlug: 'unicef',
         title: 'Total PCAS by Programme',
         id: 'total-pcas-by-programme',
         query: "select  " +
@@ -69,30 +69,21 @@ DFIDDashboard.visualizations = [
 DFIDDashboard.datasets = [
     {
         organizationSlug: 'brics',
-        name: 'BRiCS Community Plans',
-        slug: 'brics-community-plans',
-        rawData: [],
-        visualizations: DFIDDashboard.visualizations
-                        .filter(function(item) { return item.datasetSlug == 'brics-community-plans'; })
-                        .map(function(item) { return item; })
-    },
-    {
-        organizationSlug: 'brics',
-        name: 'BRiCS Registration Data',
-        slug: 'brics-registration-data',
+        name: 'BRiCS',
+        slug: 'brics',
         cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
         rawData: [],
         visualizations: DFIDDashboard.visualizations
-                        .filter(function(item) { return item.datasetSlug == 'brics-registration-data'; })
+                        .filter(function(item) { return item.datasetSlug == 'brics'; })
                         .map(function(item) { return item; })
     },
     {
         organizationSlug: 'unicef',
         name: 'UNICEF',
-        slug: 'unicef-pcas-active',
+        slug: 'unicef',
         rawData: [],
         visualizations: DFIDDashboard.visualizations
-                        .filter(function(item) { return item.datasetSlug == 'unicef-pcas-active'; })
+                        .filter(function(item) { return item.datasetSlug == 'unicef'; })
                         .map(function(item) { return item; })
     }
 ];
