@@ -72,7 +72,7 @@ DFIDDashboard.organizations = [
     }
 ];
 
-DFIDDashboard.StandaloneChartComponent = Ember.Component.extend({
+DFIDDashboard.StandaloneWidgetComponent = Ember.Component.extend({
     visualization: Ember.computed('visualizationID', function() {
         var visualizationID = this.get('visualizationID');
         console.log(visualizationID);
@@ -82,7 +82,7 @@ DFIDDashboard.StandaloneChartComponent = Ember.Component.extend({
         console.log(visualization);
         return visualization;
     }),
-    actions: {
-        log: function(thing) { console.log(thing); }
-    }
 });
+
+DFIDDashboard.StandaloneChartComponent = DFIDDashboard.StandaloneWidgetComponent.extend({})
+DFIDDashboard.StandaloneMapComponent = DFIDDashboard.StandaloneWidgetComponent.extend({})
