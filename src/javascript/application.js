@@ -14,17 +14,17 @@ DFIDDashboard.visualizations = [
         datasetSlug: 'brics-registration-data',
         title: 'Activity Groups by District',
         id: 'activity-groups-by-district',
-        query: "select \
-                the_geom, \
-                min(district) as district,\
-                min(the_geom_webmercator) as the_geom_webmercator,\
-                min(cartodb_id) as cartodb_id,\
-                count (case when category_resilience = true then session_id else null end) as resilience,\
-                count (case when category_wash = true then session_id else null end) as wash,\
-                count (case when category_shelter = true then session_id else null end) as shelter,\
-                count (case when category_food_security_and_livelihood = true then session_id else null end) as food\
-                from brics_reg_data_2015_01_16\
-                group by 1",
+        query: "select " +
+                "the_geom, " +
+                "min(district) as district, " +
+                "min(the_geom_webmercator) as the_geom_webmercator, " +
+                "min(cartodb_id) as cartodb_id, " +
+                "count (case when category_resilience = true then session_id else null end) as resilience, " +
+                "count (case when category_wash = true then session_id else null end) as wash, " +
+                "count (case when category_shelter = true then session_id else null end) as shelter, " +
+                "count (case when category_food_security_and_livelihood = true then session_id else null end) as food " +
+                "from brics_reg_data_2015_01_16 " +
+                "group by 1",
         cartoVisualizationID: '2b5caab4-7af9-11e4-bfdf-0e853d047bba',
         categorizedBy: 'district',
         columnNames: ['shelter', 'wash', 'resilience', 'food'],
@@ -34,14 +34,14 @@ DFIDDashboard.visualizations = [
         datasetSlug: 'brics-registration-data',
         title: 'Activity Groups by NGO',
         id: 'activity-groups-by-ngo',
-        query:  "select \
-                ngo,\
-                count (case when category_resilience = true then session_id else null end) as resilience,\
-                count (case when category_wash = true then session_id else null end) as wash,\
-                count (case when category_shelter = true then session_id else null end) as shelter,\
-                count (case when category_food_security_and_livelihood = true then session_id else null end) as food\
-                from brics_reg_data_2015_01_16\
-                group by 1",
+        query:  "select  " +
+                "ngo, " +
+                "count (case when category_resilience = true then session_id else null end) as resilience, " +
+                "count (case when category_wash = true then session_id else null end) as wash, " +
+                "count (case when category_shelter = true then session_id else null end) as shelter, " +
+                "count (case when category_food_security_and_livelihood = true then session_id else null end) as food " +
+                "from brics_reg_data_2015_01_16 " +
+                "group by 1",
         cartoVisualizationID: 'c9320b96-7caa-11e4-a351-0e853d047bba',
         categorizedBy: 'ngo',
         columnNames: ['resilience', 'wash', 'shelter', 'food'],
@@ -51,14 +51,14 @@ DFIDDashboard.visualizations = [
         datasetSlug: 'unicef-pcas-active',
         title: 'Total PCAS by Programme',
         id: 'total-pcas-by-programme',
-        query: "select \
-                programme_section,\
-                sum(total_pca_value) total_pca,\
-                sum(unicef_cash + unicef_supply) as unicef_contribution,\
-                sum(partner_contribution) total_partner_contribution,\
-                count (1) as num_pcas\
-                FROM unicef_active_pcas\
-                group by 1",
+        query: "select  " +
+                "programme_section, " +
+                "sum(total_pca_value) total_pca, " +
+                "sum(unicef_cash + unicef_supply) as unicef_contribution, " +
+                "sum(partner_contribution) total_partner_contribution, " +
+                "count (1) as num_pcas " +
+                "FROM unicef_active_pcas " +
+                "group by 1",
         cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
         categorizedBy: 'programme_section',
         columnNames: ['unicef_contribution', 'total_partner_contribution'],
@@ -128,10 +128,10 @@ DFIDDashboard.StandaloneWidgetComponent = Ember.Component.extend({
         var visualization = DFIDDashboard.visualizations.filter(function(item) {
             return (item.id == visualizationID);
         })[0];
-        console.log(visualization);
+        console.log(visualization.chartData);
         return visualization;
     }),
 });
 
-DFIDDashboard.StandaloneChartComponent = DFIDDashboard.StandaloneWidgetComponent.extend({})
-DFIDDashboard.StandaloneMapComponent = DFIDDashboard.StandaloneWidgetComponent.extend({})
+DFIDDashboard.StandaloneChartComponent = DFIDDashboard.StandaloneWidgetComponent.extend({});
+DFIDDashboard.StandaloneMapComponent = DFIDDashboard.StandaloneWidgetComponent.extend({});
