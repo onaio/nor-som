@@ -53,11 +53,11 @@ DFIDDashboard.visualizations = [
         id: 'total-pcas-by-programme',
         query:  "SELECT " +
                 "programme_section, " +
-                "SUM(unicef_contribution::numeric)::money as unicef_contribution, " +
-                "SUM(partner_contribution::numeric)::money as total_partner_contribution, " +
-                "SUM(total_pca_value::numeric)::money as total_pca_value, " +
+                "SUM(unicef_contribution::numeric) as unicef_contribution, " +
+                "SUM(partner_contribution::numeric) as total_partner_contribution, " +
+                "SUM(total_pca_value::numeric) as total_pca_value, " +
                 "COUNT (*) AS num_pcas, " +
-                "(SUM(total_pca_value::numeric)/count(*))::numeric::money AS avg_per_pca " +
+                "(SUM(total_pca_value::numeric)/count(*))::numeric AS avg_per_pca " +
                 "FROM unicef_active_pcas " +
                 "GROUP by 1",
         cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
@@ -110,6 +110,11 @@ DFIDDashboard.organizations = [
         name: 'UNICEF',
         slug: 'unicef',
         datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'unicef'; })
+    },
+    {
+        name: 'WFP',
+        slug: 'wfp',
+        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'wfp'; })
     },
 ];
 
