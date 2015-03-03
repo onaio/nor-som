@@ -106,6 +106,17 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
+        organizationSlugs: ['unicef'],
+        title: 'PCAs by Programme Section',
+        id: 'unicef-pca-by-programme-section',
+        query:  "SELECT programme_section,count(*) as pcas " +
+                "FROM unicef_active_pcas " +
+                "group by 1 ",
+        categorizedBy: 'programme_section',
+        columnNames: ['pcas'],
+        rawData: []
+    }),    
+    DFIDDashboard.Visualization.create({
         organizationSlugs: ['overview','fao'],
         title: 'Overall FAO Programmes',
         id: 'overall-fao-programmes',
@@ -329,7 +340,7 @@ DFIDDashboard.visualizationGroups = [
         DFIDDashboard.VisualizationGroup.create({
         id: 'unicef-pca-budgets',
         organizationSlugs: ['unicef'],
-        visualizationIDs: ['unicef-total-pca-budget-by-programme', 'unicef-total-pca-budget-by-partner'],
+        visualizationIDs: ['unicef-total-pca-budget-by-programme', 'unicef-total-pca-budget-by-partner','unicef-pca-by-programme-section'],
     }),
 ]
 
