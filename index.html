@@ -34,7 +34,7 @@
             {{/if}}
         </script>
         
-        <script type='text/x-handlebars' data-template-name='_side-navigation'>
+        <script type='text/x-handlebars' data-template-name='_visualization-selector-dropdown'>
             <div class='container'>
                 <div class="dropdown pull-right">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -78,7 +78,7 @@
         </script>
 
         <script type='text/x-handlebars' data-template-name='map'>
-            {{partial "side-navigation"}}
+            {{partial "visualization-selector-dropdown"}}
             <div class='container' id='viewport'>
 
                 <div id='description' class='row'>
@@ -122,7 +122,7 @@
         </script>
 
         <script type='text/x-handlebars' data-template-name='table'>
-            {{partial "side-navigation"}}
+            {{partial "visualization-selector-dropdown"}}
             <div class='container' id='viewport'>
                 <div id='description' class='row'>
                     <div class='col-lg-12'>
@@ -148,7 +148,7 @@
         </script>
 
         <script type='text/x-handlebars' data-template-name='viz'>
-            {{partial "side-navigation"}}
+            {{partial "visualization-selector-dropdown"}}
             {{partial content.slug}}
             <scri{{!}}pt>
                 var cartoVisualizationID = $('#map-container').attr('data-viz-id');
