@@ -350,3 +350,25 @@ DFIDDashboard.StandaloneTableComponent = DFIDDashboard.StandaloneWidgetComponent
         return rows;
     }),
 });
+DFIDDashboard.ChartGroupComponent = Ember.Component.extend({
+    visualizations: Ember.computed('visualizationGroupID', function() {
+        console.log("Visualization ID", this.get('visualizationGroupID'));
+        var visualizationGroupID = this.get('visualizationGroupID');
+        var visualizationGroup = DFIDDashboard.visualizationGroups.filter(function(item) {
+            return item.id == visualizationGroupID;
+        })[0];
+        console.log("Group", visualizationGroup);
+        var visualizations = DFIDDashboard.visualizations.filter(function(item) {
+            var indexOfItem = visualizationGroup.visualizationIDs.indexOf(item.id);
+            if(indexOfItem === 0) { item.set('CSSClasses', 'tab-pane active') }
+            else { item.set('CSSClasses', 'tab-pane') };
+            return indexOfItem != -1;
+        });
+        console.log("Visualizations", visualizations);
+        return visualizations;
+    })
+});
+
+$('body').on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+    $('body').resize();
+});
