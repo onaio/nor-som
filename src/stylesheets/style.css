@@ -38,7 +38,6 @@ ul {
 }
 
 .map-container {
-    height: 300px;
 }
 
 .btn, .dropdown-menu {
@@ -47,6 +46,10 @@ ul {
 
 .panel {
     height: 350px;
-    padding: 20px;
-    border-radius: 0px;
+    padding: 2%;
+    border-radius: 0;
+}
+
+.panel .ember-view {
+    border-radius: 0;
 }
