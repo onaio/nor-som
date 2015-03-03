@@ -197,46 +197,31 @@
             <div class='container'>
                 <div class='page-header'>
                 <h3>BRiCS</h3>
-                    <h3>Activity Groups by District</h3>
+                    <h3>Activities & Indicators</h3>
                 </div>
                 <div class='row'>
-                    <div class='col-lg-6'>
+                    <div class='col-lg-12'>
+                        <div class='panel panel-default'>
+                            {{standalone-table visualizationID='activity-groups-by-ngo'}}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class='row'>
+                    <div class='col-lg-12'>
                         <div class='panel panel-default map-panel'> 
                             {{standalone-map visualizationID='activity-groups-by-district'}}
                         </div>
                     </div>
-                    <div class='col-lg-6'>
-                        {{chart-group visualizationGroupID="brics-activities"}}
-                    </div>
                 </div>
-            </div>
-            <div class='container'>
-                <div class='page-header'>
-                        <h3>Activity Groups by NGO</h3>
-                </div>
-                <div class='row'>
-                    <div class='col-lg-12'>
-                        <div class='panel panel-default'>
-                            <h3 class='panel-title'>Total Activities by District</h3>
-                            {{standalone-chart visualizationID='activity-groups-by-districts-all-ngos'}}
-                         </div>
-                     </div>
-                </div>
-                <div class='row'>
-                    <div class='col-lg-12'>
-                        <div class='panel panel-default'>
-                            {{standalone-chart visualizationID='activity-groups-by-ngo'}}
+                <div class='container'>
+                    <div class='row'>
+                        <div class='col-lg-12'>
+                            <div class='panel panel-default'>
+                            {{chart-group visualizationGroupID="brics-activities"}}
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class='row'>
-                    <div class='col-lg-6'>
-                        <div class='panel panel-default map-panel'>
-                            {{standalone-map visualizationID='activity-groups-by-ngo'}}
-                        </div>
-                    </div>
-                    <div class='col-lg-6'>
-                        {{standalone-table visualizationID='activity-groups-by-ngo'}}
                     </div>
                 </div>
             </div>
