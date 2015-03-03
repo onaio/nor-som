@@ -108,7 +108,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['unicef'],
+        organizationSlugs: ['overview','unicef'],
         title: 'UNICEF - PCAs by Programme Section',
         id: 'unicef-pca-by-programme-section',
         query:  "SELECT programme_section,count(*) as pcas " +
@@ -237,7 +237,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['unicef'],
+        organizationSlugs: ['overview','unicef'],
         title: 'UNICEF - Cash Transfers Beneficiary',
         id: 'unicef-cash-transfers',
         query:  "SELECT " +
@@ -381,7 +381,11 @@ DFIDDashboard.Organization = Ember.Object.extend({
 
 DFIDDashboard.organizations = ([
     {
-        name: 'Overview',
+        name: 'Programme Indicators',
+        slug: 'indicators',
+    },
+    {
+        name: 'Partner Activities',
         slug: 'overview',
     },
     {
