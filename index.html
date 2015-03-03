@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="/src/stylesheets/style.css">
         <link rel="stylesheet" href="http://rawgit.com/LearnBoost/antiscroll/master/antiscroll.css">
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/2.1.0/normalize.css">
-        <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-table/v0.2.0/dist/ember-table.css">
+        <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-table/v0.4.0/dist/ember-table.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-charts/v0.3.0/dist/ember-charts.css">
         <link rel="stylesheet" href="bower_components/c3/c3.css">
@@ -20,6 +20,15 @@
                 color=visualization.chartPalette}}
         </script>
 
+        <script type='text/x-handlebars' id='components/standalone-table'>
+            {{#if tableColumns}}
+                {{table-component
+                    numFixedColumns=0
+                    hasFooter=false
+                    columns=tableColumns
+                    content=visualization.rawData}}
+            {{/if}}
+        </script>
         
         <script type='text/x-handlebars' data-template-name='_side-navigation'>
             <div class='container'>
@@ -119,11 +128,10 @@
                 <div class='row'>
                     <div id='content' class='col-lg-12'>
                         <div class='table-container'>
-                            {{table-component
-                                numFixedColumns=0
+                            {{ember-table
                                 hasFooter=false
-                                columnsBinding='columns'
-                                contentBinding='model.rawData'}}
+                                columnsBinding='tableColumns'
+                                contentBinding='tableContents'}}
                         </div>
                     </div>
                 </div>
@@ -219,6 +227,11 @@
                 </div>
                 <div class='row'>
                     <div class='col-lg-12'>
+                        {{standalone-table visualizationID='total-pcas-by-programme'}}
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-12'>
                         {{standalone-chart visualizationID='total-pcas-by-programme'}}
                     </div>
                 </div>
@@ -297,7 +310,6 @@
         <script src="http://rawgit.com/Addepar/ember-table/v0.4.0/dist/ember-table.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        <script src="bower_components/d3/d3.min.js"></script>
         <script src="bower_components/c3/c3.min.js"></script>
         <script src="bower_components/ember-c3/build/lib.js"></script>
         <script src="/src/javascript/application.js"></script>

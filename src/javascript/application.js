@@ -188,14 +188,46 @@ DFIDDashboard.organizations = [
 DFIDDashboard.StandaloneWidgetComponent = Ember.Component.extend({
     visualization: Ember.computed('visualizationID', function() {
         var visualizationID = this.get('visualizationID');
-        console.log(visualizationID);
         var visualization = DFIDDashboard.visualizations.filter(function(item) {
             return (item.id == visualizationID);
         })[0];
-        console.log(visualization.chartData);
         return visualization;
     }),
 });
 
 DFIDDashboard.StandaloneChartComponent = DFIDDashboard.StandaloneWidgetComponent.extend({});
 DFIDDashboard.StandaloneMapComponent = DFIDDashboard.StandaloneWidgetComponent.extend({});
+DFIDDashboard.StandaloneTableComponent = DFIDDashboard.StandaloneWidgetComponent.extend({
+    tableColumns: Ember.computed('visualization.rawData', function() {
+        var visualization = this.get('visualization');
+        if(!visualization) { return []; }
+        console.log("Visualization", visualization);
+        var rawData = visualization.get('rawData');
+        console.log("Raw", rawData);
+        var headings = []
+        if(rawData[0]) { headings = Object.keys(rawData[0]) };
+        var columns = headings.map(function(entry) {
+            var columnDefinition = Ember.Table.ColumnDefinition.create({
+                headerCellName: entry,
+                textAlign: 'text-align-left',
+                contentPath: entry
+            });
+            return columnDefinition;
+        });
+        return columns;
+    }),
+    tableContents: Ember.computed('columns', function() {
+        var keys = this.get('columns');
+        var rows = this.get('visualization').rawData.map(function(row) {
+            var values = [];
+            for(var index in keys) {
+                var key = keys[index];
+                if(row.hasOwnProperty(key)) {
+                    values.push(row[key]);
+                }
+            }
+            return values;
+        });
+        return rows;
+    }),
+});
