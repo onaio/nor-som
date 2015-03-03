@@ -48,6 +48,28 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
+        datasetSlug: 'brics',
+        title: 'All NGO Activitities (BRiCS) by District',
+        id: 'activity-groups-by-districts-all-ngos',
+        query:  "select " + 
+                "district,array_agg(distinct ngo) as all_ngos, " + 
+                "min(the_geom_webmercator) as the_geom_webmercator, " + 
+                "min(cartodb_id) as cartodb_id, " + 
+                "sum(case " + 
+                "when category_resilience is true then 1 " + 
+                "when category_wash is true then 1 " + 
+                "when category_shelter is true then 1 " + 
+                "when category_food_security_and_livelihood is true then 1 " + 
+                "else 0 end)as total_activities " +
+                "from brics_reg_data_2015_01_16 " + 
+                "group by 1 " +
+                "order by 1 ",
+        //cartoVisualizationID: 'c9320b96-7caa-11e4-a351-0e853d047bba',
+        categorizedBy: 'district',
+        columnNames: ['total_activities'],
+        rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
         datasetSlug: 'unicef',
         title: 'Total PCAS by Programme',
         id: 'total-pcas-by-programme',
@@ -64,10 +86,19 @@ DFIDDashboard.visualizations = [
         categorizedBy: 'programme_section',
         columnNames: ['unicef_contribution', 'total_partner_contribution'],
         rawData: []
-    }),
+    })
 ];
 
 DFIDDashboard.datasets = [
+    {
+        organizationSlug: 'overview',
+        name: 'Overview',
+        slug: 'overview',
+        rawData: [],
+        visualizations: DFIDDashboard.visualizations
+                        .filter(function(item) { return item.datasetSlug == 'overview'; })
+                        .map(function(item) { return item; })
+    },
     {
         organizationSlug: 'brics',
         name: 'BRiCS',
@@ -120,6 +151,12 @@ DFIDDashboard.datasets = [
 
 DFIDDashboard.organizations = [
     {
+        name: 'Overview',
+        slug: 'overview',
+        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'overview'; })
+
+    },
+    {
         name: 'BRiCS',
         slug: 'brics',
         datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'brics'; })
@@ -144,7 +181,8 @@ DFIDDashboard.organizations = [
         name: 'WFP',
         slug: 'wfp',
         datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'wfp'; })
-    },
+    }
+
 ];
 
 DFIDDashboard.StandaloneWidgetComponent = Ember.Component.extend({
