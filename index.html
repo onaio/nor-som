@@ -168,7 +168,7 @@
         <script type='text/x-handlebars' data-template-name='_overview'>
             <div class='container'>
                 <div class='page-header'>
-                    <h3>DFID Partner Actvity</h3>
+                    <h3>DFID Partner Activity</h3>
                 </div>
                 <div class='row'>
                     <div class='col-lg-6'>
@@ -178,6 +178,7 @@
                         {{labeled-chart visualizationID='csi_by_region_overview'}}
                     </div>
                 </div>
+                <!-- WFP -->
                 <div class='row'>
                     <div class='col-lg-6'>
                         {{chart-group visualizationGroupID='wfp-dec'}}
@@ -185,6 +186,17 @@
                     <div class='col-lg-6'>
                         <div class='panel panel-default map-panel'>
                             {{standalone-map visualizationID='wfp-dec-mt'}}
+                        </div>
+                    </div>
+                
+                <!-- FAO -->
+                <div class='row'>
+                    <div class='col-lg-6'>
+                        {{labeled-chart visualizationID='fao-fcw-ngo'}}
+                    </div>
+                    <div class='col-lg-6'>
+                        <div class='panel panel-default map-panel'>
+                            {{standalone-map visualizationID='fao-cfw-beneficiary-reg'}}
                         </div>
                     </div>
                 </div>
