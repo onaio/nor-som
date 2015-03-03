@@ -42,13 +42,11 @@
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         {{#each organization in DFIDDashboard.organizations}}
-                            {{#each dataset in organization.datasets}}
-                                <li role="presentation">
-                                    {{#link-to 'charts' dataset.slug}}
-                                        {{ dataset.name }}
-                                    {{/link-to}}
-                                </li>
-                            {{/each}}
+                            <li role="presentation">
+                                {{#link-to 'viz' organization.slug}}
+                                    {{ organization.name }}
+                                {{/link-to}}
+                            </li>
                         {{/each}}
                     </ul>
                 </div>
