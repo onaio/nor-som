@@ -86,7 +86,23 @@ DFIDDashboard.visualizations = [
         categorizedBy: 'programme_section',
         columnNames: ['unicef_contribution', 'total_partner_contribution'],
         rawData: []
-    })
+    }),
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'fao',
+        title: 'FAO Cash-for-Work Beneficiary Registration',
+        id: 'fao-cfw-beneficiary-reg',
+        query:  "SELECT " +
+                "district, " +
+                "ngo, " +
+                "SUM(total_beneficiaries) AS total_beneficiaries, " +
+                "SUM(total_hhs) AS total_hhs " +
+                "FROM fao_cfw_beneficiary_reg " +
+                "GROUP by 1, 2",
+        cartoVisualizationID: 'bb3e8a18-c16b-11e4-8b88-0e9d821ea90d',
+        categorizedBy: 'district',
+        columnNames: ['total_beneficiaries'],
+        rawData: []
+    }),
 ];
 
 DFIDDashboard.datasets = [
