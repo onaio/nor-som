@@ -88,6 +88,18 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
+        organizationSlugs: ['overview','fao'],
+        title: 'Overall FAO Programmes',
+        id: 'overall-fao-programmes',
+        query:  "SELECT " +
+                "* " +
+                "FROM fao_stack ",
+        cartoVisualizationID: 'b072fe0c-c1bb-11e4-9af8-0e853d047bba',
+        categorizedBy: 'fao_program',
+        columnNames: ['unicef_contribution', 'total_partner_contribution'],
+        rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
         organizationSlugs: ['fao'],
         title: 'FAO Cash-for-Work Beneficiary Registration',
         id: 'fao-cfw-beneficiary-reg',
@@ -250,17 +262,31 @@ DFIDDashboard.visualizations = [
 
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['overview'],
-        title: 'Food Consumption Score',
-        id: 'fcs_by_district_overview',
-        query:  "select district,  " +
+        title: 'Food Consumption Score - BRiCS & SNS',
+        id: 'fcs_by_region_overview',
+        query:  "select region,  " +
                 "count(case when fcs::numeric(10,0)>35 then id else null end) as acceptable, " +
                 "count(case when fcs::numeric(10,0)<=35 and fcs::numeric(10,0)>21 then id else null end) as borderline, " +
                 "count(case when fcs::numeric(10,0)<=21 then id else null end) as poor " +
                 "from sns_brics_mashup " +
                 "group by 1 " +
                 "order by 1 ",
-        categorizedBy: 'district',
+        categorizedBy: 'region',
         columnNames: ['acceptable', 'borderline', 'poor'],
+        rawData: []
+    }),
+
+    DFIDDashboard.Visualization.create({
+        organizationSlugs: ['overview'],
+        title: 'Coping Strategy Index - BRiCS & SNS',
+        id: 'csi_by_region_overview',
+        query:  "select region, " +
+                "avg(csi_reduced) as csi " +
+                "from sns_brics_mashup " +
+                "group by 1 " +
+                "order by 1 ",
+        categorizedBy: 'region',
+        columnNames: ['csi'],
         rawData: []
     })
 
