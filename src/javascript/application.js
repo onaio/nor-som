@@ -215,7 +215,7 @@ DFIDDashboard.visualizations = [
 
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['wfp'],
-        title: 'WFP Totals to Beneficiaries per District',
+        title: 'WFP Beneficiaries by Category (Dec 2014)',
         id: 'wfp-dec-beneficiaries',
         query:  "SELECT " +
                 "upper(region) as region, " +
@@ -229,6 +229,22 @@ DFIDDashboard.visualizations = [
                 "order by 1 ",
         categorizedBy: 'region',
         columnNames: ['safety_net', 'relief', 'nutrition', 'livelihood'],
+        rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
+        organizationSlugs: ['wfp'],
+        title: 'WFP Deliveries in Metric Tonnes (Dec 2014)',
+        id: 'wfp-dec-mt',
+        query:  "SELECT " +
+                "region, " +
+                "sum(mt_total) as mt_total " +
+                "from wfp_dec_beneficiaries " +
+                "where mt_total <> 0 " +
+                "group by 1 " +
+                "order by 1 ", 
+        categorizedBy: 'region',
+        cartoVisualizationID: 'ab0c3934-c1dd-11e4-98db-0e9d821ea90d',
+        columnNames: ['mt_total'],
         rawData: []
     }),
 
@@ -260,6 +276,11 @@ DFIDDashboard.visualizationGroups = [
         id: 'brics-activities',
         organizationSlugs: ['brics'],
         visualizationIDs: ['activity-groups-by-district', 'activity-groups-by-ngo'],
+    }),
+        DFIDDashboard.VisualizationGroup.create({
+        id: 'wfp-dec',
+        organizationSlugs: ['wfp'],
+        visualizationIDs: ['wfp-dec-beneficiaries', 'wfp-dec-mt'],
     }),
 ]
 
