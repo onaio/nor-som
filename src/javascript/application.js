@@ -32,7 +32,7 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['brics'],
-        title: 'Activity Groups by NGO',
+        title: 'BRiCS - Activity Groups by Partners',
         id: 'activity-groups-by-ngo',
         query:  "select  " +
                 "ngo, " +
@@ -50,7 +50,7 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['brics'],
-        title: 'Activities by District',
+        title: 'BRiCS - Activities by District',
         id: 'all-activity-groups-by-regions-all-ngos',
         query:  "select " + 
                 "region, " + 
@@ -72,8 +72,8 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['unicef'],
-        title: 'Total Budgets of PCAs by Programme (1M USD)',
+        organizationSlugs: ['overview','unicef'],
+        title: 'UNICEF - Total Budgets of PCAs by Programme (1M USD)',
         id: 'unicef-total-pca-budget-by-programme',
         query:  "SELECT " +
                 "programme_section, " +
@@ -90,8 +90,8 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['unicef'],
-        title: 'Total PCA Budgets by Partner (100K USD)',
+        organizationSlugs: ['overview','unicef'],
+        title: 'UNICEF - Total PCA Budgets by Partner (100K USD)',
         id: 'unicef-total-pca-budget-by-partner',
         query:  "SELECT " +
                 "partner, " +
@@ -109,7 +109,7 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['unicef'],
-        title: 'PCAs by Programme Section',
+        title: 'UNICEF - PCAs by Programme Section',
         id: 'unicef-pca-by-programme-section',
         query:  "SELECT programme_section,count(*) as pcas " +
                 "FROM unicef_active_pcas " +
@@ -120,7 +120,7 @@ DFIDDashboard.visualizations = [
     }),    
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['overview','fao'],
-        title: 'Overall FAO Programmes',
+        title: 'FAO - Overall Programmes',
         id: 'overall-fao-programmes',
         query:  "SELECT " +
                 "* " +
@@ -132,7 +132,7 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['overview','fao'],
-        title: 'FAO Cash For Work Beneficiaries by NGO',
+        title: 'FAO - Cash For Work Beneficiaries by NGO',
         id: 'fao-fcw-ngo',
         query:  "select " + 
                 "ngo, " +
@@ -150,7 +150,7 @@ DFIDDashboard.visualizations = [
 
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['fao'],
-        title: 'FAO Cash-for-Work Beneficiary Registration',
+        title: 'FAO - Cash-for-Work Beneficiary Registration',
         id: 'fao-cfw-beneficiary-reg',
         query:  "SELECT " +
                 "district, " +
@@ -166,7 +166,7 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['sns'],
-        title: 'SNS Scored CSI',
+        title: 'SNS - Scored CSI',
         id: 'sns-scored-csi',
         query:  "SELECT district, " +
                 "AVG(reduced_csi)::numeric(10,0) AS csi " +
@@ -179,7 +179,7 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['sns'],
-        title: 'SNS Scored HDDS',
+        title: 'SNS - Scored HDDS',
         id: 'sns-scored-hdds',
         query:  "SELECT district, " +
                 "AVG(mhdds)::numeric(10,0)as hdds " +
@@ -192,7 +192,7 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['sns'],
-        title: 'SNS Scored CSI',
+        title: 'SNS - Scored CSI',
         id: 'sns-scored-assets',
         query:  "SELECT district, " +
                 "AVG(total_asset)::numeric(10,0) as assets " +
@@ -205,7 +205,7 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['sns'],
-        title: 'SNS Scored FCS',
+        title: 'SNS - Scored FCS',
         id: 'sns-scored-fcs',
         query:  "SELECT " +
                 "DISTRICT, " +
@@ -221,7 +221,7 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['sns'],
-        title: 'Indicator Averages by NGO',
+        title: 'SNS - Indicator Averages by NGO',
         id: 'sns-indicator-averages-by-ngo',
         query:  "SELECT " +
                 "UPPER(ngo) as ngo, " +
@@ -238,7 +238,7 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['unicef'],
-        title: 'UNICEF Cash Transfers Beneficiary',
+        title: 'UNICEF - Cash Transfers Beneficiary',
         id: 'unicef-cash-transfers',
         query:  "SELECT " +
                 "the_geom, " +
@@ -256,7 +256,7 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['fao'],
-        title: 'FAO Cash Transfers Beneficiary',
+        title: 'FAO - Cash Transfers Beneficiary',
         id: 'fao-cfw-bydistrict',
         query:  "SELECT " +
                 "min(the_geom_webmercator) as the_geom_webmercator, " +
@@ -276,7 +276,7 @@ DFIDDashboard.visualizations = [
 
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['overview','wfp'],
-        title: 'WFP Beneficiaries by Category (Dec 2014)',
+        title: 'WFP - Beneficiaries by Category (Dec 2014)',
         id: 'wfp-dec-beneficiaries',
         query:  "SELECT " +
                 "upper(region) as region, " +
@@ -294,7 +294,7 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['overview','wfp'],
-        title: 'WFP Deliveries in Metric Tonnes (Dec 2014)',
+        title: 'WFP - Deliveries in Metric Tonnes (Dec 2014)',
         id: 'wfp-dec-mt',
         query:  "SELECT " +
                 "region, " +
@@ -311,7 +311,7 @@ DFIDDashboard.visualizations = [
 
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['overview'],
-        title: 'Food Consumption Score - BRiCS & SNS',
+        title: ' BRiCS & SNS - Food Consumption Score',
         id: 'fcs_by_region_overview',
         query:  "select region,  " +
                 "count(case when fcs::numeric(10,0)>35 then id else null end) as acceptable, " +
@@ -327,7 +327,7 @@ DFIDDashboard.visualizations = [
 
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['overview'],
-        title: 'Coping Strategy Index - BRiCS & SNS',
+        title: ' BRiCS & SNS - Coping Strategy Index',
         id: 'csi_by_region_overview',
         query:  "select region, " +
                 "avg(csi_reduced) as csi " +
