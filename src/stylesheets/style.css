@@ -38,15 +38,39 @@ ul {
 }
 
 .map-container {
-    height: 300px;
 }
 
 .btn, .dropdown-menu {
     border-radius: 0;
 }
 
-.panel {
+.panel-body {
     height: 350px;
-    padding: 20px;
-    border-radius: 0px;
+    padding: 2%;
+}
+
+.panel {
+    border-radius: 0;
+}
+
+.map-panel {
+    height: 350px;
+}
+
+.panel .ember-view {
+    border-radius: 0;
+}
+
+.table-container {
+    margin-bottom: 20px;
+}
+
+.loading-spinner {
+    display: inline-block;
+    text-align: center;
+    padding: 5px;
+    border-radius: 2px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    display: inline-block;
 }

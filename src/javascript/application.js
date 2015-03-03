@@ -88,6 +88,94 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
+        datasetSlug: 'fao',
+        title: 'FAO Cash-for-Work Beneficiary Registration',
+        id: 'fao-cfw-beneficiary-reg',
+        query:  "SELECT " +
+                "district, " +
+                "ngo, " +
+                "SUM(total_beneficiaries) AS total_beneficiaries, " +
+                "SUM(total_hhs) AS total_hhs " +
+                "FROM fao_cfw_beneficiary_reg " +
+                "GROUP by 1, 2",
+        cartoVisualizationID: 'bb3e8a18-c16b-11e4-8b88-0e9d821ea90d',
+        categorizedBy: 'district',
+        columnNames: ['total_beneficiaries'],
+        rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'sns',
+        title: 'SNS Scored CSI',
+        id: 'sns-scored-csi',
+        query:  "SELECT district, " +
+                "AVG(reduced_csi)::numeric(10,0) AS csi " +
+                "FROM sns_scored " +
+                "GROUP by 1 " +
+                "ORDER by 1",
+        categorizedBy: 'district',
+        columnNames: ['csi'],
+        rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'sns',
+        title: 'SNS Scored HDDS',
+        id: 'sns-scored-hdds',
+        query:  "SELECT district, " +
+                "AVG(mhdds)::numeric(10,0)as hdds " +
+                "FROM sns_scored " +
+                "GROUP by 1 " +
+                "ORDER by 1",
+        categorizedBy: 'district',
+        columnNames: ['hdds'],
+        rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'sns',
+        title: 'SNS Scored CSI',
+        id: 'sns-scored-assets',
+        query:  "SELECT district, " +
+                "AVG(total_asset)::numeric(10,0) as assets " +
+                "FROM sns_scored " +
+                "GROUP by 1 " +
+                "ORDER by 1",
+        categorizedBy: 'district',
+        columnNames: ['assets'],
+        rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'sns',
+        title: 'SNS Scored CSI',
+        id: 'sns-scored-fcs',
+        query:  "SELECT " +
+                "DISTRICT, " +
+                "COUNT(case when total_fcs::numeric(10,0)>35 then recordid else null end) as acceptable, " +
+                "COUNT(case when total_fcs::numeric(10,0)<=35 and total_fcs::numeric(10,0)>21 then recordid else null end) as borderline, " +
+                "COUNT(case when total_fcs::numeric(10,0)<=21 then recordid else null end) as poor " +
+                "FROM sns_scored " +
+                "GROUP by 1 " +
+                "ORDER by 1",
+        categorizedBy: 'district',
+        columnNames: ['acceptable', 'borderline', 'poor'],
+        rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'sns',
+        title: 'Indicator Averages by NGO',
+        id: 'sns-indicator-averages-by-ngo',
+        query:  "SELECT " +
+                "UPPER(ngo) as ngo, " +
+                "AVG(reduced_csi)::numeric(10,0) AS csi, " +
+                "AVG(mhdds)::numeric(10,0) AS hdds, " +
+                "AVG(total_asset)::numeric(10,0) AS assets, " +
+                "AVG(total_fcs)::numeric(10,0) AS fcs " +
+                "FROM sns_scored " +
+                "GROUP by 1 " +
+                "ORDER by 1",
+        categorizedBy: 'district',
+        columnNames: ['fcs'],
+        rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
         datasetSlug: 'unicef',
         title: 'UNICEF Cash Transfers Beneficiary',
         id: 'unicef-cash-transfers',
@@ -107,9 +195,8 @@ DFIDDashboard.visualizations = [
     })
 ];
 
-DFIDDashboard.datasets = [
+DFIDDashboard.organizations = [
     {
-        organizationSlug: 'overview',
         name: 'Overview',
         slug: 'overview',
         rawData: [],
@@ -118,7 +205,6 @@ DFIDDashboard.datasets = [
                         .map(function(item) { return item; })
     },
     {
-        organizationSlug: 'brics',
         name: 'BRiCS',
         slug: 'brics',
         cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
@@ -128,7 +214,6 @@ DFIDDashboard.datasets = [
                         .map(function(item) { return item; })
     },
     {
-        organizationSlug: 'sns',
         name: 'SNS',
         slug: 'sns',
         cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
@@ -138,7 +223,6 @@ DFIDDashboard.datasets = [
                         .map(function(item) { return item; })
     },
     {
-        organizationSlug: 'fao',
         name: 'FAO',
         slug: 'fao',
         rawData: [],
@@ -147,7 +231,6 @@ DFIDDashboard.datasets = [
                         .map(function(item) { return item; })
     },
     {
-        organizationSlug: 'unicef',
         name: 'UNICEF',
         slug: 'unicef',
         rawData: [],
@@ -156,7 +239,6 @@ DFIDDashboard.datasets = [
                         .map(function(item) { return item; })
     },    
     {
-        organizationSlug: 'wfp',
         name: 'WFP',
         slug: 'wfp',
         rawData: [],
@@ -167,53 +249,49 @@ DFIDDashboard.datasets = [
 
 ];
 
-DFIDDashboard.organizations = [
-    {
-        name: 'Overview',
-        slug: 'overview',
-        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'overview'; })
-
-    },
-    {
-        name: 'BRiCS',
-        slug: 'brics',
-        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'brics'; })
-
-    },
-    {
-        name: 'SNS',
-        slug: 'sns',
-        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'sns'; })
-    },
-    {
-        name: 'FAO',
-        slug: 'fao',
-        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'fao'; })
-    },
-    {
-        name: 'UNICEF',
-        slug: 'unicef',
-        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'unicef'; })
-    },
-    {
-        name: 'WFP',
-        slug: 'wfp',
-        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'wfp'; })
-    }
-
-];
-
 DFIDDashboard.StandaloneWidgetComponent = Ember.Component.extend({
     visualization: Ember.computed('visualizationID', function() {
         var visualizationID = this.get('visualizationID');
-        console.log(visualizationID);
         var visualization = DFIDDashboard.visualizations.filter(function(item) {
             return (item.id == visualizationID);
         })[0];
-        console.log(visualization.chartData);
         return visualization;
     }),
 });
 
 DFIDDashboard.StandaloneChartComponent = DFIDDashboard.StandaloneWidgetComponent.extend({});
 DFIDDashboard.StandaloneMapComponent = DFIDDashboard.StandaloneWidgetComponent.extend({});
+DFIDDashboard.StandaloneTableComponent = DFIDDashboard.StandaloneWidgetComponent.extend({
+    tableColumns: Ember.computed('visualization.rawData', function() {
+        var visualization = this.get('visualization');
+        if(!visualization) { return []; }
+        console.log("Visualization", visualization);
+        var rawData = visualization.get('rawData');
+        console.log("Raw", rawData);
+        var headings = []
+        if(rawData[0]) { headings = Object.keys(rawData[0]) };
+        var columns = headings.map(function(entry) {
+            var columnDefinition = Ember.Table.ColumnDefinition.create({
+                headerCellName: entry,
+                textAlign: 'text-align-left',
+                contentPath: entry
+            });
+            return columnDefinition;
+        });
+        return columns;
+    }),
+    tableContents: Ember.computed('columns', function() {
+        var keys = this.get('columns');
+        var rows = this.get('visualization').rawData.map(function(row) {
+            var values = [];
+            for(var index in keys) {
+                var key = keys[index];
+                if(row.hasOwnProperty(key)) {
+                    values.push(row[key]);
+                }
+            }
+            return values;
+        });
+        return rows;
+    }),
+});

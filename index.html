@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="/src/stylesheets/style.css">
         <link rel="stylesheet" href="http://rawgit.com/LearnBoost/antiscroll/master/antiscroll.css">
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/2.1.0/normalize.css">
-        <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-table/v0.2.0/dist/ember-table.css">
+        <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-table/v0.4.0/dist/ember-table.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-charts/v0.3.0/dist/ember-charts.css">
         <link rel="stylesheet" href="bower_components/c3/c3.css">
@@ -20,8 +20,21 @@
                 color=visualization.chartPalette}}
         </script>
 
+        <script type='text/x-handlebars' id='components/standalone-table'>
+            {{#if tableColumns}}
+                {{table-component
+                    numFixedColumns=0
+                    hasFooter=false
+                    columns=tableColumns
+                    content=visualization.rawData}}
+            {{else}}
+                <div class='loading-spinner'>
+                    <i class='fa fa-refresh fa-spin'></i>
+                </div>
+            {{/if}}
+        </script>
         
-        <script type='text/x-handlebars' data-template-name='_side-navigation'>
+        <script type='text/x-handlebars' data-template-name='_visualization-selector-dropdown'>
             <div class='container'>
                 <div class="dropdown pull-right">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -29,20 +42,18 @@
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         {{#each organization in DFIDDashboard.organizations}}
-                            {{#each dataset in organization.datasets}}
-                                <li role="presentation">
-                                    {{#link-to 'charts' dataset.slug}}
-                                        {{ dataset.name }}
-                                    {{/link-to}}
-                                </li>
-                            {{/each}}
+                            <li role="presentation">
+                                {{#link-to 'viz' organization.slug}}
+                                    {{ organization.name }}
+                                {{/link-to}}
+                            </li>
                         {{/each}}
                     </ul>
                 </div>
             </div>
         </script>
 
-        <script type='text/x-handlebars' data-template-name='organizations'>
+        <script type='text/x-handlebars' data-template-name='index'>
             <div class='container'>
                 <div class='row'>
                     <div class='col-lg-6 col-lg-offset-3'>
@@ -52,7 +63,7 @@
                             <ul>
                                 {{#each organization in content}}
                                     <li>
-                                        {{#link-to 'organization' organization.slug }}
+                                        {{#link-to 'viz' organization.slug }}
                                             {{ organization.name }}
                                         {{/link-to}}
                                     </li>
@@ -64,79 +75,13 @@
             </div>
         </script>
 
-        <script type='text/x-handlebars' data-template-name='map'>
-            {{partial "side-navigation"}}
-            <div class='container' id='viewport'>
-
-                <div id='description' class='row'>
-                    <div class='col-lg-12'>
-                        <h3>FAO Beneficiary Registration</h3>
-                        <p>This data represents beneficiaries registered by FAO.</p>
-                    </div>
-                </div>
-                <div class='row'>
-                    <div id='content' class='col-lg-12' {{bind-attr data-viz-id=model.cartoVisualizationID}}>
-                    </div>
-                </div>
-                <script>
-                    var cartoVisualizationID = $('#content').attr('data-viz-id');
-                    var cartoURL = 'http://okal.cartodb.com/api/v2/viz/' + cartoVisualizationID + '/viz.json'
-                    cartodb.createVis('content', cartoURL);
-                </script>
-            </div>
-        </script>
-
-        <script type='text/x-handlebars' data-template-name='organization'>
-            <div class='container'>
-                <div class='row'>
-                    <div class='col-lg-6 col-lg-offset-3'>
-                        <div>
-                            <h2>{{ organization.name }}</h2>
-                            <p>Choose a dataset to visualize</p>
-                            <ul>
-                                {{#each dataset in content.datasets}}
-                                    <li>
-                                        {{#link-to 'table' dataset.slug}}
-                                            {{ dataset.name }}
-                                        {{/link-to}}
-                                    </li>
-                                {{/each}}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </script>
-
-        <script type='text/x-handlebars' data-template-name='table'>
-            {{partial "side-navigation"}}
-            <div class='container' id='viewport'>
-                <div id='description' class='row'>
-                    <div class='col-lg-12'>
-                        <h3>{{model.name}}</h3>
-                    </div>
-                </div>
-                <div class='row'>
-                    <div id='content' class='col-lg-12'>
-                        <div class='table-container'>
-                            {{table-component
-                                numFixedColumns=0
-                                hasFooter=false
-                                columnsBinding='columns'
-                                contentBinding='model.rawData'}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </script>
-
         <script type='text/x-handlebars' data-template-name='components/standalone-map'>
             <div class='map-container' {{bind-attr data-viz-id=visualization.cartoVisualizationID id=visualization.mapContainerID}}>
             </div>
         </script>
 
-        <script type='text/x-handlebars' data-template-name='charts'>
-            {{partial "side-navigation"}}
+        <script type='text/x-handlebars' data-template-name='viz'>
+            {{partial "visualization-selector-dropdown"}}
             {{partial content.slug}}
             <scri{{!}}pt>
                 var cartoVisualizationID = $('#map-container').attr('data-viz-id');
@@ -181,11 +126,15 @@
                     <h3>Activity Groups by District</h3>
                 </div>
                 <div class='row'>
-                    <div class='panel panel-default col-lg-6'>
-                        {{standalone-map visualizationID='activity-groups-by-district'}}
+                    <div class='col-lg-6'>
+                        <div class='panel panel-default map-panel'> 
+                            {{standalone-map visualizationID='activity-groups-by-district'}}
+                        </div>
                     </div>
-                    <div class='panel panel-default col-lg-6'>
-                        {{standalone-chart visualizationID='activity-groups-by-district'}}
+                    <div class='col-lg-6'>
+                        <div class='panel panel-default'> 
+                            {{standalone-chart visualizationID='activity-groups-by-district'}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -194,19 +143,28 @@
                         <h3>Activity Groups by NGO</h3>
                 </div>
                 <div class='row'>
-                    <div class='panel panel-default col-lg-12'>
-                    <h4>Total Activities by District</h4>
-                        {{standalone-chart visualizationID='activity-groups-by-districts-all-ngos'}}
+                    <div class='col-lg-12'>
+                        <div class='panel panel-default'>
+                            <h4>Total Activities by District</h4>
+                            {{standalone-chart visualizationID='activity-groups-by-districts-all-ngos'}}
+                         </div>
                      </div>
                 </div>
                 <div class='row'>
-                    <div class='panel panel-default col-lg-12'>
-                        {{standalone-chart visualizationID='activity-groups-by-ngo'}}
+                    <div class='col-lg-12'>
+                        <div class='panel panel-default'>
+                            {{standalone-chart visualizationID='activity-groups-by-ngo'}}
+                        </div>
                     </div>
                 </div>
                 <div class='row'>
-                    <div class='panel panel-default col-lg-6'>
-                        {{standalone-map visualizationID='activity-groups-by-ngo'}}
+                    <div class='col-lg-6'>
+                        <div class='panel panel-default map-panel'>
+                            {{standalone-map visualizationID='activity-groups-by-ngo'}}
+                        </div>
+                    </div>
+                    <div class='col-lg-6'>
+                        {{standalone-table visualizationID='activity-groups-by-ngo'}}
                     </div>
                 </div>
             </div>
@@ -216,6 +174,11 @@
             <div class='container'>
                 <div class='page-header'>
                 <h3>UNICEF</h3>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-12'>
+                        {{standalone-table visualizationID='total-pcas-by-programme'}}
+                    </div>
                 </div>
                 <div class='row'>
                     <div class='col-lg-12'>
@@ -236,19 +199,23 @@
 
             </div>
         </script>
- <script type='text/x-handlebars' data-template-name='_fao'>
+        <script type='text/x-handlebars' data-template-name='_fao'>
             <div class='container'>
                 <div class='page-header'>
-                <h3>FAO</h3>
+                    <h3>FAO</h3>
                 </div>
                 <div class='row'>
-                    <div class='col-lg-12'>
-                      
+                    <div class='col-lg-6'>
+                        {{standalone-table visualizationID='fao-cfw-beneficiary-reg'}}
                     </div>
-                </div>
-                <div class='row'>
-                    <div class='col-lg-12'>
-                       
+                    <div class='col-lg-6'>
+                        <div class='row'>
+                            <div class='col-lg-12'>
+                                <div class='panel panel-default map-panel'>
+                                    {{standalone-map visualizationID='fao-cfw-beneficiary-reg'}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -256,16 +223,49 @@
          <script type='text/x-handlebars' data-template-name='_sns'>
             <div class='container'>
                 <div class='page-header'>
-                <h3>SNS</h3>
+                    <h3>SNS</h3>
                 </div>
                 <div class='row'>
-                    <div class='col-lg-12'>
-                      
+                    <div class='col-lg-12 table-container'>
+                        {{standalone-table visualizationID='sns-indicator-averages-by-ngo'}}
                     </div>
                 </div>
                 <div class='row'>
-                    <div class='col-lg-12'>
-                       
+                    <div class='col-lg-6'>
+                        <div class='panel panel-default'>
+                            <div class='panel-body'>
+                                {{standalone-chart visualizationID='sns-scored-csi'}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-lg-6'>
+                        <div class='panel panel-default'>
+                            <div class='panel-body'>
+                                {{standalone-chart visualizationID='sns-scored-hdds'}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-6'>
+                        <div class='panel panel-default'>
+                            <div class='panel-heading'>
+                                <h3 class='panel-title'>SNS Scored Assets</h3>
+                            </div>
+                            <div class='panel-body'>
+                                {{standalone-chart visualizationID='sns-scored-assets'}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-lg-6'>
+                        <div class='panel panel-default'>
+                            <div class='panel-heading'>
+                                <h3 class='panel-title'>SNS Scored FCS</h3>
+                            </div>
+                            <div class='panel-body'>
+                                {{standalone-chart visualizationID='sns-scored-fcs'}}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -304,13 +304,9 @@
         <script src="http://rawgit.com/Addepar/ember-table/v0.4.0/dist/ember-table.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        <script src="bower_components/d3/d3.min.js"></script>
         <script src="bower_components/c3/c3.min.js"></script>
         <script src="bower_components/ember-c3/build/lib.js"></script>
         <script src="/src/javascript/application.js"></script>
-        <script src="/src/javascript/controllers/charts.js"></script>
-        <script src="/src/javascript/controllers/organization.js"></script>
-        <script src="/src/javascript/controllers/table.js"></script>
         <script src="/src/javascript/router.js"></script>
     </body>
 </html>
