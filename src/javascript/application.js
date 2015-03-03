@@ -6,6 +6,7 @@ DFIDDashboard.Visualization = Ember.Object.extend({
         return 'map-' + this.get('cartoVisualizationID');
     }),
 });
+DFIDDashboard.VisualizationGroup = Ember.Object.extend();
 
 DFIDDashboard.sql = new cartodb.SQL({user: 'ona', api_key: '71318d1aefad674aeeeda099af88240beb003209'});
 
@@ -195,11 +196,21 @@ DFIDDashboard.visualizations = [
     })
 ];
 
+DFIDDashboard.visualizationGroups = [
+    DFIDDashboard.VisualizationGroup.create({
+        id: 'hdds-csi',
+        datasetSlug: 'sns',
+        visualizationIDs: ['sns-scored-csi', 'sns-scored-hdds'],
+    }),
+]
+
 DFIDDashboard.organizations = [
     {
         name: 'Overview',
         slug: 'overview',
         rawData: [],
+        visualizationGroups: DFIDDashboard.visualizationGroups
+                        .filter(function(item) { return item.datasetSlug == 'overview'; }),
         visualizations: DFIDDashboard.visualizations
                         .filter(function(item) { return item.datasetSlug == 'overview'; })
                         .map(function(item) { return item; })
@@ -209,6 +220,8 @@ DFIDDashboard.organizations = [
         slug: 'brics',
         cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
         rawData: [],
+        visualizationGroups: DFIDDashboard.visualizationGroups
+                        .filter(function(item) { return item.datasetSlug == 'brics'; }),
         visualizations: DFIDDashboard.visualizations
                         .filter(function(item) { return item.datasetSlug == 'brics'; })
                         .map(function(item) { return item; })
@@ -218,6 +231,8 @@ DFIDDashboard.organizations = [
         slug: 'sns',
         cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
         rawData: [],
+        visualizationGroups: DFIDDashboard.visualizationGroups
+                        .filter(function(item) { return item.datasetSlug == 'sns'; }),
         visualizations: DFIDDashboard.visualizations
                         .filter(function(item) { return item.datasetSlug == 'sns'; })
                         .map(function(item) { return item; })
@@ -226,6 +241,8 @@ DFIDDashboard.organizations = [
         name: 'FAO',
         slug: 'fao',
         rawData: [],
+        visualizationGroups: DFIDDashboard.visualizationGroups
+                        .filter(function(item) { return item.datasetSlug == 'fao'; }),
         visualizations: DFIDDashboard.visualizations
                         .filter(function(item) { return item.datasetSlug == 'fao'; })
                         .map(function(item) { return item; })
@@ -234,6 +251,8 @@ DFIDDashboard.organizations = [
         name: 'UNICEF',
         slug: 'unicef',
         rawData: [],
+        visualizationGroups: DFIDDashboard.visualizationGroups
+                        .filter(function(item) { return item.datasetSlug == 'unicef'; }),
         visualizations: DFIDDashboard.visualizations
                         .filter(function(item) { return item.datasetSlug == 'unicef'; })
                         .map(function(item) { return item; })
@@ -242,6 +261,8 @@ DFIDDashboard.organizations = [
         name: 'WFP',
         slug: 'wfp',
         rawData: [],
+        visualizationGroups: DFIDDashboard.visualizationGroups
+                        .filter(function(item) { return item.datasetSlug == 'wfp'; })
         visualizations: DFIDDashboard.visualizations
                         .filter(function(item) { return item.datasetSlug == 'wfp'; })
                         .map(function(item) { return item; })
@@ -255,7 +276,6 @@ DFIDDashboard.StandaloneWidgetComponent = Ember.Component.extend({
         var visualization = DFIDDashboard.visualizations.filter(function(item) {
             return (item.id == visualizationID);
         })[0];
-        $('body').resize()
         return visualization;
     }),
 });
@@ -295,6 +315,22 @@ DFIDDashboard.StandaloneTableComponent = DFIDDashboard.StandaloneWidgetComponent
         });
         return rows;
     }),
+});
+
+DFIDDashboard.ChartGroupComponent = Ember.Component.extend({
+    visualizations: Ember.computed('visualizationGroupID', function() {
+        console.log("Visualization ID", this.get('visualizationGroupID'));
+        var visualizationGroupID = this.get('visualizationGroupID');
+        var visualizationGroup = DFIDDashboard.visualizationGroups.filter(function(item) {
+            return item.id == visualizationGroupID;
+        })[0];
+        console.log("Group", visualizationGroup);
+        var visualizations = DFIDDashboard.visualizations.filter(function(item) {
+            return visualizationGroup.visualizationIDs.indexOf(item.id) != -1;
+        });
+        console.log("Visualizations", visualizations);
+        return visualizations;
+    })
 });
 
 $('body').on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
