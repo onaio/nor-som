@@ -71,20 +71,38 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['unicef'],
-        title: 'Total PCAS by Programme',
-        id: 'total-pcas-by-programme',
+        title: 'Total Budgets of PCAs by Programme (1M USD)',
+        id: 'unicef-total-pca-budget-by-programme',
         query:  "SELECT " +
                 "programme_section, " +
-                "SUM(unicef_contribution::numeric) as unicef_contribution, " +
-                "SUM(partner_contribution::numeric) as total_partner_contribution, " +
-                "SUM(total_pca_value::numeric) as total_pca_value, " +
+                "((SUM(unicef_contribution::numeric)/1000000)) as unicef_contribution, " +
+                "((SUM(partner_contribution::numeric)/1000000)) as partner_contribution, " +
+                "((SUM(total_pca_value::numeric)/1000000)) as total_pca_value, " +
                 "COUNT (*) AS num_pcas, " +
                 "(SUM(total_pca_value::numeric)/count(*))::numeric AS avg_per_pca " +
                 "FROM unicef_active_pcas " +
                 "GROUP by 1",
         cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
         categorizedBy: 'programme_section',
-        columnNames: ['unicef_contribution', 'total_partner_contribution'],
+        columnNames: ['unicef_contribution', 'partner_contribution'],
+        rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
+        organizationSlugs: ['unicef'],
+        title: 'Total PCA Budgets by Partner (100K USD)',
+        id: 'unicef-total-pca-budget-by-partner',
+        query:  "SELECT " +
+                "partner, " +
+                "min(ngo_category) as ngo_type, " +
+                "sum(unicef_contribution) as unicef_contribution, " +
+                "sum(partner_contribution) as partner_contribution, " +
+                "sum(total_pca_value) total_pca_amount, " +
+                "count(1) as num_pcas " +
+                "FROM unicef_active_pcas " +
+                "group by 1",
+        cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
+        categorizedBy: 'partner',
+        columnNames: ['unicef_contribution', 'partner_contribution'],
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
@@ -307,6 +325,11 @@ DFIDDashboard.visualizationGroups = [
         id: 'wfp-dec',
         organizationSlugs: ['wfp'],
         visualizationIDs: ['wfp-dec-beneficiaries', 'wfp-dec-mt'],
+    }),
+        DFIDDashboard.VisualizationGroup.create({
+        id: 'unicef-pca-budgets',
+        organizationSlugs: ['unicef'],
+        visualizationIDs: ['unicef-total-pca-budget-by-programme', 'unicef-total-pca-budget-by-partner'],
     }),
 ]
 
