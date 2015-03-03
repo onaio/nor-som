@@ -174,9 +174,8 @@ DFIDDashboard.visualizations = [
     }),
 ];
 
-DFIDDashboard.datasets = [
+DFIDDashboard.organizations = [
     {
-        organizationSlug: 'overview',
         name: 'Overview',
         slug: 'overview',
         rawData: [],
@@ -185,7 +184,6 @@ DFIDDashboard.datasets = [
                         .map(function(item) { return item; })
     },
     {
-        organizationSlug: 'brics',
         name: 'BRiCS',
         slug: 'brics',
         cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
@@ -195,7 +193,6 @@ DFIDDashboard.datasets = [
                         .map(function(item) { return item; })
     },
     {
-        organizationSlug: 'sns',
         name: 'SNS',
         slug: 'sns',
         cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
@@ -205,7 +202,6 @@ DFIDDashboard.datasets = [
                         .map(function(item) { return item; })
     },
     {
-        organizationSlug: 'fao',
         name: 'FAO',
         slug: 'fao',
         rawData: [],
@@ -214,7 +210,6 @@ DFIDDashboard.datasets = [
                         .map(function(item) { return item; })
     },
     {
-        organizationSlug: 'unicef',
         name: 'UNICEF',
         slug: 'unicef',
         rawData: [],
@@ -223,7 +218,6 @@ DFIDDashboard.datasets = [
                         .map(function(item) { return item; })
     },    
     {
-        organizationSlug: 'wfp',
         name: 'WFP',
         slug: 'wfp',
         rawData: [],
@@ -231,42 +225,6 @@ DFIDDashboard.datasets = [
                         .filter(function(item) { return item.datasetSlug == 'wfp'; })
                         .map(function(item) { return item; })
     },
-
-];
-
-DFIDDashboard.organizations = [
-    {
-        name: 'Overview',
-        slug: 'overview',
-        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'overview'; })
-
-    },
-    {
-        name: 'BRiCS',
-        slug: 'brics',
-        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'brics'; })
-
-    },
-    {
-        name: 'SNS',
-        slug: 'sns',
-        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'sns'; })
-    },
-    {
-        name: 'FAO',
-        slug: 'fao',
-        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'fao'; })
-    },
-    {
-        name: 'UNICEF',
-        slug: 'unicef',
-        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'unicef'; })
-    },
-    {
-        name: 'WFP',
-        slug: 'wfp',
-        datasets: DFIDDashboard.datasets.filter(function(item) { return item.organizationSlug == 'wfp'; })
-    }
 
 ];
 

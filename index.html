@@ -55,7 +55,7 @@
             </div>
         </script>
 
-        <script type='text/x-handlebars' data-template-name='organizations'>
+        <script type='text/x-handlebars' data-template-name='index'>
             <div class='container'>
                 <div class='row'>
                     <div class='col-lg-6 col-lg-offset-3'>
@@ -65,7 +65,7 @@
                             <ul>
                                 {{#each organization in content}}
                                     <li>
-                                        {{#link-to 'charts' organization.slug }}
+                                        {{#link-to 'viz' organization.slug }}
                                             {{ organization.name }}
                                         {{/link-to}}
                                     </li>
@@ -147,7 +147,7 @@
             </div>
         </script>
 
-        <script type='text/x-handlebars' data-template-name='charts'>
+        <script type='text/x-handlebars' data-template-name='viz'>
             {{partial "side-navigation"}}
             {{partial content.slug}}
             <scri{{!}}pt>
@@ -231,9 +231,7 @@
                         </div>
                     </div>
                     <div class='col-lg-6'>
-                        <div class='panel panel-default'>
-                            {{standalone-table visualizationID='activity-groups-by-ngo'}}
-                        </div>
+                        {{standalone-table visualizationID='activity-groups-by-ngo'}}
                     </div>
                 </div>
             </div>
@@ -355,7 +353,6 @@
         <script src="bower_components/c3/c3.min.js"></script>
         <script src="bower_components/ember-c3/build/lib.js"></script>
         <script src="/src/javascript/application.js"></script>
-        <script src="/src/javascript/controllers/charts.js"></script>
         <script src="/src/javascript/controllers/organization.js"></script>
         <script src="/src/javascript/controllers/table.js"></script>
         <script src="/src/javascript/router.js"></script>
