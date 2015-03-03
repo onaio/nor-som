@@ -326,16 +326,12 @@ DFIDDashboard.visualizationGroups = [
         id: 'wfp-dec',
         organizationSlugs: ['wfp'],
         visualizationIDs: ['wfp-dec-beneficiaries', 'wfp-dec-mt'],
-<<<<<<< HEAD
-    })
-=======
     }),
-        DFIDDashboard.VisualizationGroup.create({
+    DFIDDashboard.VisualizationGroup.create({
         id: 'unicef-pca-budgets',
         organizationSlugs: ['unicef'],
         visualizationIDs: ['unicef-total-pca-budget-by-programme', 'unicef-total-pca-budget-by-partner'],
     }),
->>>>>>> gh-pages
 ]
 
 DFIDDashboard.Organization = Ember.Object.extend({
