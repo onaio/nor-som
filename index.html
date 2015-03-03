@@ -18,7 +18,7 @@
           <div class='panel-heading'>
                 <h3 class='panel-title'>{{visualization.title}}</h3>
             </div>
-            <div class='map-container' {{bind-attr data-viz-id=visualization.cartoVisualizationID id=visualization.mapContainerID}}>
+        <div class='map-container' {{bind-attr data-viz-id=visualization.cartoVisualizationID id=visualization.mapContainerID}}>
             </div>
             </div>
             </div>
@@ -251,11 +251,7 @@
                 <div class='page-header'>
                 <h3>UNICEF</h3>
                 </div>
-                <div class='row'>
-                    <div class='col-lg-12'>
-                        {{standalone-table visualizationID='total-pcas-by-programme'}}
-                    </div>
-                </div>
+               
                 <div class='row'>
                     <div class='col-lg-12'>
                         {{standalone-chart visualizationID='total-pcas-by-programme'}}
