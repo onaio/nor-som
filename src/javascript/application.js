@@ -1,6 +1,5 @@
 window.DFIDDashboard = Ember.Application.create();
 
-DFIDDashboard.Dataset = Ember.Object.extend();
 DFIDDashboard.Visualization = Ember.Object.extend({
     mapContainerID: Ember.computed('cartoVisualizationID', function() {
         return 'map-' + this.get('cartoVisualizationID');
@@ -12,7 +11,7 @@ DFIDDashboard.sql = new cartodb.SQL({user: 'ona', api_key: '71318d1aefad674aeeed
 
 DFIDDashboard.visualizations = [
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'brics',
+        organizationSlugs: ['brics'],
         title: 'Activity Groups by District',
         id: 'activity-groups-by-district',
         query: "select " +
@@ -32,7 +31,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'brics',
+        organizationSlugs: ['brics'],
         title: 'Activity Groups by NGO',
         id: 'activity-groups-by-ngo',
         query:  "select  " +
@@ -49,7 +48,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'brics',
+        organizationSlugs: ['brics'],
         title: 'All NGO Activitities (BRiCS) by District',
         id: 'activity-groups-by-districts-all-ngos',
         query:  "select " + 
@@ -71,7 +70,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'unicef',
+        organizationSlugs: ['unicef'],
         title: 'Total PCAS by Programme',
         id: 'total-pcas-by-programme',
         query:  "SELECT " +
@@ -89,7 +88,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'fao',
+        organizationSlugs: ['fao'],
         title: 'FAO Cash-for-Work Beneficiary Registration',
         id: 'fao-cfw-beneficiary-reg',
         query:  "SELECT " +
@@ -105,7 +104,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'sns',
+        organizationSlugs: ['sns'],
         title: 'SNS Scored CSI',
         id: 'sns-scored-csi',
         query:  "SELECT district, " +
@@ -118,7 +117,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'sns',
+        organizationSlugs: ['sns'],
         title: 'SNS Scored HDDS',
         id: 'sns-scored-hdds',
         query:  "SELECT district, " +
@@ -131,7 +130,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'sns',
+        organizationSlugs: ['sns'],
         title: 'SNS Scored CSI',
         id: 'sns-scored-assets',
         query:  "SELECT district, " +
@@ -144,7 +143,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'sns',
+        organizationSlugs: ['sns'],
         title: 'SNS Scored FCS',
         id: 'sns-scored-fcs',
         query:  "SELECT " +
@@ -160,7 +159,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'sns',
+        organizationSlugs: ['sns'],
         title: 'Indicator Averages by NGO',
         id: 'sns-indicator-averages-by-ngo',
         query:  "SELECT " +
@@ -177,7 +176,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'unicef',
+        organizationSlugs: ['unicef'],
         title: 'UNICEF Cash Transfers Beneficiary',
         id: 'unicef-cash-transfers',
         query:  "SELECT " +
@@ -254,75 +253,50 @@ DFIDDashboard.visualizations = [
 DFIDDashboard.visualizationGroups = [
     DFIDDashboard.VisualizationGroup.create({
         id: 'hdds-csi',
-        datasetSlug: 'sns',
+        organizationSlugs: ['sns'],
         visualizationIDs: ['sns-scored-csi', 'sns-scored-hdds'],
     }),
 ]
 
+DFIDDashboard.Organization = Ember.Object.extend({
+    visualizations: Ember.computed('slug', function() {
+        var slug = this.get('slug');
+        return DFIDDashboard.visualizations.filter(function(item) {
+            return item.get('organizationSlugs').indexOf(slug) != -1;
+        });
+    }),
+    visualizationGroups: Ember.computed('slug', function(item) {
+        return DFIDDashboard.visualizationGroups.filter(function() {
+            return item.get('organizationSlugs').indexOf(slug) != -1;
+        })
+    })
+});
+
 DFIDDashboard.organizations = [
-    {
+    DFIDDashboard.Organization.create({
         name: 'Overview',
         slug: 'overview',
-        rawData: [],
-        visualizationGroups: DFIDDashboard.visualizationGroups
-                        .filter(function(item) { return item.datasetSlug == 'overview'; }),
-        visualizations: DFIDDashboard.visualizations
-                        .filter(function(item) { return item.datasetSlug == 'overview'; })
-                        .map(function(item) { return item; })
-    },
-    {
+    }),
+    DFIDDashboard.Organization.create({
         name: 'BRiCS',
         slug: 'brics',
-        cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
-        rawData: [],
-        visualizationGroups: DFIDDashboard.visualizationGroups
-                        .filter(function(item) { return item.datasetSlug == 'brics'; }),
-        visualizations: DFIDDashboard.visualizations
-                        .filter(function(item) { return item.datasetSlug == 'brics'; })
-                        .map(function(item) { return item; })
-    },
-    {
+    }),
+    DFIDDashboard.Organization.create({
         name: 'SNS',
         slug: 'sns',
-        cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
-        rawData: [],
-        visualizationGroups: DFIDDashboard.visualizationGroups
-                        .filter(function(item) { return item.datasetSlug == 'sns'; }),
-        visualizations: DFIDDashboard.visualizations
-                        .filter(function(item) { return item.datasetSlug == 'sns'; })
-                        .map(function(item) { return item; })
-    },
-    {
+    }),
+    DFIDDashboard.Organization.create({
         name: 'FAO',
         slug: 'fao',
-        rawData: [],
-        visualizationGroups: DFIDDashboard.visualizationGroups
-                        .filter(function(item) { return item.datasetSlug == 'fao'; }),
-        visualizations: DFIDDashboard.visualizations
-                        .filter(function(item) { return item.datasetSlug == 'fao'; })
-                        .map(function(item) { return item; })
-    },
-    {
+    }),
+    DFIDDashboard.Organization.create({
         name: 'UNICEF',
         slug: 'unicef',
-        rawData: [],
-        visualizationGroups: DFIDDashboard.visualizationGroups
-                        .filter(function(item) { return item.datasetSlug == 'unicef'; }),
-        visualizations: DFIDDashboard.visualizations
-                        .filter(function(item) { return item.datasetSlug == 'unicef'; })
-                        .map(function(item) { return item; })
-    },    
-    {
+    }),
+    DFIDDashboard.Organization.create({
         name: 'WFP',
         slug: 'wfp',
-        rawData: [],
-        visualizationGroups: DFIDDashboard.visualizationGroups
-                        .filter(function(item) { return item.datasetSlug == 'wfp'; })
-        visualizations: DFIDDashboard.visualizations
-                        .filter(function(item) { return item.datasetSlug == 'wfp'; })
-                        .map(function(item) { return item; })
-    },
-
+    }),
 ];
 
 DFIDDashboard.StandaloneWidgetComponent = Ember.Component.extend({
