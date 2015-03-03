@@ -53,3 +53,17 @@ ul {
 .panel .ember-view {
     border-radius: 0;
 }
+
+.table-container {
+    margin-bottom: 20px;
+}
+
+.loading-spinner {
+    display: inline-block;
+    text-align: center;
+    padding: 5px;
+    border-radius: 2px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    display: inline-block;
+}
