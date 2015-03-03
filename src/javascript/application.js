@@ -79,6 +79,25 @@ DFIDDashboard.datasets = [
                         .map(function(item) { return item; })
     },
     {
+        organizationSlug: 'sns',
+        name: 'SNS',
+        slug: 'sns',
+        cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
+        rawData: [],
+        visualizations: DFIDDashboard.visualizations
+                        .filter(function(item) { return item.datasetSlug == 'sns'; })
+                        .map(function(item) { return item; })
+    },
+    {
+        organizationSlug: 'fao',
+        name: 'FAO',
+        slug: 'fao',
+        rawData: [],
+        visualizations: DFIDDashboard.visualizations
+                        .filter(function(item) { return item.datasetSlug == 'fao'; })
+                        .map(function(item) { return item; })
+    },
+    {
         organizationSlug: 'unicef',
         name: 'UNICEF',
         slug: 'unicef',
@@ -86,7 +105,17 @@ DFIDDashboard.datasets = [
         visualizations: DFIDDashboard.visualizations
                         .filter(function(item) { return item.datasetSlug == 'unicef'; })
                         .map(function(item) { return item; })
-    }
+    },    
+    {
+        organizationSlug: 'wfp',
+        name: 'WFP',
+        slug: 'wfp',
+        rawData: [],
+        visualizations: DFIDDashboard.visualizations
+                        .filter(function(item) { return item.datasetSlug == 'wfp'; })
+                        .map(function(item) { return item; })
+    },
+
 ];
 
 DFIDDashboard.organizations = [
