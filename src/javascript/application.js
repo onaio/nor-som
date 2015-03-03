@@ -118,6 +118,24 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
+        organizationSlugs: ['overview','fao'],
+        title: 'FAO Cash For Work Beneficiaries by NGO',
+        id: 'fao-fcw-ngo',
+        query:  "select " + 
+                "ngo, " +
+                "sum (total_beneficiaries) as beneficiaries " +
+                "from fao_cfw_beneficiary_reg " +
+                "group by 1 ",
+        cartoVisualizationID: 'b072fe0c-c1bb-11e4-9af8-0e853d047bba',
+        categorizedBy: 'ngo',
+        columnNames: ['beneficiaries'],
+        rawData: []
+    }),
+
+
+
+
+    DFIDDashboard.Visualization.create({
         organizationSlugs: ['fao'],
         title: 'FAO Cash-for-Work Beneficiary Registration',
         id: 'fao-cfw-beneficiary-reg',
