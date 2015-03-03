@@ -146,13 +146,16 @@ DFIDDashboard.visualizations = [
         datasetSlug: 'sns',
         title: 'SNS Scored CSI',
         id: 'sns-scored-fcs',
-        query:  "SELECT district, " +
-                "AVG(total_fcs)::numeric(10,0) AS fcs " +
+        query:  "SELECT " +
+                "DISTRICT, " +
+                "COUNT(case when total_fcs::numeric(10,0)>35 then recordid else null end) as acceptable, " +
+                "COUNT(case when total_fcs::numeric(10,0)<=35 and total_fcs::numeric(10,0)>21 then recordid else null end) as borderline, " +
+                "COUNT(case when total_fcs::numeric(10,0)<=21 then recordid else null end) as poor " +
                 "FROM sns_scored " +
                 "GROUP by 1 " +
                 "ORDER by 1",
         categorizedBy: 'district',
-        columnNames: ['fcs'],
+        columnNames: ['acceptable', 'borderline', 'poor'],
         rawData: []
     }),
     DFIDDashboard.Visualization.create({

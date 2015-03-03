@@ -45,11 +45,11 @@ ul {
 }
 
 .panel-body {
+    height: 350px;
     padding: 2%;
 }
 
 .panel {
-    min-height: 350px;
     border-radius: 0;
 }
 
