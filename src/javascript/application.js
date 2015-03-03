@@ -103,6 +103,75 @@ DFIDDashboard.visualizations = [
         columnNames: ['total_beneficiaries'],
         rawData: []
     }),
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'sns',
+        title: 'SNS Scored CSI',
+        id: 'sns-scored-csi',
+        query:  "SELECT district, " +
+                "AVG(reduced_csi)::numeric(10,0) AS csi " +
+                "FROM sns_scored " +
+                "GROUP by 1 " +
+                "ORDER by 1",
+        categorizedBy: 'district',
+        columnNames: ['csi'],
+        rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'sns',
+        title: 'SNS Scored HDDS',
+        id: 'sns-scored-hdds',
+        query:  "SELECT district, " +
+                "AVG(mhdds)::numeric(10,0)as hdds " +
+                "FROM sns_scored " +
+                "GROUP by 1 " +
+                "ORDER by 1",
+        categorizedBy: 'district',
+        columnNames: ['hdds'],
+        rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'sns',
+        title: 'SNS Scored CSI',
+        id: 'sns-scored-assets',
+        query:  "SELECT district, " +
+                "AVG(total_asset)::numeric(10,0) as assets " +
+                "FROM sns_scored " +
+                "GROUP by 1 " +
+                "ORDER by 1",
+        categorizedBy: 'district',
+        columnNames: ['assets'],
+        rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'sns',
+        title: 'SNS Scored CSI',
+        id: 'sns-scored-fcs',
+        query:  "SELECT district, " +
+                "AVG(total_fcs)::numeric(10,0) AS fcs " +
+                "FROM sns_scored " +
+                "GROUP by 1 " +
+                "ORDER by 1",
+        categorizedBy: 'district',
+        columnNames: ['fcs'],
+        rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'sns',
+        title: 'Indicator Averages by NGO',
+        id: 'sns-indicator-averages-by-ngo',
+        query:  "SELECT " +
+                "UPPER(ngo) as ngo, " +
+                "AVG(reduced_csi)::numeric(10,0) AS csi, " +
+                "AVG(mhdds)::numeric(10,0) AS hdds, " +
+                "AVG(total_asset)::numeric(10,0) AS assets, " +
+                "AVG(total_fcs)::numeric(10,0) AS fcs " +
+                "FROM sns_scored " +
+                "GROUP by 1 " +
+                "ORDER by 1",
+        categorizedBy: 'district',
+        columnNames: ['fcs'],
+        rawData: []
+    }),
 ];
 
 DFIDDashboard.datasets = [

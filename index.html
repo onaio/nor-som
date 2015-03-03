@@ -283,16 +283,35 @@
          <script type='text/x-handlebars' data-template-name='_sns'>
             <div class='container'>
                 <div class='page-header'>
-                <h3>SNS</h3>
+                    <h3>SNS</h3>
                 </div>
                 <div class='row'>
-                    <div class='col-lg-12'>
-                      
+                    <div class='col-lg-12 table-container'>
+                        {{standalone-table visualizationID='sns-indicator-averages-by-ngo'}}
                     </div>
                 </div>
                 <div class='row'>
-                    <div class='col-lg-12'>
-                       
+                    <div class='col-lg-6'>
+                        <div class='panel panel-default'>
+                            {{standalone-chart visualizationID='sns-scored-csi'}}
+                        </div>
+                    </div>
+                    <div class='col-lg-6'>
+                        <div class='panel panel-default'>
+                            {{standalone-chart visualizationID='sns-scored-hdds'}}
+                        </div>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-6'>
+                        <div class='panel panel-default'>
+                            {{standalone-chart visualizationID='sns-scored-assets'}}
+                        </div>
+                    </div>
+                    <div class='col-lg-6'>
+                        <div class='panel panel-default'>
+                            {{standalone-chart visualizationID='sns-scored-fcs'}}
+                        </div>
                     </div>
                 </div>
             </div>
