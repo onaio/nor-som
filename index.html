@@ -18,7 +18,7 @@
           <div class='panel-heading'>
                 <h3 class='panel-title'>{{visualization.title}}</h3>
             </div>
-        <div class='map-container' {{bind-attr data-viz-id=visualization.cartoVisualizationID id=visualization.mapContainerID}}>
+            <div class='map-container' {{bind-attr data-viz-id=visualization.cartoVisualizationID id=visualization.mapContainerID}}>
             </div>
             </div>
             </div>
@@ -188,59 +188,44 @@
                 <div class='col-lg-6'>
                     <div class='row'>
                         <div class='panel panel-default'>
-                            {{labeled-chart visualizationID='csi_by_region_overview'}}
+                            {{standalone-chart visualizationID='csi_by_region_overview'}}
                         </div>
                     </div>
                 </div>
             </div>
         </script>
 
-
-
         <script type='text/x-handlebars' data-template-name='_brics'>
             <div class='container'>
                 <div class='page-header'>
                 <h3>BRiCS</h3>
-                    <h3>Activity Groups by District</h3>
+                    <h3>Activities & Indicators</h3>
                 </div>
                 <div class='row'>
-                    <div class='col-lg-6'>
+                    <div class='col-lg-12'>
+                        <div class='panel panel-default'>
+                            {{standalone-table visualizationID='activity-groups-by-ngo'}}
+                        </div>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-12'>
                         <div class='panel panel-default map-panel'> 
                             {{standalone-map visualizationID='activity-groups-by-district'}}
                         </div>
                     </div>
-                    <div class='col-lg-6'>
-                        {{chart-group visualizationGroupID="brics-activities"}}
-                    </div>
                 </div>
-            </div>
-            <div class='container'>
-                <div class='page-header'>
-                        <h3>Activity Groups by NGO</h3>
-                </div>
-                <div class='row'>
-                    <div class='col-lg-12'>
-                        <div class='panel panel-default'>
-                            <h3 class='panel-title'>Total Activities by District</h3>
-                            {{standalone-chart visualizationID='activity-groups-by-districts-all-ngos'}}
-                         </div>
-                     </div>
-                </div>
-                <div class='row'>
-                    <div class='col-lg-12'>
-                        <div class='panel panel-default'>
-                            {{standalone-chart visualizationID='activity-groups-by-ngo'}}
+                <sp>
+                </sp>
+                <sp>
+                </sp>
+                <div class='container'>
+                    <div class='row'>
+                        <div class='col-lg-12'>
+                            <div class='panel panel-default'>
+                            {{chart-group visualizationGroupID="brics-activities"}}
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class='row'>
-                    <div class='col-lg-6'>
-                        <div class='panel panel-default map-panel'>
-                            {{standalone-map visualizationID='activity-groups-by-ngo'}}
-                        </div>
-                    </div>
-                    <div class='col-lg-6'>
-                        {{standalone-table visualizationID='activity-groups-by-ngo'}}
                     </div>
                 </div>
             </div>
@@ -251,17 +236,23 @@
                 <div class='page-header'>
                 <h3>UNICEF</h3>
                 </div>
-    
                 <div class='row'>
                     <div class='col-lg-12'>
-                        {{chart-group visualizationGroupID='unicef-pca-budgets'}}
+                        {{standalone-table visualizationID='total-pcas-by-programme'}}
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-12'>
+                        {{standalone-chart visualizationID='total-pcas-by-programme'}}
                     </div>
                 </div>
                     <div class='row'>
-                        <div class='col-lg-12'>
-                        {{labeled-chart visualizationID='unicef-cash-transfers'}} 
-                        </div>
+                    <div class='col-lg-12'>
+            
+                    <h3 class='panel-title'>UNICEF Cash Transfers</h3>
+                        {{standalone-chart visualizationID='unicef-cash-transfers'}}
                     </div>
+                </div>
             
 
             </div>
@@ -293,24 +284,55 @@
                     <h3>SNS</h3>
                 </div>
                 <div class='row'>
-                    <div class='col-lg-8 table-container'>
+                    <div class='col-lg-12 table-container'>
                         {{standalone-table visualizationID='sns-indicator-averages-by-ngo'}}
                     </div>
                 </div>
                 <div class='row'>
+                    {{chart-group visualizationGroupID='hdds-csi'}}
+                </div>
+                <div class='row'>
                     <div class='col-lg-6'>
-                                {{labeled-chart visualizationID='sns-scored-csi'}}
+                        <div class='panel panel-default'>
+                             <div class='panel-heading'>
+                                <h3 class='panel-title'>SNS Scored CSI</h3>
+                            </div>
+                            <div class='panel-body'>
+                                {{standalone-chart visualizationID='sns-scored-csi'}}
+                            </div>
+                        </div>
                     </div>
                     <div class='col-lg-6'>
-                                {{labeled-chart visualizationID='sns-scored-hdds'}}
+                        <div class='panel panel-default'>
+                             <div class='panel-heading'>
+                                <h3 class='panel-title'>SNS Scored HDDS</h3>
+                            </div>
+                            <div class='panel-body'>
+                                {{standalone-chart visualizationID='sns-scored-hdds'}}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class='row'>
                     <div class='col-lg-6'>
-                                {{labeled-chart visualizationID='sns-scored-assets'}}
+                        <div class='panel panel-default'>
+                            <div class='panel-heading'>
+                                <h3 class='panel-title'>SNS Scored Assets</h3>
+                            </div>
+                            <div class='panel-body'>
+                                {{standalone-chart visualizationID='sns-scored-assets'}}
+                            </div>
+                        </div>
                     </div>
                     <div class='col-lg-6'>
-                                {{labeled-chart visualizationID='sns-scored-fcs'}}
+                        <div class='panel panel-default'>
+                            <div class='panel-heading'>
+                                <h3 class='panel-title'>SNS Scored FCS</h3>
+                            </div>
+                            <div class='panel-body'>
+                                {{standalone-chart visualizationID='sns-scored-fcs'}}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

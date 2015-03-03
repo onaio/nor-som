@@ -12,7 +12,7 @@ DFIDDashboard.sql = new cartodb.SQL({user: 'ona', api_key: '71318d1aefad674aeeed
 DFIDDashboard.visualizations = [
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['brics'],
-        title: 'Activity Groups by District',
+        title: 'Issues & BRiCS Response',
         id: 'activity-groups-by-district',
         query: "select " +
                 "the_geom, " +
@@ -25,7 +25,7 @@ DFIDDashboard.visualizations = [
                 "count (case when category_food_security_and_livelihood = true then session_id else null end) as food " +
                 "from brics_reg_data_2015_01_16 " +
                 "group by 1",
-        cartoVisualizationID: '2b5caab4-7af9-11e4-bfdf-0e853d047bba',
+        cartoVisualizationID: '06c6e9fe-c0f8-11e4-99cc-0e4fddd5de28',
         categorizedBy: 'district',
         columnNames: ['shelter', 'wash', 'resilience', 'food'],
         rawData: []
@@ -50,11 +50,9 @@ DFIDDashboard.visualizations = [
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['brics'],
         title: 'All NGO Activitities (BRiCS) by District',
-        id: 'activity-groups-by-districts-all-ngos',
+        id: 'all-activity-groups-by-regions-all-ngos',
         query:  "select " + 
-                "district,array_agg(distinct ngo) as all_ngos, " + 
-                "min(the_geom_webmercator) as the_geom_webmercator, " + 
-                "min(cartodb_id) as cartodb_id, " + 
+                "region, " + 
                 "sum(case " + 
                 "when category_resilience is true then 1 " + 
                 "when category_wash is true then 1 " + 
@@ -62,10 +60,13 @@ DFIDDashboard.visualizations = [
                 "when category_food_security_and_livelihood is true then 1 " + 
                 "else 0 end)as total_activities " +
                 "from brics_reg_data_2015_01_16 " + 
+                "where (category_shelter is true or category_wash is true " +
+                "or category_resilience is true or category_food_security_and_livelihood is true) " +
+                "and region <> 'JUBA HOOSE' " +
                 "group by 1 " +
                 "order by 1 ",
         //cartoVisualizationID: 'c9320b96-7caa-11e4-a351-0e853d047bba',
-        categorizedBy: 'district',
+        categorizedBy: 'region',
         columnNames: ['total_activities'],
         rawData: []
     }),
@@ -319,18 +320,22 @@ DFIDDashboard.visualizationGroups = [
     DFIDDashboard.VisualizationGroup.create({
         id: 'brics-activities',
         organizationSlugs: ['brics'],
-        visualizationIDs: ['activity-groups-by-district', 'activity-groups-by-ngo'],
+        visualizationIDs: ['all-activity-groups-by-regions-all-ngos', 'activity-groups-by-ngo'],
     }),
-        DFIDDashboard.VisualizationGroup.create({
+    DFIDDashboard.VisualizationGroup.create({
         id: 'wfp-dec',
         organizationSlugs: ['wfp'],
         visualizationIDs: ['wfp-dec-beneficiaries', 'wfp-dec-mt'],
+<<<<<<< HEAD
+    })
+=======
     }),
         DFIDDashboard.VisualizationGroup.create({
         id: 'unicef-pca-budgets',
         organizationSlugs: ['unicef'],
         visualizationIDs: ['unicef-total-pca-budget-by-programme', 'unicef-total-pca-budget-by-partner'],
     }),
+>>>>>>> gh-pages
 ]
 
 DFIDDashboard.Organization = Ember.Object.extend({
