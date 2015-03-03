@@ -44,9 +44,12 @@ ul {
     border-radius: 0;
 }
 
+.panel-body {
+    padding: 2%;
+}
+
 .panel {
     min-height: 350px;
-    padding: 2%;
     border-radius: 0;
 }
 
