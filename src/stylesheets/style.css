@@ -45,9 +45,13 @@ ul {
 }
 
 .panel {
-    height: 350px;
+    min-height: 350px;
     padding: 2%;
     border-radius: 0;
+}
+
+.map-panel {
+    height: 350px;
 }
 
 .panel .ember-view {
