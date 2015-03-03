@@ -255,6 +255,7 @@ DFIDDashboard.StandaloneWidgetComponent = Ember.Component.extend({
         var visualization = DFIDDashboard.visualizations.filter(function(item) {
             return (item.id == visualizationID);
         })[0];
+        $('body').resize()
         return visualization;
     }),
 });
@@ -294,4 +295,8 @@ DFIDDashboard.StandaloneTableComponent = DFIDDashboard.StandaloneWidgetComponent
         });
         return rows;
     }),
+});
+
+$('body').on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+    $('body').resize();
 });

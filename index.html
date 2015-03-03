@@ -231,13 +231,45 @@
                     </div>
                 </div>
                 <div class='row'>
-                    <div class='col-lg-6'>
-                        <div class='panel panel-default'>
-                            <div class='panel-body'>
-                                {{standalone-chart visualizationID='sns-scored-csi'}}
+                    <div class='col-lg-12'>
+                        <div role='tabpanel' class='dashboard-tab-panel'>
+                            <ul role='tablist' class='nav nav-tabs'>
+                                <li role='presentation' class='dropdown pull-right'>
+                                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                                        <i class='fa fa-list'></i>
+                                    </button>
+                                    <ul class='dropdown-menu' role='menu'>
+                                        <li role='presentation'><a tabindex='-1' data-toggle='tab' href='#sns-scored-hdds' role='tab'>HDDS</a></li>
+                                        <li role='presentation'><a tabindex='-1' data-toggle='tab' href='#sns-scored-csi' role='tab'>CSI</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <div class='tab-content'>
+                                <div id='sns-scored-hdds' class='tab-pane' role='tabpanel'>
+                                    <div class='panel panel-default'>
+                                        <div class='panel-heading'>
+                                            <h3 class='panel-title'>HDDS</h3>
+                                        </div>
+                                        <div class='panel-body'>
+                                            {{standalone-chart visualizationID='sns-scored-hdds'}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id='sns-scored-csi' class='tab-pane active' role='tabpanel'>
+                                    <div class='panel panel-default'>
+                                        <div class='panel-heading'>
+                                            <h3 class='panel-title'>CSI</h3>
+                                        </div>
+                                        <div class='panel-body'>
+                                            {{standalone-chart visualizationID='sns-scored-csi'}}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class='row'>
                     <div class='col-lg-6'>
                         <div class='panel panel-default'>
                             <div class='panel-body'>
