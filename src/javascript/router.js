@@ -1,7 +1,6 @@
 DFIDDashboard.Router.map(function() {
     this.resource('index', { path: '/' });
     this.resource('viz', { path: '/:slug'});
-    this.resource('charts', { path: '/dataset/:slug/charts'});
 });
 
 DFIDDashboard.IndexRoute = Ember.Route.extend({
