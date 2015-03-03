@@ -144,7 +144,7 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         datasetSlug: 'sns',
-        title: 'SNS Scored CSI',
+        title: 'SNS Scored FCS',
         id: 'sns-scored-fcs',
         query:  "SELECT " +
                 "DISTRICT, " +
@@ -192,7 +192,23 @@ DFIDDashboard.visualizations = [
         categorizedBy: 'district',
         columnNames: ['beneficiaries'],
         rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'overview',
+        title: 'Food Consumption Score',
+        id: 'fcs_by_district_overview',
+        query:  "select district,  " +
+                "count(case when fcs::numeric(10,0)>35 then id else null end) as acceptable, " +
+                "count(case when fcs::numeric(10,0)<=35 and fcs::numeric(10,0)>21 then id else null end) as borderline, " +
+                "count(case when fcs::numeric(10,0)<=21 then id else null end) as poor " +
+                "from sns_brics_mashup " +
+                "group by 1 " +
+                "order by 1 ",
+        categorizedBy: 'district',
+        columnNames: ['acceptable', 'borderline', 'poor'],
+        rawData: []
     })
+
 ];
 
 DFIDDashboard.organizations = [
