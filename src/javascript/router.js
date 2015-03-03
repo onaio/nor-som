@@ -12,7 +12,7 @@ DFIDDashboard.VizRoute = Ember.Route.extend({
         var organization = DFIDDashboard.organizations.filter(function(item) {
             return item.slug == params.slug;
         })[0];
-        var visualizations = organization.visualizations;
+        var visualizations = organization.get('visualizations');
         visualizations.map(function(visualization) {
             var query = visualization.query;
             DFIDDashboard.sql.execute(query)

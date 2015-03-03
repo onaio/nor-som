@@ -45,7 +45,7 @@ ul {
 }
 
 .panel-body {
-    height: 350px;
+    min-height: 350px;
     padding: 2%;
 }
 
@@ -59,6 +59,16 @@ ul {
 
 .panel .ember-view {
     border-radius: 0;
+}
+
+.dashboard-tab-panel {
+    position: relative;
+}
+
+.dashboard-tab-panel .dropdown {
+    position: absolute;
+    right: 10px;
+    top: 7px;
 }
 
 .table-container {
