@@ -86,6 +86,24 @@ DFIDDashboard.visualizations = [
         categorizedBy: 'programme_section',
         columnNames: ['unicef_contribution', 'total_partner_contribution'],
         rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'unicef',
+        title: 'UNICEF Cash Transfers Beneficiary',
+        id: 'unicef-cash-transfers',
+        query:  "SELECT " +
+                "the_geom, " +
+                "min(district) as district, " +
+                "min(the_geom_webmercator) as the_geom_webmercator, " +
+                "min(cartodb_id) as cartodb_id, " +
+                "sum(number_of_individuals) as beneficiaries, " +
+                "sum(number_of_hhs) as hhs " +
+                "FROM unicef_cash_transfers " +
+                "group by 1 ",
+        cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
+        categorizedBy: 'district',
+        columnNames: ['beneficiaries'],
+        rawData: []
     })
 ];
 
