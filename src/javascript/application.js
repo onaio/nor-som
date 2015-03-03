@@ -273,7 +273,7 @@ DFIDDashboard.visualizations = [
     }),
 
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['wfp'],
+        organizationSlugs: ['overview','wfp'],
         title: 'WFP Beneficiaries by Category (Dec 2014)',
         id: 'wfp-dec-beneficiaries',
         query:  "SELECT " +
@@ -291,7 +291,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['wfp'],
+        organizationSlugs: ['overview','wfp'],
         title: 'WFP Deliveries in Metric Tonnes (Dec 2014)',
         id: 'wfp-dec-mt',
         query:  "SELECT " +
