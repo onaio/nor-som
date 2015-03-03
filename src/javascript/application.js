@@ -145,7 +145,7 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         datasetSlug: 'sns',
-        title: 'SNS Scored CSI',
+        title: 'SNS Scored FCS',
         id: 'sns-scored-fcs',
         query:  "SELECT " +
                 "DISTRICT, " +
@@ -193,7 +193,62 @@ DFIDDashboard.visualizations = [
         categorizedBy: 'district',
         columnNames: ['beneficiaries'],
         rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'fao',
+        title: 'FAO Cash Transfers Beneficiary',
+        id: 'fao-cfw-bydistrict',
+        query:  "SELECT " +
+                "min(the_geom_webmercator) as the_geom_webmercator, " +
+                "min(cartodb_id) as cartodb_id, " +
+                "district, " +
+                "min(ngo) as NGO, " +
+                "sum(total_beneficiaries) as total_beneficiaries, " +
+                "sum(total_hhs) as total_hhs " +
+                "FROM fao_cfw_beneficiary_reg " +
+                "group by 3, " +
+                "group by 5 desc ",
+        cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
+        categorizedBy: 'district',
+        columnNames: ['beneficiaries'],
+        rawData: []
+    }),
+
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'wfp',
+        title: 'WFP Totals to Beneficiaries per District',
+        id: 'wfp-dec-beneficiaries',
+        query:  "SELECT " +
+                "upper(region) as region, " +
+                "sum(safety_net) as safety_net, " +
+                "sum(relief) as relief, " +
+                "sum(nutrition) as nutrition, " +
+                "sum(livelihood) as livelihood " +
+                "FROM wfp_dec_beneficiaries " +
+                "where safety_net <> 0 or relief <> 0 or nutrition <> 0  or livelihood <> 0 " +
+                "group by 1 " +
+                "order by 1 ",
+        categorizedBy: 'region',
+        columnNames: ['safety_net', 'relief', 'nutrition', 'livelihood'],
+        rawData: []
+    }),
+
+    DFIDDashboard.Visualization.create({
+        datasetSlug: 'overview',
+        title: 'Food Consumption Score',
+        id: 'fcs_by_district_overview',
+        query:  "select district,  " +
+                "count(case when fcs::numeric(10,0)>35 then id else null end) as acceptable, " +
+                "count(case when fcs::numeric(10,0)<=35 and fcs::numeric(10,0)>21 then id else null end) as borderline, " +
+                "count(case when fcs::numeric(10,0)<=21 then id else null end) as poor " +
+                "from sns_brics_mashup " +
+                "group by 1 " +
+                "order by 1 ",
+        categorizedBy: 'district',
+        columnNames: ['acceptable', 'borderline', 'poor'],
+        rawData: []
     })
+
 ];
 
 DFIDDashboard.visualizationGroups = [
