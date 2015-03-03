@@ -366,6 +366,7 @@ DFIDDashboard.StandaloneWidgetComponent = Ember.Component.extend({
 });
 
 DFIDDashboard.StandaloneChartComponent = DFIDDashboard.StandaloneWidgetComponent.extend({});
+DFIDDashboard.LabeledChartComponent = DFIDDashboard.StandaloneWidgetComponent.extend({});
 DFIDDashboard.StandaloneMapComponent = DFIDDashboard.StandaloneWidgetComponent.extend({});
 DFIDDashboard.StandaloneTableComponent = DFIDDashboard.StandaloneWidgetComponent.extend({
     tableColumns: Ember.computed('visualization.rawData', function() {
