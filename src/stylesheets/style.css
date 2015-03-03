@@ -1,6 +1,7 @@
 body {
     font-family: Raleway;
     padding-bottom: 20px;
+    background-color: #efefef;
 }
 
 ul {
@@ -42,4 +43,9 @@ ul {
 
 .btn, .dropdown-menu {
     border-radius: 0;
+}
+
+.panel {
+    height: 350px;
+    padding: 20px;
 }

@@ -81,6 +81,7 @@ DFIDDashboard.ChartsRoute = Ember.Route.extend({
                     visualization.set('chartData', chartData);
                     visualization.set('chartAxis', chartAxis);
                     visualization.set('chartPadding', {left: 120});
+                    visualization.set('chartPalette', {pattern: ['#00140F', '#1C766C', '#65B0AC', '#77B8BE', '#DBF6FD']});
                     visualization.set('rawData', rows);
                 })
                 .error(function(error) { console.error(error); });
