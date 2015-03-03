@@ -256,6 +256,11 @@ DFIDDashboard.visualizationGroups = [
         organizationSlugs: ['sns'],
         visualizationIDs: ['sns-scored-csi', 'sns-scored-hdds'],
     }),
+    DFIDDashboard.VisualizationGroup.create({
+        id: 'brics-activities',
+        organizationSlugs: ['brics'],
+        visualizationIDs: ['activity-groups-by-district', 'activity-groups-by-ngo'],
+    }),
 ]
 
 DFIDDashboard.Organization = Ember.Object.extend({
