@@ -194,7 +194,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'fao',
+        organizationSlugs: ['fao'],
         title: 'FAO Cash Transfers Beneficiary',
         id: 'fao-cfw-bydistrict',
         query:  "SELECT " +
@@ -214,7 +214,7 @@ DFIDDashboard.visualizations = [
     }),
 
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'wfp',
+        organizationSlugs: ['wfp'],
         title: 'WFP Totals to Beneficiaries per District',
         id: 'wfp-dec-beneficiaries',
         query:  "SELECT " +
@@ -233,7 +233,7 @@ DFIDDashboard.visualizations = [
     }),
 
     DFIDDashboard.Visualization.create({
-        datasetSlug: 'overview',
+        organizationSlugs: ['overview'],
         title: 'Food Consumption Score',
         id: 'fcs_by_district_overview',
         query:  "select district,  " +
@@ -262,6 +262,7 @@ DFIDDashboard.Organization = Ember.Object.extend({
     visualizations: Ember.computed('slug', function() {
         var slug = this.get('slug');
         return DFIDDashboard.visualizations.filter(function(item) {
+            console.log(item);
             return item.get('organizationSlugs').indexOf(slug) != -1;
         });
     }),
@@ -272,32 +273,35 @@ DFIDDashboard.Organization = Ember.Object.extend({
     })
 });
 
-DFIDDashboard.organizations = [
-    DFIDDashboard.Organization.create({
+DFIDDashboard.organizations = ([
+    {
         name: 'Overview',
         slug: 'overview',
-    }),
-    DFIDDashboard.Organization.create({
+    },
+    {
         name: 'BRiCS',
         slug: 'brics',
-    }),
-    DFIDDashboard.Organization.create({
+    },
+    {
         name: 'SNS',
         slug: 'sns',
-    }),
-    DFIDDashboard.Organization.create({
+    },
+    {
         name: 'FAO',
         slug: 'fao',
-    }),
-    DFIDDashboard.Organization.create({
+    },
+    {
         name: 'UNICEF',
         slug: 'unicef',
-    }),
-    DFIDDashboard.Organization.create({
+    },
+    {
         name: 'WFP',
         slug: 'wfp',
-    }),
-];
+    },
+]).map(function(item) {
+        return DFIDDashboard.Organization.create(item);
+    });
+
 
 DFIDDashboard.StandaloneWidgetComponent = Ember.Component.extend({
     visualization: Ember.computed('visualizationID', function() {
