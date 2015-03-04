@@ -51,38 +51,36 @@
 
 
         <script type='text/x-handlebars' id='components/chart-group'>
-            <div class='col-lg-12'>
-                <div role='tabpanel' class='dashboard-tab-panel'>
-                    <ul role='tablist' class='nav nav-tabs'>
-                        <li role='presentation' class='dropdown pull-right'>
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                                <i class='fa fa-bars'></i>
-                            </button>
-                            <ul class='dropdown-menu' role='menu'>
-                                 {{#each visualization in visualizations}}
-                                    <li role='presentation'>
-                                        <a tabindex='-1' data-toggle='tab' href=#{{unbound visualization.id}} role='tab'>
-                                            {{visualization.title}}
-                                        </a>
-                                    </li>
-                                 {{/each}}
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class='tab-content'>
-                        {{#each visualization in visualizations}}
-                            <div id={{unbound visualization.id}} class='{{unbound visualization.CSSClasses}}' role='tabpanel'>
-                                <div class='panel panel-default'>
-                                    <div class='panel-heading'>
-                                        <h3 class='panel-title'>{{visualization.title}}</h3>
-                                    </div>
-                                    <div class='panel-body'>
-                                        {{standalone-chart visualizationID=visualization.id}}
-                                    </div>
+            <div role='tabpanel' class='dashboard-tab-panel'>
+                <ul role='tablist' class='nav nav-tabs'>
+                    <li role='presentation' class='dropdown pull-right'>
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                            <i class='fa fa-bars'></i>
+                        </button>
+                        <ul class='dropdown-menu' role='menu'>
+                             {{#each visualization in visualizations}}
+                                <li role='presentation'>
+                                    <a tabindex='-1' data-toggle='tab' href=#{{unbound visualization.id}} role='tab'>
+                                        {{visualization.title}}
+                                    </a>
+                                </li>
+                             {{/each}}
+                        </ul>
+                    </li>
+                </ul>
+                <div class='tab-content'>
+                    {{#each visualization in visualizations}}
+                        <div id={{unbound visualization.id}} class='{{unbound visualization.CSSClasses}}' role='tabpanel'>
+                            <div class='panel panel-default'>
+                                <div class='panel-heading'>
+                                    <h3 class='panel-title'>{{visualization.title}}</h3>
+                                </div>
+                                <div class='panel-body'>
+                                    {{standalone-chart visualizationID=visualization.id}}
                                 </div>
                             </div>
-                        {{/each}}
-                    </div>
+                        </div>
+                    {{/each}}
                 </div>
             </div>
         </script>
@@ -173,17 +171,14 @@
                     <h3>Programme Indicators</h3>
                 </div>
 
-                 <div class='row'>
+                <div class='row'>
                     <div class='col-lg-6'>
-    
-                         {{chart-group visualizationGroupID='region-overview'}}
+                        {{chart-group visualizationGroupID='region-overview'}}
                     </div>
                     <div class='col-lg-6'>
                         {{labeled-chart visualizationID='csi_by_region_overview'}}
                     </div>
                 </div>
-               
-
             </div>
         </script>
 
