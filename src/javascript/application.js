@@ -11,7 +11,7 @@ DFIDDashboard.sql = new cartodb.SQL({user: 'ona', api_key: '71318d1aefad674aeeed
 
 DFIDDashboard.visualizations = [
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['brics'],
+        organizationSlugs: ['brics','overview'],
         title: 'Issues & BRiCS Response',
         id: 'activity-groups-by-district',
         query: "select " +
@@ -31,7 +31,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['brics'],
+        organizationSlugs: ['brics','overview'],
         title: 'BRiCS - Activity Groups by Partners',
         id: 'activity-groups-by-ngo',
         query:  "select  " +
@@ -49,7 +49,7 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['brics'],
+        organizationSlugs: ['brics','overview'],
         title: 'BRiCS - Activities by District',
         id: 'all-activity-groups-by-regions-all-ngos',
         query:  "select " + 
@@ -91,11 +91,10 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['overview','unicef'],
-        title: 'UNICEF - Total PCA Budgets by Partner (100K USD)',
-        id: 'unicef-total-pca-budget-by-partner',
+        title: 'UNICEF - Total NGO PCAs (Local or Int\'l)',
+        id: 'unicef-pcas-by-partner',
         query:  "SELECT " +
-                "partner, " +
-                "min(ngo_category) as ngo_type, " +
+                "ngo_category as ngo_type, " +
                 "sum(unicef_contribution) as unicef_contribution, " +
                 "sum(partner_contribution) as partner_contribution, " +
                 "sum(total_pca_value) total_pca_amount, " +
@@ -103,8 +102,8 @@ DFIDDashboard.visualizations = [
                 "FROM unicef_active_pcas " +
                 "group by 1",
         cartoVisualizationID: '8adc94f2-be35-11e4-a9de-0e0c41326911',
-        categorizedBy: 'partner',
-        columnNames: ['unicef_contribution', 'partner_contribution'],
+        categorizedBy: 'ngo_type',
+        columnNames: ['num_pcas'],
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
@@ -144,10 +143,6 @@ DFIDDashboard.visualizations = [
         columnNames: ['beneficiaries'],
         rawData: []
     }),
-
-
-
-
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['fao'],
         title: 'FAO - Cash-for-Work Beneficiary Registration',
@@ -310,7 +305,7 @@ DFIDDashboard.visualizations = [
     }),
 
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['overview'],
+        organizationSlugs: ['overview','indicators'],
         title: ' BRiCS & SNS - Food Consumption Score',
         id: 'fcs_by_region_overview',
         query:  "select region,  " +
@@ -324,9 +319,8 @@ DFIDDashboard.visualizations = [
         columnNames: ['acceptable', 'borderline', 'poor'],
         rawData: []
     }),
-
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['overview'],
+        organizationSlugs: ['overview','indicators'],
         title: ' BRiCS & SNS - Coping Strategy Index',
         id: 'csi_by_region_overview',
         query:  "select region, " +
@@ -349,7 +343,7 @@ DFIDDashboard.visualizationGroups = [
     }),
     DFIDDashboard.VisualizationGroup.create({
         id: 'brics-activities',
-        organizationSlugs: ['brics'],
+        organizationSlugs: ['brics','overview'],
         visualizationIDs: ['all-activity-groups-by-regions-all-ngos', 'activity-groups-by-ngo'],
     }),
         DFIDDashboard.VisualizationGroup.create({
@@ -361,6 +355,11 @@ DFIDDashboard.visualizationGroups = [
         id: 'unicef-pca-budgets',
         organizationSlugs: ['unicef'],
         visualizationIDs: ['unicef-total-pca-budget-by-programme', 'unicef-total-pca-budget-by-partner','unicef-pca-by-programme-section'],
+    }),
+        DFIDDashboard.VisualizationGroup.create({
+        id: 'region-overview',
+        organizationSlugs: ['indicators','overview'],
+        visualizationIDs: ['fcs_by_region_overview', 'csi_by_region_overview'],
     }),
 ]
 

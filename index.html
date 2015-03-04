@@ -14,7 +14,7 @@
 
 
          <script type='text/x-handlebars' data-template-name='components/standalone-map'>
-         <div class='panel panel-default'>
+         <div class='panel panel-default map-panel'>
             <div class='panel-heading'>
                 <h3 class='panel-title'>{{visualization.title}}</h3>
             </div>
@@ -164,19 +164,33 @@
 
 
 
-        <script type='text/x-handlebars' data-template-name='_overview'>
+        <script type='text/x-handlebars' data-template-name='_indicators'>
             <div class='container'>
                 <div class='page-header'>
-                    <h3>DFID Partner Activity</h3>
+                    <h3>Programme Indicators</h3>
                 </div>
-                <div class='row'>
+
+                 <div class='row'>
                     <div class='col-lg-6'>
-                         {{labeled-chart visualizationID='fcs_by_region_overview'}}
+    
+                         {{chart-group visualizationGroupID='region-overview'}}
                     </div>
                     <div class='col-lg-6'>
                         {{labeled-chart visualizationID='csi_by_region_overview'}}
                     </div>
                 </div>
+               
+
+            </div>
+        </script>
+
+
+        <script type='text/x-handlebars' data-template-name='_overview'>
+            <div class='container'>
+                <div class='page-header'>
+                    <h3>DFID Partner Activity Summary</h3>
+                </div>
+               
                 <!-- WFP -->
                 <div class='row'>
                     <div class='col-lg-6'>
@@ -189,6 +203,8 @@
                     </div>
                 </div>
              
+
+
                 <div class='row'>
                     <div class='col-lg-6'>
                         {{chart-group visualizationGroupID='unicef-pca-budgets'}}
@@ -197,6 +213,17 @@
                         {{labeled-chart visualizationID='unicef-cash-transfers'}} 
                     </div>
                 </div>
+
+                <!-- BRICS -->
+                <div class='row'>
+                    <div class='col-lg-6'>
+                       {{chart-group visualizationGroupID="brics-activities"}}
+                    </div>
+                    <div class='col-lg-6'>
+                        {{labeled-chart visualizationID='unicef-cash-transfers'}} 
+                    </div>
+                </div>
+            
             
                 <div class='row'>
                
@@ -227,8 +254,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 <div class='row'>
                     <div class='col-lg-12'>
                         <div class='panel panel-default map-panel'> 
@@ -254,15 +279,26 @@
                 <h3>UNICEF</h3>
                 </div>
     
+
                 <div class='row'>
                     <div class='col-lg-6'>
-                        {{chart-group visualizationGroupID='unicef-pca-budgets'}}
+                        {{labeled-chart visualizationID='unicef-total-pca-budget-by-programme'}}
+                    </div>
+    
+                        <div class='col-lg-6'>
+                        {{labeled-chart visualizationID='unicef-pca-by-programme-section'}} 
+                        
+                        </div>
+                 </div>
+                  <div class='row'>
+                    <div class='col-lg-6'>
+                        {{labeled-chart visualizationID='unicef-pcas-by-partner'}} 
                     </div>
     
                         <div class='col-lg-6'>
                         {{labeled-chart visualizationID='unicef-cash-transfers'}} 
                         </div>
-                    </div>
+                 </div>
 
             </div>
         </script>
@@ -275,19 +311,20 @@
                 <div class='row'>
                
                     <div class='col-lg-6'>
-                        <div class='panel panel-default map-panel'>
+                             <div class='panel panel-default map-panel'>
                              {{standalone-map visualizationID='overall-fao-programmes'}}
-                        </div>
+                             </div>
+                    
                     </div>
                     <div class='col-lg-6'>
-                        {{labeled-chart visualizationID='fao-fcw-ngo'}}
-                    </div>
-                </div>
-
+                        <div class='panel panel-default map-panel'>
+                         {{standalone-map visualizationID='fao-cfw-beneficiary-reg'}}
+                         </div>  
+                 </div>
 
                 <div class='row'>
-                    <div class='col-lg-6'>
-                         {{standalone-map visualizationID='fao-cfw-beneficiary-reg'}}
+                    <div class='col-lg-12'><br><br><br>
+                        {{labeled-chart visualizationID='fao-fcw-ngo'}}
                     </div>
                 </div>
             </div>
