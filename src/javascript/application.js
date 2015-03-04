@@ -32,6 +32,25 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['brics','overview'],
+        title: 'BRiCS Cost by Beneficiary',
+        id: 'brics-cost-by-beneficiary',
+        query:  "select activities, " +
+                "sum(budget__usd) as budget_usd, " +
+                "(sum(beneficiaries_per_activity) * count(*)) as tot_beneficiaries, " +
+                "count(*) as num_activities, " +
+                "(sum(budget__usd)/(sum(beneficiaries_per_activity) * count(*))) as usd_per_ben " +
+                "FROM brics_community_plans " +
+                "where activities is not null " +
+                "group by 1 " +
+                "limit 50 ",
+        cartoVisualizationID: '06c6e9fe-c0f8-11e4-99cc-0e4fddd5de28',
+        categorizedBy: 'activities',
+        columnNames: ['budget_usd', 'tot_beneficiaries', 'num_activities', 'usd_per_ben'],
+        rawData: []
+    }),
+
+    DFIDDashboard.Visualization.create({
+        organizationSlugs: ['brics','overview'],
         title: 'BRiCS - Activity Groups by Partners',
         id: 'activity-groups-by-ngo',
         query:  "select  " +
