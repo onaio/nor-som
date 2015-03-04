@@ -102,3 +102,8 @@ ul {
     background-color: #337ab7;
     color: #fff;
 }
+
+#logo-link {
+    text-decoration: none;
+    color: inherit;
+}
