@@ -407,6 +407,10 @@ DFIDDashboard.organizations = ([
         slug: 'overview',
     },
     {
+        name: 'Partner Map',
+        slug: 'map',
+    },
+    {
         name: 'BRiCS',
         slug: 'brics',
     },
