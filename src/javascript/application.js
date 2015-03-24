@@ -150,6 +150,15 @@ DFIDDashboard.visualizations = [
     }),
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['overview','fao'],
+        title: 'FAO - Overall Programmes',
+        id: 'overall-fao-programmes-2',
+        cartoVisualizationID: 'b072fe0c-c1bb-11e4-9af8-0e853d047bba',
+        categorizedBy: 'fao_program',
+        columnNames: ['unicef_contribution', 'total_partner_contribution'],
+        rawData: []
+    }),
+    DFIDDashboard.Visualization.create({
+        organizationSlugs: ['overview','fao'],
         title: 'FAO - Cash For Work Beneficiaries by NGO',
         id: 'fao-fcw-ngo',
         query:  "select " + 
@@ -380,13 +389,17 @@ DFIDDashboard.visualizationGroups = [
         organizationSlugs: ['indicators','overview'],
         visualizationIDs: ['fcs_by_region_overview', 'csi_by_region_overview'],
     }),
+        DFIDDashboard.VisualizationGroup.create({
+        id: 'overview-maps',
+        organizationSlugs: ['indicators','overview'],
+        visualizationIDs: ['overall-fao-programmes-2', 'wfp-dec-mt'],
+    }),
 ]
 
 DFIDDashboard.Organization = Ember.Object.extend({
     visualizations: Ember.computed('slug', function() {
         var slug = this.get('slug');
         return DFIDDashboard.visualizations.filter(function(item) {
-            console.log(item);
             return item.get('organizationSlugs').indexOf(slug) != -1;
         });
     }),
@@ -452,9 +465,7 @@ DFIDDashboard.StandaloneTableComponent = DFIDDashboard.StandaloneWidgetComponent
     tableColumns: Ember.computed('visualization.rawData', function() {
         var visualization = this.get('visualization');
         if(!visualization) { return []; }
-        console.log("Visualization", visualization);
         var rawData = visualization.get('rawData');
-        console.log("Raw", rawData);
         var headings = []
         if(rawData[0]) { headings = Object.keys(rawData[0]) };
         var columns = headings.map(function(entry) {
@@ -485,19 +496,36 @@ DFIDDashboard.StandaloneTableComponent = DFIDDashboard.StandaloneWidgetComponent
 
 DFIDDashboard.ChartGroupComponent = Ember.Component.extend({
     visualizations: Ember.computed('visualizationGroupID', function() {
-        console.log("Visualization ID", this.get('visualizationGroupID'));
         var visualizationGroupID = this.get('visualizationGroupID');
         var visualizationGroup = DFIDDashboard.visualizationGroups.filter(function(item) {
             return item.id == visualizationGroupID;
         })[0];
-        console.log("Group", visualizationGroup);
         var visualizations = DFIDDashboard.visualizations.filter(function(item) {
             var indexOfItem = visualizationGroup.visualizationIDs.indexOf(item.id);
             if(indexOfItem === 0) { item.set('CSSClasses', 'tab-pane active') }
             else { item.set('CSSClasses', 'tab-pane') };
             return indexOfItem != -1;
         });
-        console.log("Visualizations", visualizations);
+        return visualizations;
+    })
+});
+
+$('body').on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+    $('body').resize();
+});
+
+DFIDDashboard.MapGroupComponent = Ember.Component.extend({
+    visualizations: Ember.computed('visualizationGroupID', function() {
+        var visualizationGroupID = this.get('visualizationGroupID');
+        var visualizationGroup = DFIDDashboard.visualizationGroups.filter(function(item) {
+            return item.id == visualizationGroupID;
+        })[0];
+        var visualizations = DFIDDashboard.visualizations.filter(function(item) {
+            var indexOfItem = visualizationGroup.visualizationIDs.indexOf(item.id);
+            if(indexOfItem === 0) { item.set('CSSClasses', 'tab-pane active') }
+            else { item.set('CSSClasses', 'tab-pane') };
+            return indexOfItem != -1;
+        });
         return visualizations;
     })
 });

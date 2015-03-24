@@ -48,6 +48,40 @@
                 color=visualization.chartPalette}}
         </script>
 
+        <script type='text/x-handlebars' id='components/map-group'>
+            <div role='tabpanel' class='dashboard-tab-panel'>
+                <ul role='tablist' class='nav nav-tabs'>
+                    <li role='presentation' class='dropdown pull-right'>
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                            <i class='fa fa-bars'></i>
+                        </button>
+                        <ul class='dropdown-menu' role='menu'>
+                             {{#each visualization in visualizations}}
+                                <li role='presentation'>
+                                    <a tabindex='-1' data-toggle='tab' href='#map-tab-{{unbound visualization.id}}' role='tab'>
+                                        {{visualization.title}}
+                                    </a>
+                                </li>
+                             {{/each}}
+                        </ul>
+                    </li>
+                </ul>
+                <div class='tab-content'>
+                    {{#each visualization in visualizations}}
+                        <div id='map-tab-{{unbound visualization.id}}' class='{{unbound visualization.CSSClasses}}' role='tabpanel'>
+                            <div class='panel panel-default'>
+                               <div class='panel-heading'>
+                                   <h3 class='panel-title'>{{visualization.title}}</h3>
+                               </div>
+                               <div class='map-container map-panel' {{bind-attr data-viz-id=visualization.cartoVisualizationID id=visualization.mapContainerID}}>
+                                    <iframe width='100%' height='100%' frameborder='0' src='http://ona.cartodb.com/viz/{{unbound visualization.cartoVisualizationID}}/embed_map'></iframe>
+                               </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </script>
 
 
         <script type='text/x-handlebars' id='components/chart-group'>
@@ -214,12 +248,10 @@
                 <!-- WFP -->
                 <div class='row'>
                     <div class='col-lg-6'>
-                        {{chart-group visualizationGroupID='wfp-dec'}}
+                      {{chart-group visualizationGroupID='wfp-dec'}}
                     </div>
-                    <div class='col-lg-6'>
-                        <div class='panel panel-default map-panel'>
-                            {{standalone-map visualizationID='wfp-dec-mt'}}
-                        </div>
+                    <div class='col-lg-6 bricss'>
+                       {{map-group visualizationGroupID='overview-maps'}}
                     </div>
                 </div>
              
@@ -236,24 +268,8 @@
 
                 <!-- BRICS -->
                 <div class='row'>
-                    <div class='col-lg-6'>
-                       {{chart-group visualizationGroupID="brics-activities"}}
-                    </div>
-                    <div class='col-lg-6'>
+                    <div class='col-lg-12'>
                         {{labeled-chart visualizationID='unicef-cash-transfers'}} 
-                    </div>
-                </div>
-            
-            
-                <div class='row'>
-               
-                    <div class='col-lg-6'>
-                        <div class='panel panel-default map-panel'>
-                             {{standalone-map visualizationID='overall-fao-programmes'}}
-                        </div>
-                    </div>
-                    <div class='col-lg-6'>
-                        {{labeled-chart visualizationID='fao-fcw-ngo'}}
                     </div>
                 </div>
             </div>

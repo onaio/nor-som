@@ -55,6 +55,7 @@ ul {
 
 .map-panel {
     height: 350px;
+    overflow: hidden;
 }
 
 .panel .ember-view {
