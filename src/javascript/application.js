@@ -301,6 +301,7 @@ DFIDDashboard.visualizations = [
         organizationSlugs: ['overview','wfp'],
         title: 'WFP - Beneficiaries by Category (Dec 2014)',
         id: 'wfp-dec-beneficiaries',
+        chartType: 'pie',
         query:  "SELECT " +
                 "upper(region) as region, " +
                 "sum(safety_net) as safety_net, " +

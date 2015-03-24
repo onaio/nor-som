@@ -28,7 +28,7 @@ DFIDDashboard.VizRoute = Ember.Route.extend({
                         });
                         var chartData= {
                             columns: columns,
-                            type: 'bar',
+                            type: (visualization.chartType || 'bar'),
                             groups: [
                                 visualization.columnNames
                             ]
