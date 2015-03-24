@@ -1,5 +1,3 @@
-# DFID Dashboard
+# Norway Somalia M&E Dashboard
 
-Dashboard for DFID Somalia programmes
-
-Available online at http://dashboard.dfid.onalabs.org
+Available online at http://nor-som.onalabs.org
