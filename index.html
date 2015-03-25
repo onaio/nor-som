@@ -11,7 +11,32 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="http://rawgit.com/Addepar/ember-charts/v0.3.0/dist/ember-charts.css">
         <link rel="stylesheet" href="bower_components/c3/c3.css">
-        <title>DFID Dashboard - Somalia Programmes</title>
+        <title>Royal Norwegian Embassy - Somalia</title>
+
+
+
+        <script type='text/x-handlebars' data-template-name='_visualization-selector-dropdown'>
+            <div class='container'><br><br>
+               <a href='#/' id='logo-link'>
+                   <h3>Royal Norwegian Embassy</h3>
+                    Somalia Activities
+                </a>
+                <div class="dropdown pull-right">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                        <i class='fa fa-bars'></i>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        {{#each organization in DFIDDashboard.organizations}}
+                            <li role="presentation">
+                                {{#link-to 'viz' organization.slug}}
+                                    {{ organization.name }}
+                                {{/link-to}}
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </script>
 
 
          <script type='text/x-handlebars' data-template-name='components/standalone-map'>
@@ -133,29 +158,7 @@
             {{/if}}
         </script>
         
-        <script type='text/x-handlebars' data-template-name='_visualization-selector-dropdown'>
-            <div class='container'><br><br>
-               <a href='#/' id='logo-link'>
-                   <img height=35 src="/img/dfid_black.png">
-                   <h3>MONITORING & EVALUATION FOR SOMALIA</h3>
-                    2013-2017 Humanitarian Programme 
-                </a>
-                <div class="dropdown pull-right">
-                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
-                        <i class='fa fa-bars'></i>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        {{#each organization in DFIDDashboard.organizations}}
-                            <li role="presentation">
-                                {{#link-to 'viz' organization.slug}}
-                                    {{ organization.name }}
-                                {{/link-to}}
-                            </li>
-                        {{/each}}
-                    </ul>
-                </div>
-            </div>
-        </script>
+
 
         <script type='text/x-handlebars' data-template-name='index'>
             <div class='container'>
@@ -201,25 +204,6 @@
         </script>
 
 
-
-        <script type='text/x-handlebars' data-template-name='_indicators'>
-            <div class='container'>
-                <div class='page-header'>
-                    <h3>Programme Indicators</h3>
-                </div>
-
-                <div class='row'>
-                    <div class='col-lg-6'>
-                        {{chart-group visualizationGroupID='region-overview'}}
-                    </div>
-                    <div class='col-lg-6'>
-                        {{labeled-chart visualizationID='csi_by_region_overview'}}
-                    </div>
-                </div>
-            </div>
-        </script>
-
-
      <script type='text/x-handlebars' data-template-name='_map'>
             <div class='container'>
                 <div class='page-header'>
@@ -229,7 +213,8 @@
                  <div class='row'>
                     <div class='col-lg-12'>
     
-<iframe width='100%' height='650' frameborder='0' src='http://ona.cartodb.com/viz/9e506de2-c213-11e4-9bd4-0e018d66dc29/embed_map' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+<iframe width='100%' height='650' frameborder='0' src='http://ona.cartodb.com/viz/eff9065c-d2e1-11e4-b698-0e018d66dc29/embed_map' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+
 
 
                     </div>
@@ -262,7 +247,7 @@
                         {{chart-group visualizationGroupID='unicef-pca-budgets'}}
                     </div>
                     <div class='col-lg-6'>
-                        {{labeled-chart visualizationID='unicef-cash-transfers'}} 
+                      
                     </div>
                 </div>
 
@@ -275,149 +260,60 @@
             </div>
         </script>
 
-
-
-        <script type='text/x-handlebars' data-template-name='_brics'>
+        <script type='text/x-handlebars' data-template-name='_npa-boreholes'>
             <div class='container'>
                 <div class='page-header'>
-                    <h3>BRiCS <small>Activities and Indicators</small></h3>
+                    <h4>Norwegian People's Aid (NPA) -  Boreholes and Water Points</h4>
                 </div>
-                <div class='row'>
+               
+
+                 <div class='row'>
                     <div class='col-lg-12'>
-                        <div class='table-container'>
-                            {{standalone-table visualizationID='activity-groups-by-ngo'}}
-                        </div>
-                    </div>
-                </div>
-                <div class='row'>
-                    <div class='col-lg-6'>
-                        {{standalone-map visualizationID='activity-groups-by-district'}}
-                    </div>
-                    <div class='col-lg-6'>
-                        {{chart-group visualizationGroupID="brics-activities"}}
-                    </div>
-                </div>
-                <div class='row'>
-                    <div class='col-lg-12'>
-                        <div class='panel panel-default'>
-                            {{standalone-table visualizationID='brics-cost-by-beneficiary'}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </script>
-
-        <script type='text/x-handlebars' data-template-name='_unicef'>
-            <div class='container'>
-                <div class='page-header'>
-                <h3>UNICEF</h3>
-                </div>
     
+        <iframe width='100%' height='500' frameborder='0' src='http://ona.cartodb.com/viz/eff9065c-d2e1-11e4-b698-0e018d66dc29/embed_map' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+            <br>&nbsp;<br>
+                    </div>
+                </div>
 
                 <div class='row'>
                     <div class='col-lg-6'>
-                        {{labeled-chart visualizationID='unicef-total-pca-budget-by-programme'}}
+                    
+                    
+                    {{labeled-chart visualizationID='npa-boreholes-type-counts'}} 
+                       
                     </div>
-    
-                        <div class='col-lg-6'>
-                        {{labeled-chart visualizationID='unicef-pca-by-programme-section'}} 
-                        
-                        </div>
-                 </div>
-                  <div class='row'>
                     <div class='col-lg-6'>
-                        {{labeled-chart visualizationID='unicef-pcas-by-partner'}} 
+                        {{labeled-chart visualizationID='npa-water-main-back'}} 
                     </div>
-    
-                        <div class='col-lg-6'>
-                        {{labeled-chart visualizationID='unicef-cash-transfers'}} 
-                        </div>
-                 </div>
+                </div>
+                 <div class='row'>
+                    <div class='col-lg-6'>
+                       {{labeled-chart visualizationID='npa-water-pay-by-type'}} 
+                    </div>
+                    <div class='col-lg-6'>
+                    {{labeled-chart visualizationID='npa-water-access-type'}} 
+                    </div>
+                </div>
+             <div class='row'>
+                    <div class='col-lg-6'>
+                       {{labeled-chart visualizationID='npa-water-quality-drinking-type'}} 
+                    </div>
+                    <div class='col-lg-6'>
+                    {{labeled-chart visualizationID='npa-water-animal-drinking-type'}} 
+                    </div>
+                </div>
 
+
+
+                
+
+                <!-- BRICS -->
+               
             </div>
         </script>
-        <script type='text/x-handlebars' data-template-name='_fao'>
-        <div class='container'>
-            <div class='page-header'>
-                <h3>FAO</h3>
-            </div>
-
-            <div class='row'>
-                <div class='col-lg-6'>
-                    <div class='panel panel-default map-panel'>
-                    {{standalone-map visualizationID='overall-fao-programmes'}}
-                    </div>
-                </div>
-
-                <div class='col-lg-6'>
-                    <div class='panel panel-default map-panel'>
-                    {{standalone-map visualizationID='fao-cfw-beneficiary-reg'}}
-                    </div>
-                </div>
-            </div>
-
-            <div class='row'>
-                <div class='col-lg-12'><br><br><br>
-                    {{labeled-chart visualizationID='fao-fcw-ngo'}}
-                </div>
-            </div>
-        </div>
-        </script>
 
 
-        
-         <script type='text/x-handlebars' data-template-name='_sns'>
-            <div class='container'>
-                <div class='page-header'>
-                    <h3>SNS</h3>
-                </div>
-                <div class='row'>
-                    <div class='col-lg-8 table-container'>
-                        {{standalone-table visualizationID='sns-indicator-averages-by-ngo'}}
-                    </div>
-                </div>
-                <div class='row'>
-                    <div class='col-lg-6'>
-                                {{labeled-chart visualizationID='sns-scored-csi'}}
-                    </div>
-                    <div class='col-lg-6'>
-                                {{labeled-chart visualizationID='sns-scored-hdds'}}
-                    </div>
-                </div>
-                <div class='row'>
-                    <div class='col-lg-6'>
-                                {{labeled-chart visualizationID='sns-scored-assets'}}
-                    </div>
-                    <div class='col-lg-6'>
-                                {{labeled-chart visualizationID='sns-scored-fcs'}}
-                    </div>
-                </div>
-            </div>
-        </script>
-                 <script type='text/x-handlebars' data-template-name='_wfp'>
-            <div class='container'>
-                <div class='page-header'>
-                <h3>WFP</h3>
-                </div>
-                <div class='row'>
-                    <div class='col-lg-6'>
-          
-                                {{chart-group visualizationGroupID='wfp-dec'}}
-                    </div>
-                            <div class='col-lg-6'>
-                            <div class='panel panel-default map-panel'>
-           {{standalone-map visualizationID='wfp-dec-mt'}}
-           </div>
-                    </div>
-                </div>
-                <div class='row'>
-                    <div class='col-lg-6'>
-                   
-                   
-                    </div>
-                </div>
-            </div>
-        </script>
+
     </head>
     <body>
 

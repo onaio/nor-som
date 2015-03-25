@@ -126,51 +126,80 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['overview','unicef'],
-        title: 'UNICEF - PCAs by Programme Section',
-        id: 'unicef-pca-by-programme-section',
-        query:  "SELECT programme_section,count(*) as pcas " +
-                "FROM unicef_active_pcas " +
-                "group by 1 ",
-        categorizedBy: 'programme_section',
-        columnNames: ['pcas'],
+        organizationSlugs: ['overview','npa-boreholes'],
+
+        title: 'NPA - Water point types',
+        id: 'npa-boreholes-type-counts',
+        query:  "SELECT verification_information_water_source_type as water_point_type, count (*) as water_points from npa_boreholes group by 1 order by water_point_type",
+        categorizedBy: 'water_point_type',
+        columnNames: ['water_points'],
+        rawData: []
+    }),      
+    DFIDDashboard.Visualization.create({
+        organizationSlugs: ['overview','npa-boreholes'],
+        title: 'NPA - Payment for Access by Water Point Type',
+        id: 'npa-water-pay-by-type',
+        query:  "SELECT general_information_water_source as water_point_type, " +
+                "count (case when person_identification_pay_for_water = 'yes' then cartodb_id else null end) as yes, " +
+                "count (case when person_identification_pay_for_water = 'no' then cartodb_id else null end) as no " +
+                "FROM npa_borehole_impact group by 1 order by water_point_type",
+        categorizedBy: 'water_point_type',
+        columnNames: ['yes','no'],
         rawData: []
     }),    
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['overview','fao'],
-        title: 'FAO - Overall Programmes',
-        id: 'overall-fao-programmes',
-        query:  "SELECT " +
-                "* " +
-                "FROM fao_stack ",
-        cartoVisualizationID: 'b072fe0c-c1bb-11e4-9af8-0e853d047bba',
-        categorizedBy: 'fao_program',
-        columnNames: ['unicef_contribution', 'total_partner_contribution'],
+        organizationSlugs: ['overview','npa-boreholes'],
+        title: 'NPA - Backup/Main Source by Water Point Type',
+        id: 'npa-water-main-back',
+        query:  "SELECT general_information_water_source as water_point_type, " + 
+                "count (case when person_identification_water_source_importance = 'main_water_source' then cartodb_id else null end) as main, " + 
+                "count (case when person_identification_water_source_importance = 'back_water_source' then cartodb_id else null end) as back_up " + 
+                "FROM npa_borehole_impact group by 1 order by water_point_type",
+        categorizedBy: 'water_point_type',
+        columnNames: ['main','back_up'],
         rawData: []
-    }),
+    }),  
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['overview','fao'],
-        title: 'FAO - Overall Programmes',
-        id: 'overall-fao-programmes-2',
-        cartoVisualizationID: 'b072fe0c-c1bb-11e4-9af8-0e853d047bba',
-        categorizedBy: 'fao_program',
-        columnNames: ['unicef_contribution', 'total_partner_contribution'],
+        organizationSlugs: ['overview','npa-boreholes'],
+        title: 'NPA - Who Controls Access by Water Point Type',
+        id: 'npa-water-access-type',
+        query:  "SELECT general_information_water_source as water_point_type, " + 
+                "count (case when access_community_chairman = 'True' then cartodb_id else null end) as community_chairman, " +
+                "count (case when access_water_ngo_staffs = 'True' then cartodb_id else null end) as ngo_staffs, " + 
+                "count (case when access_water_pastoralists = 'True' then cartodb_id else null end) as pastoralists, " +
+                "count (case when access_water_village_elders = 'True' then cartodb_id else null end) as village_elders, " +
+                "count (case when access_water_local_council = 'True' then cartodb_id else null end) as water_comittee " +
+                "FROM npa_borehole_impact group by 1 order by water_point_type",
+        categorizedBy: 'water_point_type',
+        columnNames: ['community_chairman','ngo_staffs','pastoralists','village_elders','water_comittee'],
         rawData: []
-    }),
+    }),          
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['overview','fao'],
-        title: 'FAO - Cash For Work Beneficiaries by NGO',
-        id: 'fao-fcw-ngo',
-        query:  "select " + 
-                "ngo, " +
-                "sum (total_beneficiaries) as beneficiaries " +
-                "from fao_cfw_beneficiary_reg " +
-                "group by 1 ",
-        cartoVisualizationID: 'b072fe0c-c1bb-11e4-9af8-0e853d047bba',
-        categorizedBy: 'ngo',
-        columnNames: ['beneficiaries'],
+        organizationSlugs: ['overview','npa-boreholes'],
+        title: 'NPA - Water Drinking Quality by Water Point Type',
+        id: 'npa-water-quality-drinking-type',
+        query:  "SELECT general_information_water_source as water_point_type, " +
+                "count (case when water_quality_human_drinking_good = 'False' then cartodb_id else null end) as bad, " +
+                "count (case when water_quality_human_drinking_good = 'True' then cartodb_id else null end) as good " + 
+                "FROM npa_borehole_impact group by 1 order by water_point_type",
+        categorizedBy: 'water_point_type',
+        columnNames: ['good','bad'],
         rawData: []
-    }),
+    }),    
+    DFIDDashboard.Visualization.create({
+        organizationSlugs: ['overview','npa-boreholes'],
+        title: 'NPA - Water Quality for Animals by Water Point Type',
+        id: 'npa-water-animal-drinking-type',
+        query:  "SELECT general_information_water_source as water_point_type, " +
+                "count (case when water_good_for_animal_drinking = 'False' then cartodb_id else null end) as bad, " +
+                "count (case when water_good_for_animal_drinking = 'True' then cartodb_id else null end) as good " + 
+                "FROM npa_borehole_impact group by 1 order by water_point_type",
+        categorizedBy: 'water_point_type',
+        columnNames: ['good','bad'],
+        rawData: []
+    }),         
+
+
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['fao'],
         title: 'FAO - Cash-for-Work Beneficiary Registration',
@@ -395,6 +424,11 @@ DFIDDashboard.visualizationGroups = [
         organizationSlugs: ['indicators','overview'],
         visualizationIDs: ['overall-fao-programmes-2', 'wfp-dec-mt'],
     }),
+        DFIDDashboard.VisualizationGroup.create({
+        id: 'npa-boreholes-maps',
+        organizationSlugs: ['npa-boreholes','overview'],
+        visualizationIDs: ['npa-boreholes-types',''],
+    }),
 ]
 
 DFIDDashboard.Organization = Ember.Object.extend({
@@ -412,38 +446,16 @@ DFIDDashboard.Organization = Ember.Object.extend({
 });
 
 DFIDDashboard.organizations = ([
-    {
-        name: 'Programme Indicators',
-        slug: 'indicators',
-    },
+
     {
         name: 'Partner Activities',
         slug: 'overview',
     },
     {
-        name: 'Partner Map',
-        slug: 'map',
+        name: 'NPA Boreholes',
+        slug: 'npa-boreholes',
     },
-    {
-        name: 'BRiCS',
-        slug: 'brics',
-    },
-    {
-        name: 'SNS',
-        slug: 'sns',
-    },
-    {
-        name: 'FAO',
-        slug: 'fao',
-    },
-    {
-        name: 'UNICEF',
-        slug: 'unicef',
-    },
-    {
-        name: 'WFP',
-        slug: 'wfp',
-    },
+   
 ]).map(function(item) {
         return DFIDDashboard.Organization.create(item);
     });
