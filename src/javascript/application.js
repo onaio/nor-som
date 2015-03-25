@@ -10,44 +10,7 @@ DFIDDashboard.VisualizationGroup = Ember.Object.extend();
 DFIDDashboard.sql = new cartodb.SQL({user: 'ona', api_key: '71318d1aefad674aeeeda099af88240beb003209'});
 
 DFIDDashboard.visualizations = [
-    DFIDDashboard.Visualization.create({
-        organizationSlugs: ['brics','overview'],
-        title: 'Issues & BRiCS Response',
-        id: 'activity-groups-by-district',
-        query: "select " +
-                "the_geom, " +
-                "min(district) as district, " +
-                "min(the_geom_webmercator) as the_geom_webmercator, " +
-                "min(cartodb_id) as cartodb_id, " +
-                "count (case when category_resilience = true then session_id else null end) as resilience, " +
-                "count (case when category_wash = true then session_id else null end) as wash, " +
-                "count (case when category_shelter = true then session_id else null end) as shelter, " +
-                "count (case when category_food_security_and_livelihood = true then session_id else null end) as food " +
-                "from brics_reg_data_2015_01_16 " +
-                "group by 1",
-        cartoVisualizationID: '06c6e9fe-c0f8-11e4-99cc-0e4fddd5de28',
-        categorizedBy: 'district',
-        columnNames: ['shelter', 'wash', 'resilience', 'food'],
-        rawData: []
-    }),
-    DFIDDashboard.Visualization.create({
-        organizationSlugs: ['brics','overview'],
-        title: 'BRiCS Cost by Beneficiary',
-        id: 'brics-cost-by-beneficiary',
-        query:  "select activities, " +
-                "sum(budget__usd) as budget_usd, " +
-                "(sum(beneficiaries_per_activity) * count(*)) as tot_beneficiaries, " +
-                "count(*) as num_activities, " +
-                "(sum(budget__usd)/(sum(beneficiaries_per_activity) * count(*))) as usd_per_ben " +
-                "FROM brics_community_plans " +
-                "where activities is not null " +
-                "group by 1 " +
-                "limit 50 ",
-        cartoVisualizationID: '06c6e9fe-c0f8-11e4-99cc-0e4fddd5de28',
-        categorizedBy: 'activities',
-        columnNames: ['budget_usd', 'tot_beneficiaries', 'num_activities', 'usd_per_ben'],
-        rawData: []
-    }),
+    
 
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['brics','overview'],
@@ -176,7 +139,7 @@ DFIDDashboard.visualizations = [
     }),          
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['overview','npa-boreholes'],
-        title: 'NPA - Water Drinking Quality by Water Point Type',
+        title: 'NPA - Water Quality (Drinking) by Water Point Type',
         id: 'npa-water-quality-drinking-type',
         query:  "SELECT general_information_water_source as water_point_type, " +
                 "count (case when water_quality_human_drinking_good = 'False' then cartodb_id else null end) as bad, " +
@@ -448,13 +411,23 @@ DFIDDashboard.Organization = Ember.Object.extend({
 DFIDDashboard.organizations = ([
 
     {
-        name: 'Partner Activities',
+        name: 'Overview',
         slug: 'overview',
     },
     {
         name: 'NPA Boreholes',
         slug: 'npa-boreholes',
+    },   
+    {
+        name: 'YME Boreholes',
+        slug: 'yme-boreholes',
     },
+       {
+        name: 'NIS Lights',
+        slug: 'nis-lights',
+    },
+
+
    
 ]).map(function(item) {
         return DFIDDashboard.Organization.create(item);
