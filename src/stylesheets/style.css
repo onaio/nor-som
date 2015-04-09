@@ -109,4 +109,8 @@ ul {
     color: inherit;
 }
 
-.galleria{ width: 700px; height: 400px; background: #000 }
+.galleria{
+    background: #000;
+    height: 400px;
+    width: 700px;
+}
