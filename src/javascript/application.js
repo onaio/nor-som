@@ -94,7 +94,22 @@ DFIDDashboard.visualizations = [
         categorizedBy: 'boreholes',
         columnNames: ['functional','non_functional'],
         rawData: []
-    }),       
+    }),    
+
+    DFIDDashboard.Visualization.create({
+        organizationSlugs: ['yme-boreholes'],
+        title: 'YME - Water Source Importance',
+        id: 'yme-water-soure-importance',
+        chartType: 'pie',
+        query:  "SELECT count(*) as ben, count (case when person_identification_water_source_importance = 'main_water_source' then cartodb_id else null end) as main, " +
+                "count (case when person_identification_water_source_importance = 'back_water_source' then cartodb_id else null end) as backup " +
+                "FROM yme_borehole_impact",
+        categorizedBy: 'ben',
+        columnNames: ['main','backup'],
+        rawData: []
+    }),          
+
+
 
 
     DFIDDashboard.Visualization.create({
