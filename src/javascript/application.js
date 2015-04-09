@@ -20,6 +20,7 @@ DFIDDashboard.visualizations = [
         columnNames: ['water_points'],
         rawData: []
     }),      
+
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['overview','npa-boreholes'],
         title: 'NPA - Payment for Access by Water Point Type',
@@ -99,7 +100,7 @@ DFIDDashboard.visualizations = [
 
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['yme-boreholes'],
-        title: 'YME - Water Source Importance',
+        title: 'YME - How important to you is this water source?',
         id: 'yme-water-soure-importance',
         chartType: 'pie',
         query:  "SELECT count(*) as ben, count (case when person_identification_water_source_importance = 'main_water_source' then cartodb_id else null end) as main, " +
@@ -112,7 +113,7 @@ DFIDDashboard.visualizations = [
 
         DFIDDashboard.Visualization.create({
         organizationSlugs: ['yme-boreholes'],
-        title: 'YME - Water Quality',
+        title: 'YME - What is the quality of the water?',
         id: 'yme-quality-of-water',
         chartType: 'pie',
         query:  "SELECT count(*) as ben, count (case when person_identification_quality_of_water = 'only_good_for_animal_drinking' then cartodb_id else null end) as only_good_for_animal_drinking, " +
@@ -127,7 +128,7 @@ DFIDDashboard.visualizations = [
 
         DFIDDashboard.Visualization.create({
         organizationSlugs: ['yme-boreholes'],
-        title: 'YME - Water Levels',
+        title: 'YME - Does the borehole provide enough water to meet your needs?',
         id: 'yme-water-levels',
         chartType: 'pie',
         query:  "SELECT count(*) as ben, count (case when person_identification_water_level = 'usually' then cartodb_id else null end) as usually, " +
@@ -141,7 +142,7 @@ DFIDDashboard.visualizations = [
 
         DFIDDashboard.Visualization.create({
         organizationSlugs: ['yme-boreholes'],
-        title: 'YME - Used Water Source Since',
+        title: 'YME - How long have you used this water source?',
         id: 'yme-used-watersource-since',
         chartType: 'pie',
         query:  "SELECT count(*) as ben, count (case when person_identification_used_water_source = 'Always' then cartodb_id else null end) as always, " +
@@ -152,7 +153,16 @@ DFIDDashboard.visualizations = [
         columnNames: ['always','since_it_was_built_renovated','in_the_past_year'],
         rawData: []
     }), 
-
+        DFIDDashboard.Visualization.create({
+        organizationSlugs: ['yme-boreholes'],
+        title: 'YME - Who decides access to water?',
+        id: 'yme-water-access-who-decides',
+        query:  "SELECT count (*) as respondents, person_identification_decides_who_accesses_water as water_decider " + 
+                "FROM yme_borehole_impact group by 2 order by 2",
+        categorizedBy: 'water_decider',
+        columnNames: ['respondents'],
+        rawData: []
+    }), 
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['yme-tvet'],
         title: 'YME - Intention to Expand Business',
@@ -170,7 +180,7 @@ DFIDDashboard.visualizations = [
 
      DFIDDashboard.Visualization.create({
         organizationSlugs: ['yme-tvet'],
-        title: 'YME - Incoming employees need Training ',
+        title: 'YME - Incoming employees need training ',
         id: 'yme-tvet-incoming-employees-training',
         chartType: 'pie',
         query:  "SELECT count(*) as tocateg, count (case when future_of_business_workers_need_special_training = 'yes' then cartodb_id else null end) as yes, " +
@@ -252,21 +262,14 @@ DFIDDashboard.visualizations = [
     }), 
 
     DFIDDashboard.Visualization.create({
-        organizationSlugs: ['fao'],
-        title: 'FAO - Cash-for-Work Beneficiary Registration',
-        id: 'fao-cfw-beneficiary-reg',
-        query:  "SELECT " +
-                "district, " +
-                "ngo, " +
-                "SUM(total_beneficiaries) AS total_beneficiaries, " +
-                "SUM(total_hhs) AS total_hhs " +
-                "FROM fao_cfw_beneficiary_reg " +
-                "GROUP by 1, 2",
-        cartoVisualizationID: 'bb3e8a18-c16b-11e4-8b88-0e9d821ea90d',
-        categorizedBy: 'district',
-        columnNames: ['total_beneficiaries'],
+        organizationSlugs: ['yme-tvet'],
+        title: 'YME - How skills were acquired? (Local merchants)',
+        id: 'yme-tvet-skills-acquired',
+        query:  "SELECT count(*) as merchants, training_background_how_skills_were_acquired as training FROM labour_market_assessment_quantitative_tool2 group by 2 order by training asc",
+        categorizedBy: 'training',
+        columnNames: ['merchants'],
         rawData: []
-    }),
+    }),      
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['sns'],
         title: 'SNS - Scored CSI',
@@ -363,7 +366,13 @@ DFIDDashboard.visualizationGroups = [
         organizationSlugs: ['npa-boreholes','overview'],
         visualizationIDs: ['npa-boreholes-types',''],
     }),
+        DFIDDashboard.VisualizationGroup.create({
+        id: 'yme-tvet-demand',
+        organizationSlugs: ['yme-tvet'],
+        visualizationIDs: ['yme-tvet-significant-excess-demand','yme-tvet-jobs-availability'],
+    }),
 ]
+
 
 DFIDDashboard.Organization = Ember.Object.extend({
     visualizations: Ember.computed('slug', function() {

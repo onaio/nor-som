@@ -229,15 +229,14 @@
                        
                     </div>
                     <div class='col-lg-6'>
-                    {{labeled-chart visualizationID='yme-water-soure-importance'}} 
+                    {{labeled-chart visualizationID='yme-water-access-who-decides'}} 
                         
                     </div>
                 </div>
                <div class='row'>
                     <div class='col-lg-6'>
                     
-                    
-                    {{labeled-chart visualizationID='yme-quality-of-water'}} 
+                     {{labeled-chart visualizationID='yme-water-soure-importance'}} 
                        
                     </div>
                     <div class='col-lg-6'>
@@ -253,7 +252,7 @@
                        
                     </div>
                     <div class='col-lg-6'>
-                   
+                   {{labeled-chart visualizationID='yme-quality-of-water'}} 
                         
                     </div>
                 </div>
@@ -358,19 +357,20 @@
 
      <script type='text/x-handlebars' data-template-name='_yme-tvet'>
             <div class='container'>
-                <div class='page-header text-center' style="padding:0 10em;">
-                    <h3>YME TVET Centre</h3>
-                  
-<!--
-                    <div class='col-lg-12' style="font-size:1.2em; margin-bottom:2em;">
-                        Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
-                    </div>
--->
+                <div class='page-header'>
+                    <h3>YME - Professor Adow Vocational Training Schoot (TVET)</h3>
                 </div>
+               
+                   
+                  
+
+            
 
                 <div class='row'>
                     <div class='col-lg-12'>
                          <div class="galleria">
+
+                           <img src="/img/tvet/DSC01834.jpg"/>
                             <img src="/img/tvet/DSC01612.jpg"/>
                             <img src="/img/tvet/DSC01622.jpg"/>
                             <img src="/img/tvet/DSC01634.jpg"/>
@@ -389,9 +389,8 @@
                             <img src="/img/tvet/DSC01717.jpg"/>
                             <img src="/img/tvet/DSC01769.jpg"/>
                             <img src="/img/tvet/DSC01797.jpg"/>
-                            <img src="/img/tvet/DSC01834.jpg"/>
-                            <img src="/img/tvet/DSC01903.jpg"/>
-                            <img src="/img/tvet/DSC01931.jpg"/>
+                             <img src="/img/tvet/DSC01931.jpg"/>
+                             <img src="/img/tvet/DSC01903.jpg"/>
                             <img src="/img/tvet/DSC01944.jpg"/>
                             <img src="/img/tvet/DSC01948.jpg"/>
                             <img src="/img/tvet/DSC01970.jpg"/>
@@ -407,14 +406,47 @@
                 </div>
                 <div class='row'>
                     <div class='col-lg-6'>
+                    <h4>School Profile</h4>
+                    The basic technical and vocational training program is implemented by G.S.A (Somalia) in partnership with Yme foundation (Norway) and NorSom (Norway), funded by MFA of Norway. The program is fully integrated into the claimed Galmudug government education strategy and vocational training reforms.
+
+The activities of vocational training are centered in Galkayo, central Somalia. The activities envisaged cover all areas (regions) bordering Galkayo.
+
+In the first stage of its implementation, the program supports the attainment of the objective of the strategic opportunity for vocational skill, success plan, in order to ensure that young men and women receive high quality skills relevant to the real world and employment-oriented vocational training.
+<br>&nbsp;<br>
+                    </div>
+               
+                    <div class='col-lg-6'>
+                    <h4>Labour Market Assessment</h4>
+ A retroactive labour market survey of 68 employers and business-owners in the vicinity of the TVET centre was conducted by third party monitors. For an “urgent need” for graduates from the TVET centre to be established, it would need to be shown that (i) there are employers in the local area working in the fields covered by the training, (ii) those employers need to increase their capacity and are looking to expand, and (iii) those employers report a need for more skilled workers to facilitate their expansion.
+<br>&nbsp;<br>
+                    </div>
+                </div>
+  
+
+
+
+                <div class='row'>
+                    <div class='col-lg-6'>
                     {{labeled-chart visualizationID='yme-tvet-main-services'}}    
                     </div>
                     <div class='col-lg-6'>
-                 {{labeled-chart visualizationID='yme-tvet-significant-excess-demand'}}  
+            
+                 
+                 {{labeled-chart visualizationID='yme-tvet-skills-acquired'}} 
                         
                     </div>
                 </div>
 
+    
+                 <div class='row'>
+                    <div class='col-lg-6'>
+            {{labeled-chart visualizationID='yme-tvet-significant-excess-demand'}} 
+                    </div>
+                    <div class='col-lg-6'>
+                           {{labeled-chart visualizationID='yme-tvet-jobs-availability'}}      
+                   
+                    </div>
+                </div>
 
                 <div class='row'>
                     <div class='col-lg-6'>
@@ -422,20 +454,22 @@
                     </div>
                     <div class='col-lg-6'>
                     
-                   {{labeled-chart visualizationID='yme-tvet-incoming-employees-training'}} 
+                   {{chart-group visualizationGroupID='yme-tvet-demand'}} 
                         
                     </div>
                 </div>
 
                  <div class='row'>
                     <div class='col-lg-6'>
-            {{labeled-chart visualizationID='yme-tvet-ease-finding-skilled-workers'}}   
+              
                     </div>
                     <div class='col-lg-6'>
                     
-             {{labeled-chart visualizationID='yme-tvet-jobs-availability'}}           
+           
                     </div>
                 </div>
+
+
             </div>
         </script>
 
