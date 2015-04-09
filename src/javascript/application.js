@@ -112,7 +112,7 @@ DFIDDashboard.visualizations = [
 
         DFIDDashboard.Visualization.create({
         organizationSlugs: ['yme-boreholes'],
-        title: 'YME - Quality of Water',
+        title: 'YME - Water Quality',
         id: 'yme-quality-of-water',
         chartType: 'pie',
         query:  "SELECT count(*) as ben, count (case when person_identification_quality_of_water = 'only_good_for_animal_drinking' then cartodb_id else null end) as only_good_for_animal_drinking, " +
