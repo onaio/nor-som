@@ -254,6 +254,10 @@ DFIDDashboard.organizations = ([
         name: 'YME Boreholes',
         slug: 'yme-boreholes',
     },
+    {
+        name: 'YME TVET Centre',
+        slug: 'yme-tvet',
+    },
        {
         name: 'NIS Lights',
         slug: 'nis-lights',
