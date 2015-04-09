@@ -82,7 +82,8 @@ DFIDDashboard.visualizations = [
         categorizedBy: 'water_point_type',
         columnNames: ['good','bad'],
         rawData: []
-    }),           
+    }),    
+
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['yme-boreholes'],
         title: 'YME - Functional Boreholes',
@@ -109,8 +110,34 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),          
 
+    DFIDDashboard.Visualization.create({
+        organizationSlugs: ['yme-tvet'],
+        title: 'YME - Intention to Expand Business',
+        id: 'yme-tvet-intention-expand',
+        chartType: 'pie',
+        query:  "SELECT count(*) as tocateg, count (case when future_of_business_plan_business_expansion = 'yes_definitely' then cartodb_id else null end) as yes_definitely, " +
+                "count (case when future_of_business_plan_business_expansion = 'yes_possibly' then cartodb_id else null end) as yes_possibly, " +
+                "count (case when future_of_business_plan_business_expansion = 'no' then cartodb_id else null end) as no, " +
+                "count (case when future_of_business_plan_business_expansion = 'refuse_to_answer' then cartodb_id else null end) as refusestoanswer " +
+                "FROM labour_market_assessment_quantitative_tool2",
+        categorizedBy: 'tocateg',
+        columnNames: ['yes_definitely','yes_possibly','no','refusestoanswer'],
+        rawData: []
+    }),          
 
-
+     DFIDDashboard.Visualization.create({
+        organizationSlugs: ['yme-tvet'],
+        title: 'YME - Incoming employees need Training ',
+        id: 'yme-tvet-incoming-employees-training',
+        chartType: 'pie',
+        query:  "SELECT count(*) as tocateg, count (case when future_of_business_workers_need_special_training = 'yes' then cartodb_id else null end) as yes, " +
+                "count (case when future_of_business_workers_need_special_training = 'no' then cartodb_id else null end) as no, " +
+                "count (case when future_of_business_workers_need_special_training = 'refuses_to_answer' then cartodb_id else null end) as refusestoanswer " +
+                "FROM labour_market_assessment_quantitative_tool2",
+        categorizedBy: 'tocateg',
+        columnNames: ['yes','no','refusestoanswer'],
+        rawData: []
+    }),  
 
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['fao'],
