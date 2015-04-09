@@ -82,7 +82,19 @@ DFIDDashboard.visualizations = [
         categorizedBy: 'water_point_type',
         columnNames: ['good','bad'],
         rawData: []
-    }),         
+    }),           
+    DFIDDashboard.Visualization.create({
+        organizationSlugs: ['yme-boreholes'],
+        title: 'YME - Functional Boreholes',
+        id: 'yme-functional-boreholes',
+        chartType: 'pie',
+        query:  "SELECT count(*) as boreholes, count(case when verification_information_state_of_water_source = 'true' then cartodb_id else null end) as functional, " +
+                "count(case when verification_information_state_of_water_source = 'false' then cartodb_id else null end) as non_functional " +
+                "FROM yme_borehole_verification_ndisha",
+        categorizedBy: 'boreholes',
+        columnNames: ['functional','non_functional'],
+        rawData: []
+    }),       
 
 
     DFIDDashboard.Visualization.create({
