@@ -127,16 +127,29 @@ DFIDDashboard.visualizations = [
 
         DFIDDashboard.Visualization.create({
         organizationSlugs: ['yme-boreholes'],
-        title: 'YME - Water Use Types',
-        id: 'yme-use-types',
+        title: 'YME - Water Levels',
+        id: 'yme-water-levels',
         chartType: 'pie',
-        query:  "SELECT count(*) as ben, count (case when person_identification_quality_of_water = 'only_good_for_animal_drinking' then cartodb_id else null end) as only_good_for_animal_drinking, " +
-                "count (case when person_identification_quality_of_water = 'only_good_for_irrigation' then cartodb_id else null end) as only_good_for_irrigation, " +
-                "count (case when person_identification_quality_of_water = 'good_for_human_drinking' then cartodb_id else null end) as good_for_human_drinking, " +
-                "count (case when person_identification_quality_of_water = 'Other' or person_identification_quality_of_water = ' ' then cartodb_id else null end) as other " +
+        query:  "SELECT count(*) as ben, count (case when person_identification_water_level = 'usually' then cartodb_id else null end) as usually, " +
+                "count (case when person_identification_water_level = 'always' then cartodb_id else null end) as always, " +
+                "count (case when person_identification_water_level = 'rarely' then cartodb_id else null end) as rarely " +
                 "FROM yme_borehole_impact",
         categorizedBy: 'ben',
-        columnNames: ['only_good_for_animal_drinking','only_good_for_irrigation','good_for_human_drinking','other'],
+        columnNames: ['usually','always','rarely'],
+        rawData: []
+    }), 
+
+        DFIDDashboard.Visualization.create({
+        organizationSlugs: ['yme-boreholes'],
+        title: 'YME - Used Water Source Since',
+        id: 'yme-used-watersource-since',
+        chartType: 'pie',
+        query:  "SELECT count(*) as ben, count (case when person_identification_used_water_source = 'Always' then cartodb_id else null end) as always, " +
+                "count (case when person_identification_used_water_source = 'Since_it_was_built_renovated' then cartodb_id else null end) as since_it_was_built_renovated, " +
+                "count (case when person_identification_used_water_source = 'In_the_past_year' then cartodb_id else null end) as in_the_past_year " +
+                "FROM yme_borehole_impact",
+        categorizedBy: 'ben',
+        columnNames: ['always','since_it_was_built_renovated','in_the_past_year'],
         rawData: []
     }), 
 
