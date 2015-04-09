@@ -110,6 +110,36 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),          
 
+        DFIDDashboard.Visualization.create({
+        organizationSlugs: ['yme-boreholes'],
+        title: 'YME - Quality of Water',
+        id: 'yme-quality-of-water',
+        chartType: 'pie',
+        query:  "SELECT count(*) as ben, count (case when person_identification_quality_of_water = 'only_good_for_animal_drinking' then cartodb_id else null end) as only_good_for_animal_drinking, " +
+                "count (case when person_identification_quality_of_water = 'only_good_for_irrigation' then cartodb_id else null end) as only_good_for_irrigation, " +
+                "count (case when person_identification_quality_of_water = 'good_for_human_drinking' then cartodb_id else null end) as good_for_human_drinking, " +
+                "count (case when person_identification_quality_of_water = 'Other' or person_identification_quality_of_water = ' ' then cartodb_id else null end) as other " +
+                "FROM yme_borehole_impact",
+        categorizedBy: 'ben',
+        columnNames: ['only_good_for_animal_drinking','only_good_for_irrigation','good_for_human_drinking','other'],
+        rawData: []
+    }), 
+
+        DFIDDashboard.Visualization.create({
+        organizationSlugs: ['yme-boreholes'],
+        title: 'YME - Water Use Types',
+        id: 'yme-use-types',
+        chartType: 'pie',
+        query:  "SELECT count(*) as ben, count (case when person_identification_quality_of_water = 'only_good_for_animal_drinking' then cartodb_id else null end) as only_good_for_animal_drinking, " +
+                "count (case when person_identification_quality_of_water = 'only_good_for_irrigation' then cartodb_id else null end) as only_good_for_irrigation, " +
+                "count (case when person_identification_quality_of_water = 'good_for_human_drinking' then cartodb_id else null end) as good_for_human_drinking, " +
+                "count (case when person_identification_quality_of_water = 'Other' or person_identification_quality_of_water = ' ' then cartodb_id else null end) as other " +
+                "FROM yme_borehole_impact",
+        categorizedBy: 'ben',
+        columnNames: ['only_good_for_animal_drinking','only_good_for_irrigation','good_for_human_drinking','other'],
+        rawData: []
+    }), 
+
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['yme-tvet'],
         title: 'YME - Intention to Expand Business',
