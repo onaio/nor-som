@@ -139,6 +139,37 @@ DFIDDashboard.visualizations = [
         rawData: []
     }),  
 
+     DFIDDashboard.Visualization.create({
+        organizationSlugs: ['yme-tvet'],
+        title: 'YME - Ease in finding skilled workers',
+        id: 'yme-tvet-ease-finding-skilled-workers',
+        chartType: 'pie',
+        query:  "SELECT count(*) as to_categ, count (case when benefits_of_providing_service_find_workers_relevant_skills = 'somewhat_easily' then cartodb_id else null end) as somewhat_easily, " +
+                "count (case when benefits_of_providing_service_find_workers_relevant_skills = 'very_easily' then cartodb_id else null end) as very_easily, " +
+                "count (case when benefits_of_providing_service_find_workers_relevant_skills = 'not_at_all_easily' then cartodb_id else null end) as not_at_all_easily, " +
+                "count (case when benefits_of_providing_service_find_workers_relevant_skills = 'n/a' then cartodb_id else null end) as n_a " +
+                "FROM labour_market_assessment_quantitative_tool2",
+        categorizedBy: 'to_categ',
+        columnNames: ['somewhat_easily','very_easily','not_at_all_easily','n_a'],
+        rawData: []
+    }), 
+
+      DFIDDashboard.Visualization.create({
+        organizationSlugs: ['yme-tvet'],
+        title: 'YME - Jobs Availability',
+        id: 'yme-tvet-jobs-availability',
+        chartType: 'pie',
+        query:  "SELECT count(*) as to_categ, count (case when benefits_of_providing_service_num_of_available_jobs = 'alot_of_jobs' then cartodb_id else null end) as alot_of_jobs, " +
+                "count (case when benefits_of_providing_service_num_of_available_jobs = 'some_jobs' then cartodb_id else null end) as some_jobs, " +
+                "count (case when benefits_of_providing_service_num_of_available_jobs = 'almost_no_jobs' then cartodb_id else null end) as almost_no_jobs, " +
+                "count (case when benefits_of_providing_service_num_of_available_jobs = 'refuses_to_answer' then cartodb_id else null end) as refuses_to_answer, " +
+                "count (case when benefits_of_providing_service_find_workers_relevant_skills = 'n/a' then cartodb_id else null end) as n_a " +
+                "FROM labour_market_assessment_quantitative_tool2",
+        categorizedBy: 'to_categ',
+        columnNames: ['alot_of_jobs','some_jobs','almost_no_jobs','refuses_to_answer','n_a'],
+        rawData: []
+    }), 
+
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['fao'],
         title: 'FAO - Cash-for-Work Beneficiary Registration',
