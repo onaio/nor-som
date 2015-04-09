@@ -170,6 +170,44 @@ DFIDDashboard.visualizations = [
         rawData: []
     }), 
 
+        DFIDDashboard.Visualization.create({
+        organizationSlugs: ['yme-tvet'],
+        title: 'YME - Main Services Offered by Local Employers',
+        id: 'yme-tvet-main-services',
+        chartType: 'pie',
+        query:  "SELECT count(*) as to_categ, count (case when training_background_main_service_offered = 'electrician' then cartodb_id else null end) as electrician, " +
+                "count (case when training_background_main_service_offered = 'blacksmith' then cartodb_id else null end) as blacksmith, " +
+                "count (case when training_background_main_service_offered = 'appliance_repair' then cartodb_id else null end) as appliance_repair, " +
+                "count (case when training_background_main_service_offered = 'carpenter' then cartodb_id else null end) as carpenter, " +
+                "count (case when training_background_main_service_offered = 'tile_worker' then cartodb_id else null end) as tile_worker," +
+                "count (case when training_background_main_service_offered = 'mason_bricklayer' then cartodb_id else null end) as mason_bricklayer, " +
+                "count (case when training_background_main_service_offered = 'plumber' then cartodb_id else null end) as plumber, " +
+                "count (case when training_background_main_service_offered = 'beautician_hairdress_henna' then cartodb_id else null end) as beautician_hairdress_henna," +
+                "count (case when training_background_main_service_offered = 'welder_metal_worker' then cartodb_id else null end) as welder_metal_worker, " +
+                "count (case when training_background_main_service_offered = 'electronics_repair' then cartodb_id else null end) as electronics_repair," +
+                "count (case when training_background_main_service_offered = 'auto_mechanic' then cartodb_id else null end) as auto_mechanic, " +
+                "count (case when training_background_main_service_offered = 'craftsmen' then cartodb_id else null end) as craftsmen, " +
+                "count (case when training_background_main_service_offered = 'other_main_service' then cartodb_id else null end) as other_main_service " +
+                "FROM labour_market_assessment_quantitative_tool2",
+        categorizedBy: 'to_categ',
+        columnNames: ['electrician','blacksmith','appliance_repair','carpenter','tile_worker','mason_bricklayer','plumber','beautician_hairdress_henna','welder_metal_worker','electronics_repair','auto_mechanic','craftsmen','other_main_service'],
+        rawData: []
+    }), 
+
+     DFIDDashboard.Visualization.create({
+        organizationSlugs: ['yme-tvet'],
+        title: 'YME - Significant excess demand',
+        id: 'yme-tvet-significant-excess-demand',
+        chartType: 'pie',
+        query:  "SELECT count(*) as to_categ, count (case when consumers_unable_to_meet_demand = 'yes' then cartodb_id else null end) as yes, " +
+                "count (case when consumers_unable_to_meet_demand = 'no' then cartodb_id else null end) as no, " +
+                "count (case when consumers_unable_to_meet_demand = 'refuses_to_answer' then cartodb_id else null end) as refuses_to_answer, " +
+                "count (case when consumers_unable_to_meet_demand = 'n/a' then cartodb_id else null end) as n_a " +
+                "FROM labour_market_assessment_quantitative_tool2",
+        categorizedBy: 'to_categ',
+        columnNames: ['yes','no','refuses_to_answer','n_a'],
+    }), 
+
     DFIDDashboard.Visualization.create({
         organizationSlugs: ['fao'],
         title: 'FAO - Cash-for-Work Beneficiary Registration',
