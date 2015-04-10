@@ -369,7 +369,7 @@ DFIDDashboard.visualizationGroups = [
         DFIDDashboard.VisualizationGroup.create({
         id: 'yme-tvet-demand',
         organizationSlugs: ['yme-tvet'],
-        visualizationIDs: ['yme-tvet-significant-excess-demand','yme-tvet-jobs-availability'],
+        visualizationIDs: ['yme-tvet-ease-finding-skilled-workers','yme-tvet-significant-excess-demand'],
     }),
 ]
 
